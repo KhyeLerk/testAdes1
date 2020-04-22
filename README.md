@@ -2,8 +2,8 @@
 
 ## Names:
 
-1. `[NAME HERE]`
-2. `[NAME HERE]`
+1. `[Eric Ng Yong Wei]`
+2. `[Liew Khye Lerk]`
 
 ## Setup
 
