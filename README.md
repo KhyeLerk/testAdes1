@@ -7,6 +7,14 @@ Music Festival
 1. `[Eric Ng Yong Wei]`
 2. `[Liew Khye Lerk]`
 
+## Weekly Report:
+### Week 1:
+1. What did the team do this week?
+	
+2. What did the team plan to do next week? 
+	
+3. Any additional thoughts?
+
 ## Setup
 
 1. Setup a Github account (Using any account)
