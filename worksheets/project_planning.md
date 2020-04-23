@@ -45,3 +45,9 @@ This document helps you identify the smaller tasks and helps you create a rough 
 | 2-3  | Basic | Frontend  | Data Viewer   | Implementation |
 
 > This is just a template, you just need to state **WHO** will do **WHAT** and **WHEN**.
+
+### Member 1 = < Eric Ng Yong Wei >
+| Week | Level | Component | Feature       | Task           |
+|------|-------|-----------|---------------|----------------|
+| 1    | Basic | Backend   | DB Schema     | create table   |
+| 1    | Basic | Backend   | Prob Worksheet| start working on algo of solution|
