@@ -14,7 +14,7 @@ This document should help you explain how your user interfaces are designed. You
 
 > This is just an example, please find your own justifications.
 
-![Justificaiton1](https://www.jquery-az.com/wp-content/uploads/2016/05/39.0_1-Bootstrap-data-table.png)
+![Justificaiton1](https://d2jq2hx2dbkw6t.cloudfront.net/214/data-view-laravel-vuejs.png)
 
 #### Good Points
 
