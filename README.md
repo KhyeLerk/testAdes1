@@ -10,9 +10,16 @@ Music Festival
 ## Weekly Report:
 ### Week 1:
 1. What did the team do this week?
+- Created schema for database
+- Started documentating APIs to be completed
+- Updated project problem chose and team names
+- Started working on the algorithm for the problem
 	
 2. What did the team plan to do next week? 
-	
+- Complete project worksheet
+- Complete Codestyle
+- More progress on API documentation
+
 3. Any additional thoughts?
 
 ## Setup
