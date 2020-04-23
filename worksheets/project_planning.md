@@ -46,8 +46,16 @@ This document helps you identify the smaller tasks and helps you create a rough 
 
 > This is just a template, you just need to state **WHO** will do **WHAT** and **WHEN**.
 
-### Member 1 = < Eric Ng Yong Wei >
+### Member 1 - Eric Ng Yong Wei
 | Week | Level | Component | Feature       | Task           |
 |------|-------|-----------|---------------|----------------|
 | 1    | Basic | Backend   | DB Schema     | create table   |
-| 1    | Basic | Backend   | Prob Worksheet| start working on algo of solution|
+| 1    | Basic | Backend   | Prob Worksheet| Finish working on algo of solution|
+| 1    | Basic | Backend   | Proj Planning | Finish the proj planning md file|
+| 1-2  | Basic | Backend   | API           | Start working on documentation of APIs|
+| 2    | Basic | Backend   | Proj worksheet| Finish project worksheet|
+| 2    | Basic | Backend   | Code style    | Finish working on codestyle.md|
+
+### Member 2 - Liew Khye Lerk
+| Week | Level | Component | Feature       | Task           |
+|------|-------|-----------|---------------|----------------|
