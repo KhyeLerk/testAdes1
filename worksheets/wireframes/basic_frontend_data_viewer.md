@@ -18,7 +18,7 @@ This document should help you explain how your user interfaces are designed. You
 
 1. Advanced filter for accurate search of data.
 2. Showing total number of rows can be useful for some instance.
-3. Pagination tool meets requirement
+3. Pagination tool meets requirement.
 4. Amount of rows shown per page can be manipulated which can be useful to show more data.
 5. Sorting by columns can be useful for looking at data.
 6. Multiple search options to search by multiple attributes.
@@ -26,10 +26,21 @@ This document should help you explain how your user interfaces are designed. You
 #### Bad Points
 
 1. Data with many column may be bad.
+2. Pagination only shows 
 
 ### Justification 2
 
-> Find more existing work for reference.
+![Justificaiton1](https://www.phpflow.com/wp-content/uploads/2014/12/Bootstrap-Data-Table.png)
+
+#### Good Points
+
+1. Pagination shows multiple pages for quick access.
+2. Amount of rows shown per page can be manipulated which can be useful to show more data.
+
+#### Bad Points
+
+1. May need more advanced search/filter system for different attributes.
+2. Data with many column may be bad.
 
 ### Justification 3
 
