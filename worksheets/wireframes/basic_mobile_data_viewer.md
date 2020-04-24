@@ -28,7 +28,7 @@
 - Use of back button at the top of the screen is obstructive and unnecessary for Android users since most Android phones have a back button as navigation button in build in the phone
 - No filter buttons as the navigation links ady replaces the need of filter button
 
-![Image3](assets/basic_mobile_data_2.png)
+![Image3](assets/basic_mobile_data_3.png)
 
 #### Good Points
 - Each event were displayed as a navigation link with a title for easier navigation
