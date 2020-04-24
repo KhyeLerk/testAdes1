@@ -26,7 +26,7 @@ This document should help you explain how your user interfaces are designed. You
 #### Bad Points
 
 1. Data with many column may be bad.
-2. Pagination only shows 
+
 
 ### Justification 2
 
@@ -49,9 +49,14 @@ This document should help you explain how your user interfaces are designed. You
 *Please note that the numbering in the image has no correlation with the numbering below this text line.
 #### Good Points
 
-1. 
-
+1. Multiple search bar for each column is more efficient for data search. 
+2. A filter for each column is useful for narrowing down data to your liking. 
+3. Pagination tool meets functionality requirement. 
+4. Rows are collapsible which makes information more. 
+5. Columns are able to be resized which allows data with many columns to be more organized.
 
 #### Bad Points
 
-1.
+1. Pagination UI looks too small.
+2. Unable to choose page size.
+3. Does not show total number of rows which can be inefficient as a data viewer.
