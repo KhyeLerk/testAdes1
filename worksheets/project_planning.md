@@ -58,7 +58,7 @@ This document helps you identify the smaller tasks and helps you create a rough 
 | 2    | Basic | Backend   | Proj worksheet| Finish project worksheet|
 | 2    | Basic | Backend   | Code style    | Finish working on codestyle.md|
 | 2    | Basic | Frontend  | basic_mobile_data_viewer| Finish working on basic_mobile_data_viewer's UI and justifications|
-| 3    | Basic | Frontend  | basic_mobile_result_viewer| 
+| 3    | Basic | Frontend  | basic_mobile_result_viewer| Finish working on basic_mobile_result_viewer's UI and justifications|
 
 ### Member 2 - Liew Khye Lerk
 | Week | Level | Component | Feature       | Task           |
