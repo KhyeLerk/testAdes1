@@ -44,7 +44,7 @@ This document should help you explain how your user interfaces are designed. You
 
 ### Justification 3
 
-![Justificaiton2](https://docs.bamboosolutions.com/wp-content/uploads/2017/06/HW37_UserOptions.png)
+![Justificaiton3](https://docs.bamboosolutions.com/wp-content/uploads/2017/06/HW37_UserOptions.png)
 
 #### Good Points
 
