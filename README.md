@@ -11,14 +11,16 @@ Music Festival
 ### Week 1:
 1. What did the team do this week?
 - Created schema for database
-- Started documentating APIs to be completed
 - Updated project problem chose and team names
-- Started working on the algorithm for the problem
+- Starting to work on basic mobile data viewer
+- Finish basic concept on the algorithm for the problem
+- Complete project plan for 3 weeks
 	
 2. What did the team plan to do next week? 
 - Complete project worksheet
 - Complete Codestyle
 - More progress on API documentation
+- Complete on determining the code style to be used
 
 3. Any additional thoughts?
 
