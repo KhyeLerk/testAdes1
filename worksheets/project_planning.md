@@ -46,15 +46,19 @@ This document helps you identify the smaller tasks and helps you create a rough 
 
 > This is just a template, you just need to state **WHO** will do **WHAT** and **WHEN**.
 
+# Project Planning
+
 ### Member 1 - Eric Ng Yong Wei
 | Week | Level | Component | Feature       | Task           |
 |------|-------|-----------|---------------|----------------|
 | 1    | Basic | Backend   | DB Schema     | create table   |
 | 1    | Basic | Backend   | Prob Worksheet| Finish working on algo of solution|
 | 1    | Basic | Backend   | Proj Planning | Finish the proj planning md file|
-| 1-2  | Basic | Backend   | API           | Start working on documentation of APIs|
+| 1-3  | Basic | Backend   | API           | Start working on documentation of APIs|
 | 2    | Basic | Backend   | Proj worksheet| Finish project worksheet|
 | 2    | Basic | Backend   | Code style    | Finish working on codestyle.md|
+| 2    | Basic | Frontend  | basic_mobile_data_viewer| Finish working on basic_mobile_data_viewer's UI and justifications|
+| 3    | Basic | Frontend  | basic_mobile_result_viewer| 
 
 ### Member 2 - Liew Khye Lerk
 | Week | Level | Component | Feature       | Task           |
