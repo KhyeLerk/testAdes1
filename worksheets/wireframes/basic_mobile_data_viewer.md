@@ -1,5 +1,4 @@
 # Justifications of other designs
 
-![Image 1 - sample design](assets/basic front end data viewer - mobile phone/1.jpg)
+![Image](assets/basic_mobile_data_1.jpg)
 
-#### test
