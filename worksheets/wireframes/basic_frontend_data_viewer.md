@@ -46,6 +46,7 @@ This document should help you explain how your user interfaces are designed. You
 
 ![Justificaiton3](https://docs.bamboosolutions.com/wp-content/uploads/2017/06/HW37_UserOptions.png)
 
+*Please note that the numbering in the image has no correlation with the numbering below this text line.
 #### Good Points
 
 1. 
