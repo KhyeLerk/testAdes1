@@ -1,1 +1,2 @@
-> See example in frontend wireframes
+# Justifications of other designs
+
