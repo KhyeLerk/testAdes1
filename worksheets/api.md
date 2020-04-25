@@ -81,3 +81,70 @@ GET /basic/data?id=1234567890
 	"code": 500
 }
 ```
+
+# API 1 : Get Performances
+
+### HTTP Method => GET
+### Endpoint => /api/performances
+
+### Parameters 
+- N/A
+
+### Response Body
+```json
+{
+    "result":[
+        {
+            "performanceId":number,
+            "festivalId":number,
+            "startTime":time,
+            "endTime":time,
+            "popularity":number,
+        }
+    ]
+}
+```
+
+### Error
+```json
+{
+    "error":string,
+    "code":number,
+}
+```
+
+### Sample Request
+```http
+GET /api/performances
+```
+
+### Sample Response
+```json
+{
+    "result":[
+        {
+            "performancesId":1111111111,
+            "festivalId":3333333333,
+            "startTime":1000,
+            "endTime":1200,
+            "popularity":1
+        },
+
+        {
+            "performancesId":2222222222,
+            "festivalId":3333333333,
+            "startTime":1100,
+            "endTime":1300,
+            "popularity":10000
+        },
+
+        {
+            "performancesId":3333333333,
+            "festivalId":3333333333,
+            "startTime":1200,
+            "endTime":1400,
+            "popularity":1
+        }
+    ]
+}
+```
