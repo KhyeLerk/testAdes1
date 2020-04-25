@@ -35,13 +35,15 @@ This document should help you explain how your user interfaces are designed. You
 
 #### Good Points
 
-1. Pagination shows multiple pages for quick access.
+1. Pagination tool meets functionality requirement.
 2. Amount of rows shown per page can be manipulated which can be useful to show more data.
+3. Page size has a drop down which can be effective in some instances.
+4. Simple UI allows admin to easily locate appropriate data.
 
 #### Bad Points
 
-1. May need more advanced search/filter system for different attributes.
-2. Data with many column may be bad.
+1. May need more advanced search/filter system to search for different attributes and columns.
+2. Data with many column may be bad as it may look too compact making it hard to view data.
 
 ### Justification 3
 
@@ -55,9 +57,10 @@ This document should help you explain how your user interfaces are designed. You
 3. Pagination tool meets functionality requirement. 
 4. Rows are collapsible which makes information more. 
 5. Columns are able to be resized which allows data with many columns to be more organized.
+6. Selected row is shaded in a different color for better clarity.
 
 #### Bad Points
 
 1. Pagination UI looks too small.
-2. Unable to choose page size.
-3. Does not show total number of rows which can be inefficient as a data viewer.
+2. Does not show total number of rows which can be inefficient as a data viewer.
+3. The drop down table has inefficient column spacing which makes data in certain columns look very compact.
