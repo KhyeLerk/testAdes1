@@ -23,6 +23,7 @@ Music Festival
 - Complete on determining the code style to be used
 
 3. Any additional thoughts?
+- Probably have to take API doc to the next week due to incompletion of front end UI 
 
 ## Setup
 
