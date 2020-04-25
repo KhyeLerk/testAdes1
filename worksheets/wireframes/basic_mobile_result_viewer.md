@@ -2,7 +2,7 @@
 
 ### Justification 1
 
-[Image1]()
+[Image1](assets/basic_mobile_result_1.jpg)
 
 ###### Good Points
 
@@ -16,7 +16,7 @@
 
 ### Justification 2
 
-[Image2]()
+[Image2]((assets/basic_mobile_result_2.jpg)
 
 ###### Good Points
 
@@ -32,7 +32,7 @@
 
 ### Justification 3
 
-[Image3]()
+[Image3]((assets/basic_mobile_result_3.jpg)
 
 ###### Good Points
 
