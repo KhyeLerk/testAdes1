@@ -15,7 +15,7 @@ Music Festival
 - Starting to work on basic mobile data viewer
 - Finish basic concept on the algorithm for the problem
 - Complete project plan for 3 weeks
-- Found and started justification for existing wireframes for basic front-end data viewer
+- Found and completed justification for existing wireframes for basic front-end data viewer
 	
 2. What did the team plan to do next week? 
 - Complete project worksheet
@@ -26,6 +26,15 @@ Music Festival
 
 3. Any additional thoughts?
 - Probably have to take API doc to the next week due to incompletion of front end UI 
+
+### Week 2:
+1. What did the team do this week?
+- Confirmed on the code style to be used
+
+2. What did the team plan to do next week?
+- Finish documentation of API
+- Start working on basic front end data viewer to display all the data in the database and able to meet all the required functionalities
+- Start working on the basic insert api for the users add rows into the database
 
 ## Setup
 
