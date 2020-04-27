@@ -148,3 +148,291 @@ GET /api/performances
     ]
 }
 ```
+
+# Sample Error
+
+```json
+{
+	"error":"Server Error",
+	"code":500
+}
+```
+
+# API 2 : Get Performances for certain rows only
+
+### HTTP Method => GET
+### Endpoint => /api/performances
+
+### Request Body
+- page <int(10)> => 1
+
+### Response Body
+```json
+{
+    "result":[
+        {
+            "performanceId":number,
+            "festivalId":number,
+            "startTime":time,
+            "endTime":time,
+            "popularity":number,
+        }
+    ]
+}
+```
+
+### Error
+```json
+{
+    "error":string,
+    "code":number,
+}
+```
+
+### Sample Request
+```http
+GET /api/performances
+<body> page = 1
+```
+
+### Sample Response
+```json
+{
+    "result":[
+        {
+            "performancesId":1111111111,
+            "festivalId":3333333333,
+            "startTime":1000,
+            "endTime":1200,
+            "popularity":1
+        },
+
+        {
+            "performancesId":2222222222,
+            "festivalId":3333333333,
+            "startTime":1100,
+            "endTime":1300,
+            "popularity":10000
+        },
+
+        {
+            "performancesId":3333333333,
+            "festivalId":3333333333,
+            "startTime":1200,
+            "endTime":1400,
+            "popularity":1
+        }
+    ]
+}
+```
+
+# Sample Error
+
+```json
+{
+	"error":"Server Error",
+	"code":500
+}
+```
+
+# API 3 : Insert new performances into table
+
+### HTTP Method => POST
+### Endpoint => /api/performances
+
+### Request Body
+- festivalId <int(10)> => 1111111111
+- popularity <int> => 2000
+- startTime <time> => 10:30:00
+- endTime <time> => 12:30:00
+	
+### Response Body
+```json
+ // No content
+```
+
+### Error
+```json
+{
+    "error":string,
+    "code":number,
+}
+```
+
+### Sample Request
+```http
+Post /api/performances
+<body>
+- festivalId : 1111111111
+- popularity : 2000
+- startTime : 10:30:00
+- endTime : 12:30:00
+```
+
+### Sample Response
+```json
+{}
+```
+
+# Sample Error
+
+```json
+{
+	"error":"Duplicate Entry",
+	"code":1062
+}
+```
+
+# API 4: Get Performances sort by popularity in descending order
+
+### HTTP Method => GET
+### Endpoint => /api/performances/popularity
+
+### Parameters 
+- N/A
+
+### Response Body
+```json
+{
+    "result":[
+        {
+            "performanceId":number,
+            "festivalId":number,
+            "startTime":time,
+            "endTime":time,
+            "popularity":number,
+        }
+    ]
+}
+```
+
+### Error
+```json
+{
+    "error":string,
+    "code":number,
+}
+```
+
+### Sample Request
+```http
+GET /api/performances/popularity
+```
+
+### Sample Response
+```json
+{
+    "result":[
+    
+    	{
+            "performancesId":2222222222,
+            "festivalId":3333333333,
+            "startTime":1100,
+            "endTime":1300,
+            "popularity":10000
+        },
+	
+        {
+            "performancesId":1111111111,
+            "festivalId":3333333333,
+            "startTime":1000,
+            "endTime":1200,
+            "popularity":1
+        },
+
+        {
+            "performancesId":3333333333,
+            "festivalId":3333333333,
+            "startTime":1200,
+            "endTime":1400,
+            "popularity":1
+        }
+    ]
+}
+```
+
+# Sample Error
+
+```json
+{
+	"error":"Server Error",
+	"code":500
+}
+```
+
+# API 5: Get Performances sort by festivalId in ascending order
+
+### HTTP Method => GET
+### Endpoint => /api/performances/festivalId
+
+### Parameters 
+- N/A
+
+### Response Body
+```json
+{
+    "result":[
+        {
+            "performanceId":number,
+            "festivalId":number,
+            "startTime":time,
+            "endTime":time,
+            "popularity":number,
+        }
+    ]
+}
+```
+
+### Error
+```json
+{
+    "error":string,
+    "code":number,
+}
+```
+
+### Sample Request
+```http
+GET /api/performances/festivalId
+```
+
+### Sample Response
+```json
+{
+    "result":[
+        {
+            "performancesId":1111111111,
+            "festivalId":1111111111,
+            "startTime":1000,
+            "endTime":1200,
+            "popularity":1
+        },
+    
+    	{
+            "performancesId":2222222222,
+            "festivalId":3333333333,
+            "startTime":1100,
+            "endTime":1300,
+            "popularity":10000
+        },
+
+        {
+            "performancesId":3333333333,
+            "festivalId":3333333333,
+            "startTime":1200,
+            "endTime":1400,
+            "popularity":1
+        }
+    ]
+}
+```
+
+# Sample Error
+
+```json
+{
+	"error":"Server Error",
+	"code":500
+}
+```
+
