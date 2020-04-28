@@ -15,3 +15,13 @@ Example:
 ```sql
 SELECT * FROM table_name WHERE attr1 == value1 AND attr2 >= value2 LIMIT 10 OFFSET 20;
 ```
+
+## INSERT new performances
+```sql
+INSERT INTO performances(festivalId, startTime, endTime) VALUES (1111111111, 12:00:00, 13:00:00);
+```
+
+## SELECT arranging using festivalId
+```sql
+SELECT * FROM performances ORDER_BY festivalId 
+```
