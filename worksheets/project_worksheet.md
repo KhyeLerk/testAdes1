@@ -31,6 +31,31 @@ rectangle Advance {
 @enduml
 ```
 Link: [Use Case Diagram](https://www.plantuml.com/plantuml/svg/0/RP5D4e8m38NtFKMMik0EY3jl4Kh4ED0wRS25mzrjeVoEsULxBydhjF22JlgkLIqz1CI2u-OfKBCZBMoDGYtMmPrBBAtj03sygYhHQzsnOIyEOnSaZ435KJHDIy4meD44NmMXDbwYPvrehB0IyXmkR3mvWMgIQnJCLijbOFhibJWmtrijsdRlNYYv7Fc-bIpcIiBvtXaly-lcIHdLduYONhQ5d0CU-37Y6c_nx086TDk5ISTET6ktnQCgoDJX0ty0 "project_worksheet")
+```plantuml
+@startuml
+left to right direction
+actor JiBaBoom as jbb
+actor Administrator as admin
+rectangle Advance {
+    rectangle Basic {
+        jbb -- (insert performance)
+        (view performance) -- admin
+        (compute result - without popularity) as compute
+        jbb -- compute
+        compute -- admin
+
+    }
+    jbb -- (insert performance with popularity)
+    (view performance with popularity) -- admin
+    (compute result - with popularity) as advCompute
+    jbb -- advCompute
+    advCompute -- admin
+}
+@enduml
+```
+Link: [Use Case Diagram](http://www.plantuml.com/plantuml/png/VOz1RW8n34NtEOMNiE0ETBhhBKp6WAia7ZdEeAhYxarGHDgHYdV-_lRxFcP3jHA32tGsC07bozLWPYLlBCcXDr7uu0adaGYOuVDqwkhR73bnDiNMrH4smRLLJ9T0rR1YyWJV3ceDVSBClgkrsaau7637APCQBAHdqTXMzq_FRcMw_HdLbKvyUhp4fHXLL2x1u00tjgkKUbAM4b3PllOjQFTj0spbtW_GOt9thpC_eB-9RkH_PHkO_t_PFeBp-Zv2zr1RTRG3SNT7IdE9uGS0)
+
+
 
 ### Question
 
