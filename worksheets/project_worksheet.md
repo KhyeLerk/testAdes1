@@ -37,7 +37,12 @@ Link: [Use Case Diagram](https://www.plantuml.com/plantuml/svg/0/RP5D4e8m38NtFKM
 The above listed are functional requirements, that is, **WHAT** the system should allow users to do. There are also non-functional requirements that state **HOW** a system should perform.
 
 -   Q1. Consider the use case of `Compute basic/advance result`, **HOW** is this functionality made available to both JiBaBoom and Adminstrator _(Hint: They are different)_? `(Answer Here)`
+
+It will include a "compute" button on both JiBaBoom's and Adminstrator's view on the UI to allow the input data to be computed and display the correct result
+
 -   Q2. Consider the use case of `Insert basic/advance data`. **HOW** is the data stored? `(Answer Here)`
+
+The data is stored in the performance and performancewithpopularity table in the database
 
 ---
 
@@ -76,10 +81,21 @@ Link: [Component Diagram](https://www.plantuml.com/plantuml/svg/0/JK-x3i8m3Dpz5L
 
 ### Questions:
 
-1. Does the frontend communicate with the mobile? `(Yes/No)`
+1. Does the frontend communicate with the mobile? `(Yes/No)` 
+
+No
+
 2. Does the frontend communicate directly with the database? `(Yes/No)`
+
+No
+
 3. How should the frontend display data from the database? `(Answer here)`
+
+The data in the database will be sent to the API in json format then to the localstorage of the browser of the website ( localstorage of the phone if mobile app ) which will display in an organized method at the front end to allow users to pick any of them as the input to compute the result
+
 4. How does the frontend communicate with backend? `(Answer here)`
+
+A html request is send to the app.js file to trigger an API to send an SQL statement to the database. The database will return the desired value back (if any) to the app.js file in json and then to the html page and display the result
 
 ---
 
@@ -151,11 +167,11 @@ Links:
 
 Choose the correct API/Viewer to be used for each of the `???` steps in the diagram:
 
--   Q1. `[Insert/Result]` API (Delete one of the options)
--   Q2. `[Data/Result]` Viewer
--   Q3. `[Insert/Result]` API
--   Q4. `[Data/Result]` Viewer
--   Q5. `[Insert/Result]` API
+-   Q1. `[Insert]` API (Delete one of the options)
+-   Q2. `[Data]` Viewer
+-   Q3. `[Insert]` API
+-   Q4. `[Result]` Viewer
+-   Q5. `[Insert]` API
 
 There's a note that mentions
 
@@ -166,7 +182,8 @@ how can frontend/mobile\nget data from backend?
 Think about how you can do it and type your answer below:
 
 ```
-[Answer Here]
+The front end will send a http request to the application. The application will process the http request and send an SQL syntax to the database. The database will then return the desired data in json format to the application and then back to the webpage to be displayed
+after it decode it into a javascript variable from the json format using JSON.parse() function
 ```
 
 ---
