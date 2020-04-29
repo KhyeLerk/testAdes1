@@ -7,6 +7,14 @@ Music Festival
 1. `[Eric Ng Yong Wei]`
 2. `[Liew Khye Lerk]`
 
+## Front End
+- Ionic
+- React
+
+## Back End
+- Azure DB
+- Node.js
+
 ## Weekly Report:
 ### Week 1:
 1. What did the team do this week?
