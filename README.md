@@ -8,6 +8,9 @@ Music Festival
 2. `[Liew Khye Lerk]`
 
 ## Front End
+- React.js
+
+## Mobile
 - Ionic
 - React
 
