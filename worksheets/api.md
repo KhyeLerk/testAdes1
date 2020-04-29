@@ -99,7 +99,6 @@ GET /basic/data?id=1234567890
             "festivalId":number,
             "startTime":time,
             "endTime":time,
-            "popularity":number,
         }
     ]
 }
@@ -127,7 +126,6 @@ GET /api/performances
             "festivalId":3333333333,
             "startTime":1000,
             "endTime":1200,
-            "popularity":1
         },
 
         {
@@ -135,7 +133,6 @@ GET /api/performances
             "festivalId":3333333333,
             "startTime":1100,
             "endTime":1300,
-            "popularity":10000
         },
 
         {
@@ -143,7 +140,6 @@ GET /api/performances
             "festivalId":3333333333,
             "startTime":1200,
             "endTime":1400,
-            "popularity":1
         }
     ]
 }
@@ -175,7 +171,6 @@ GET /api/performances
             "festivalId":number,
             "startTime":time,
             "endTime":time,
-            "popularity":number,
         }
     ]
 }
@@ -203,16 +198,13 @@ GET /api/performances
             "performancesId":1111111111,
             "festivalId":3333333333,
             "startTime":1000,
-            "endTime":1200,
-            "popularity":1
-        },
+            "endTime":1200,        },
 
         {
             "performancesId":2222222222,
             "festivalId":3333333333,
             "startTime":1100,
             "endTime":1300,
-            "popularity":10000
         },
 
         {
@@ -220,7 +212,6 @@ GET /api/performances
             "festivalId":3333333333,
             "startTime":1200,
             "endTime":1400,
-            "popularity":1
         }
     ]
 }
@@ -263,7 +254,6 @@ GET /api/performances
 Post /api/performances
 <body>
 - festivalId : 1111111111
-- popularity : 2000
 - startTime : 10:30:00
 - endTime : 12:30:00
 ```
@@ -299,7 +289,6 @@ Post /api/performances
             "festivalId":number,
             "startTime":time,
             "endTime":time,
-            "popularity":number,
         }
     ]
 }
@@ -315,7 +304,7 @@ Post /api/performances
 
 ### Sample Request
 ```http
-GET /api/performances/popularity
+GET /api/performances/startTime
 ```
 
 ### Sample Response
@@ -328,7 +317,6 @@ GET /api/performances/popularity
             "festivalId":3333333333,
             "startTime":1100,
             "endTime":1300,
-            "popularity":10000
         },
 	
         {
@@ -336,7 +324,6 @@ GET /api/performances/popularity
             "festivalId":3333333333,
             "startTime":1000,
             "endTime":1200,
-            "popularity":1
         },
 
         {
@@ -344,7 +331,6 @@ GET /api/performances/popularity
             "festivalId":3333333333,
             "startTime":1200,
             "endTime":1400,
-            "popularity":1
         }
     ]
 }
@@ -376,7 +362,6 @@ GET /api/performances/popularity
             "festivalId":number,
             "startTime":time,
             "endTime":time,
-            "popularity":number,
         }
     ]
 }
