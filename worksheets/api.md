@@ -82,7 +82,7 @@ GET /basic/data?id=1234567890
 }
 ```
 
-# API 1 : Get Performances
+# API 1 : Get Performances ( For testing connection with database )
 
 ### HTTP Method => GET
 ### Endpoint => /api/performances
@@ -161,9 +161,9 @@ GET /api/performances
 # API 2 : Get Performances for certain rows only
 
 ### HTTP Method => GET
-### Endpoint => /api/performances
+### Endpoint => /api/performances/:page
 
-### Request Body
+### Request Parameters
 - page <int(10)> => 1
 
 ### Response Body
@@ -242,7 +242,6 @@ GET /api/performances
 
 ### Request Body
 - festivalId <int(10)> => 1111111111
-- popularity <int> => 2000
 - startTime <time> => 10:30:00
 - endTime <time> => 12:30:00
 	
@@ -283,10 +282,10 @@ Post /api/performances
 }
 ```
 
-# API 4: Get Performances sort by popularity in descending order
+# API 4: Get Performances sort by startTime in ascending order
 
 ### HTTP Method => GET
-### Endpoint => /api/performances/popularity
+### Endpoint => /api/performances/startTime
 
 ### Parameters 
 - N/A
