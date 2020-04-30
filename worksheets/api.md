@@ -45,11 +45,8 @@ Each API should include
 
 ### Error
 
-```json
-{
-	"error": string,
-	"code": number
-}
+```js
+"Server error"
 ```
 
 ### Sample Request
@@ -75,11 +72,9 @@ GET /basic/data?id=1234567890
 
 ### Sample Error
 
-```json
-{
-	"error": "Server Error",
-	"code": 500
-}
+
+```js
+"Server error"
 ```
 
 # API 1 : Get Performances ( For testing connection with database )
@@ -105,11 +100,9 @@ GET /basic/data?id=1234567890
 ```
 
 ### Error
-```json
-{
-    "error":string,
-    "code":number,
-}
+
+```js
+"Server error"
 ```
 
 ### Sample Request
@@ -147,11 +140,8 @@ GET /api/performances
 
 # Sample Error
 
-```json
-{
-	"error":"Server Error",
-	"code":500
-}
+```js
+"Server error"
 ```
 
 # API 2 : Get Performances for certain rows only
@@ -177,11 +167,9 @@ GET /api/performances
 ```
 
 ### Error
-```json
-{
-    "error":string,
-    "code":number,
-}
+
+```js
+"Server error"
 ```
 
 ### Sample Request
@@ -219,11 +207,9 @@ GET /api/performances
 
 # Sample Error
 
-```json
-{
-	"error":"Server Error",
-	"code":500
-}
+
+```js
+"Server error"
 ```
 
 # API 3 : Insert new performances into table
@@ -265,11 +251,8 @@ Post /api/performances
 
 # Sample Error
 
-```json
-{
-	"error":"Duplicate Entry",
-	"code":1062
-}
+```js
+"Server error"
 ```
 
 # API 4: Get Performances sort by startTime in ascending order
@@ -295,11 +278,9 @@ Post /api/performances
 ```
 
 ### Error
-```json
-{
-    "error":string,
-    "code":number,
-}
+
+```js
+"Server error"
 ```
 
 ### Sample Request
@@ -338,11 +319,8 @@ GET /api/performances/startTime
 
 # Sample Error
 
-```json
-{
-	"error":"Server Error",
-	"code":500
-}
+```js
+"Server error"
 ```
 
 # API 5: Get Performances sort by festivalId in ascending order
@@ -368,11 +346,9 @@ GET /api/performances/startTime
 ```
 
 ### Error
-```json
-{
-    "error":string,
-    "code":number,
-}
+
+```js
+"Server error"
 ```
 
 ### Sample Request
@@ -413,10 +389,7 @@ GET /api/performances/festivalId
 
 # Sample Error
 
-```json
-{
-	"error":"Server Error",
-	"code":500
-}
+```js
+"Server error"
 ```
 
