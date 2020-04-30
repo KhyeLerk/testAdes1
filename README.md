@@ -15,7 +15,7 @@ Music Festival
 - React
 
 ## Back End
-- Azure DB
+- Heroku (ClearDB MySQL)
 - Node.js
 
 ## Weekly Report:
