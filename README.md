@@ -41,6 +41,7 @@ Music Festival
 ### Week 2:
 1. What did the team do this week?
 - Confirmed on the code style to be used
+- Completed basic wireframes for both frontend and mobile.
 
 2. What did the team plan to do next week?
 - Finish documentation of API
