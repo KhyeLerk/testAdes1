@@ -1,5 +1,5 @@
 /*
-Class : DIT/1B/02
+Class : DIT/2B/22
 Admission Number : 1940211
 Name : Eric Ng Yong Wei
 */
