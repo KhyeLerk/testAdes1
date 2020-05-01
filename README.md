@@ -42,11 +42,14 @@ Music Festival
 1. What did the team do this week?
 - Confirmed on the code style to be used
 - Completed basic wireframes for both frontend and mobile.
+- Complete basic insert api for the users add rows into the database
+- Start working on basic front end data viewer to display all the data in the database and able to meet all the required functionalities
+- Completed schema.md for 2 sql statements
+- Finish documentation of API
+- Completed hosting of database and codes for API
 
 2. What did the team plan to do next week?
-- Finish documentation of API
-- Start working on basic front end data viewer to display all the data in the database and able to meet all the required functionalities
-- Start working on the basic insert api for the users add rows into the database
+- Finish working on basic front end data viewer to display all the data in the database and able to meet all the required functionalities
 
 ## Setup
 
