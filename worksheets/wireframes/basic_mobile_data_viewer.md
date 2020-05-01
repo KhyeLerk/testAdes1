@@ -7,8 +7,9 @@
 ### Wireframe part 2
 ![Wireframe2](assets/basic-wireframe-data-viewer-mobile-2.png)
 
-  Mobile wireframe contains all three required functionalities. The two filtering search bars are located at the top of the app and spans across the whole screen to allow users to easily tap on them. The page size is also at the top for the same purpose of letting the user access it more easily. Pagination takes up the entire bar at the bottom of the screen so that no space is wasted as well as allowing more screen area to let user easily navigate and use the pagination function.
-  Due to the lesser estate that mobile has compared to web, having a data table fit inside a smaller screen can be harder. The wireframe designed compromises the space available with the amound of data visible. The data table is now scrollable which allows users to see the rest of the data as shown in `wireframe part 2`. However the festivalId is locked in place for the users to easily determine which data they are looking at.
+   Mobile wireframe contains all three required functionalities. The two filtering search bars are located at the top of the app and spans across the whole screen to allow users to easily tap on them. The page size is also at the top for the same purpose of letting the user access it more easily. Pagination takes up the entire bar at the bottom of the screen so that no space is wasted as well as allowing more screen area to let user easily navigate and use the pagination function.
+  
+   Due to the lesser estate that mobile has compared to web, having a data table fit inside a smaller screen can be harder. The wireframe designed compromises the space available with the amound of data visible. The data table is now scrollable which allows users to see the rest of the data as shown in `wireframe part 2`. However the festivalId is locked in place for the users to easily determine which data they are looking at.
 ## Justifications
 
 ### Justification 1
