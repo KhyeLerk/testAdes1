@@ -4,16 +4,16 @@
 
 ![Wireframe](assets/basic-wireframe-data-viewer-frontend-1.png)
 
-    The wireframe accommodates the three required functionalities: filtering by two attributes (festivalId and startTime), pagination and the data table. The design of the page lets user to easily identify which tab (data table or data viewer) they are on due to the color.
+   The wireframe accommodates the three required functionalities: filtering by two attributes (festivalId and startTime), pagination and the data table. The design of the page lets user to easily identify which tab (data table or data viewer) they are on due to the color.
   
-    Having to display only four columns of data, the data table is designed so that data displayed is not too far nor to near to each other. The table rows are seperated into two colors all done so for the purpose of clarity and ease of reading data.
+   Having to display only four columns of data, the data table is designed so that data displayed is not too far nor to near to each other. The table rows are seperated into two colors all done so for the purpose of clarity and ease of reading data.
   
-    The two filtering search bars for "festivalId" and "startTime" are located top, right below the "data viewer" tab to allow convinient access. The filters are also close to their respective column headings for easy identification of data. The search bars have placeholder text which identifies which attribute it searches for.
+   The two filtering search bars for "festivalId" and "startTime" are located top, right below the "data viewer" tab to allow convinient access. The filters are also close to their respective column headings for easy identification of data. The search bars have placeholder text which identifies which attribute it searches for.
   
-    The pagination is right below the data table. Page number will have a different color to identify which page admin is on. 
-    All functionalities are designed around the data table which allows the user to focus on the important part of the web page - the data table.
+   The pagination is right below the data table. Page number will have a different color to identify which page admin is on. 
+   All functionalities are designed around the data table which allows the user to focus on the important part of the web page - the data table.
   
-     The wireframe is bound to three main colors so that it does not come out as a distraction but as identification. Such as blue being used to determine a more important attribute within the page (page number/ tab / title). 
+   The wireframe is bound to three main colors so that it does not come out as a distraction but as identification. Such as blue being used to determine a more important attribute within the page (page number/ tab / title). 
   
 ## Justifications
 
