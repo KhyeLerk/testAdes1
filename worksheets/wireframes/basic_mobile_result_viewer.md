@@ -1,3 +1,14 @@
+
+# Wireframe & Justification
+
+
+## Wireframe
+### Wireframe part 1
+![Wireframe1](assets/basic-wireframe-result-viewer-mobile-1.png)
+### Wireframe part 2
+![Wireframe2](assets/basic-wireframe-result-viewer-mobile-2.png)
+
+
 # Justifications
 
 ### Justification 1
