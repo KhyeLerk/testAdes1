@@ -47,7 +47,7 @@ This document should help you explain how your user interfaces are designed. You
 
 ### Justification 3
 
-![Justificaiton3](https://assets.materialup.com/uploads/5ba1df18-fce3-4340-ac60-d4c89de5344b/preview.png)
+![Justificaiton3](https://media.discordapp.net/attachments/340803505952653312/706487863725916240/preview.png?width=779&height=584)
 
 #### Good Points
 - Good looking UI
