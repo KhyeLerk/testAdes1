@@ -24,18 +24,18 @@
   
 #### Good Points
 
-1. Advanced filter for accurate search of data. The data viewer has a dropdown box to search for each individual column as well as  a dropdown for operators as a search function.
-2. Showing total number of rows can be useful for some instances.
-3. Pagination tool shows page number as well as next or previous page functionality.
-4. Amount of rows shown per page can be manipulated which can be useful to show more data.
-5. Sorting by columns can be useful for looking at data such as: ascending or descending order of numbers; Alphabetical order; Date created.
-6. Simple UI allowing admin to easily identify functionality of each button and also allows data to be viewed clearly.
+- Advanced filter for accurate search of data. The data viewer has a dropdown box to search for each individual column as well as  a dropdown for operators as a search function.
+- Showing total number of rows can be useful for some instances.
+- Pagination tool shows page number as well as next or previous page functionality.
+- Amount of rows shown per page can be manipulated which can be useful to show more data.
+- Sorting by columns can be useful for looking at data such as: ascending or descending order of numbers; Alphabetical order; Date created.
+- Simple UI allowing admin to easily identify functionality of each button and also allows data to be viewed clearly.
 
 #### Bad Points
 
-1. Data with many column may be bad as the data shown may be too compact which lowers clarity of the data viewer.
-2. No button for incrementing or reducing the number of rows shown can be ineffective in some instances.
-3. Pagination tool does not have a back to first page function.
+- Data with many column may be bad as the data shown may be too compact which lowers clarity of the data viewer.
+- No button for incrementing or reducing the number of rows shown can be ineffective in some instances.
+- Pagination tool does not have a back to first page function.
 
 ### Justification 2
 
@@ -43,15 +43,15 @@
 
 #### Good Points
 
-1. Pagination tool meets functionality requirement.
-2. Amount of rows shown per page can be manipulated which can be useful to show more data.
-3. Page size has a drop down which can be effective in some instances.
-4. Simple UI allows admin to easily locate appropriate data.
+- Pagination tool meets functionality requirement.
+- Amount of rows shown per page can be manipulated which can be useful to show more data.
+- Page size has a drop down which can be effective in some instances.
+- Simple UI allows admin to easily locate appropriate data.
 
 #### Bad Points
 
-1. May need more advanced search/filter system to search for different attributes and columns.
-2. Data with many column may be bad as it may look too compact making it hard to view data.
+- May need more advanced search/filter system to search for different attributes and columns.
+- Data with many column may be bad as it may look too compact making it hard to view data.
 
 ### Justification 3
 
@@ -60,15 +60,15 @@
 *Please note that the numbering in the image has no correlation with the numbering below this text line.
 #### Good Points
 
-1. Multiple search bar for each column is more efficient for data search. 
-2. A filter for each column is useful for narrowing down data to your liking. 
-3. Pagination tool meets functionality requirement. 
-4. Rows are collapsible which makes information more. 
-5. Columns are able to be resized which allows data with many columns to be more organized.
-6. Selected row is shaded in a different color for better clarity.
+- Multiple search bar for each column is more efficient for data search. 
+- A filter for each column is useful for narrowing down data to your liking. 
+- Pagination tool meets functionality requirement. 
+- Rows are collapsible which makes information more. 
+- Columns are able to be resized which allows data with many columns to be more organized.
+- Selected row is shaded in a different color for better clarity.
 
 #### Bad Points
 
-1. Pagination UI looks too small.
-2. Does not show total number of rows which can be inefficient as a data viewer.
-3. The drop down table has inefficient column spacing which makes data in certain columns look very compact.
+- Pagination UI looks too small.
+- Does not show total number of rows which can be inefficient as a data viewer.
+- The drop down table has inefficient column spacing which makes data in certain columns look very compact.
