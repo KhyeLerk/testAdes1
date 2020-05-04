@@ -1,3 +1,18 @@
+
+# Wireframe & Justification
+
+
+## Wireframe
+### Wireframe part 1
+![Wireframe1](assets/basic-wireframe-result-viewer-mobile-1.png)
+### Wireframe part 2
+![Wireframe2](assets/basic-wireframe-result-viewer-mobile-2.png)
+
+  For the mobile result viewer, the initial screen would be `Wireframe part 1` when the admin has not input any festivalId. This is to avoid unnecessary UI to make it easier for the admin to use. After entering in the festivalId the admin will be directed to `Wireframe part 2` where it shows the results of the festivalId. 
+  
+  The design of the result viewer in `Wireframe part 2` differs from the frontend wireframe as a timetable of that scale would be too large to properly fit in a mobile screen resolution while maintaining the readibility it should offer. Therefore having the time attribute as a column instead of a row would fix this problem and allows the admin to see the data result clearly. It also takes advantage of virtual scrolling which is easy to use on mobile.
+  
+  By having the search bar for festivalId at the top of the screen, it allows admins to search for other festivalIds without having to return to the previous page. This makes the result viewer more flexible and efficient to use.
 # Justifications
 
 ### Justification 1
