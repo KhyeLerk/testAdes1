@@ -74,7 +74,9 @@ This document helps you identify the smaller tasks and helps you create a rough 
 |------|-------|-----------|---------------|----------------|
 | 1    | Basic | Frontend  | basic_frontend_data_viewer| Finish justifications|
 | 1    | Basic | Frontend  | basic_frontend_result_viewer| Finish justifications|
-| 2    | Basic | Frontend  | basic_frontend_data_viewer| Finish designing UI|
-| 2    | Basic | Frontend  | basic_frontend_result_viewer| Finish designing UI|
+| 2    | Basic | Frontend  | basic_frontend_data_viewer| Finish Wireframes|
+| 2    | Basic | Frontend  | basic_frontend_result_viewer| Finish Wireframes|
+| 2    | Basic | Frontend  | basic_mobile_data_viewer| Finish Wireframes|
+| 2    | Basic | Frontend  | basic_mobile_result_viewer| Finish Wireframes|
 | 2-3  | Basic | Frontend  | Data Viewer   | Implementation |
 
