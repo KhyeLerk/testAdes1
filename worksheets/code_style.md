@@ -30,7 +30,7 @@ for(var i = 0;i < 5;i++){
 ### Bad Example
 
 ```js
-var myFirstVariable
+var myFirst_Variable
 var companyName = Shield;
 for(var i = 0;i < 5;i++)
 {
