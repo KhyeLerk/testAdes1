@@ -57,15 +57,26 @@ This document helps you identify the smaller tasks and helps you create a rough 
 | 1-3  | Basic | Backend   | API           | Start working on documentation of APIs|
 | 2    | Basic | Backend   | Proj worksheet| Finish project worksheet|
 | 2    | Basic | Backend   | Code style    | Finish working on codestyle.md|
+| 2    | Basic | Backend   | Schema        | Complete documentation of schema.md|
 | 2    | Basic | Frontend  | basic_mobile_data_viewer| Finish working on basic_mobile_data_viewer's UI and justifications|
 | 3    | Basic | Frontend  | basic_mobile_result_viewer| Finish working on basic_mobile_result_viewer's UI and justifications|
+| 3    | Basic | Backend   | Insert API    | Complete basic insert API|
+| 4    | Basic | Backend   | Result API    | Complete all basic result API|
+| 5-6  | Basic | Backend | Caching result | Complete the basic of caching result|
+| 7    | Advanced | Backend | Result API   | Complete all advance result API|
+| 8    | Advanced | Backend | Caching result | Complete the advance of caching result|
+| 9-10 | Advanced | Backend | API          | Complete documentation of API|
+| 11-16| Advanced | Backend | Hosting      | Testing and troubleshooting with Khye for front end and back end|
+| 17   | Basic | Backend   | Weekly report | Complete the whole weekly report for all weeks and check back details|
 
 ### Member 2 - Liew Khye Lerk
 | Week | Level | Component | Feature       | Task           |
 |------|-------|-----------|---------------|----------------|
 | 1    | Basic | Frontend  | basic_frontend_data_viewer| Finish justifications|
 | 1    | Basic | Frontend  | basic_frontend_result_viewer| Finish justifications|
-| 2    | Basic | Frontend  | basic_frontend_data_viewer| Finish designing UI|
-| 2    | Basic | Frontend  | basic_frontend_result_viewer| Finish designing UI|
+| 2    | Basic | Frontend  | basic_frontend_data_viewer| Finish Wireframes|
+| 2    | Basic | Frontend  | basic_frontend_result_viewer| Finish Wireframes|
+| 2    | Basic | Frontend  | basic_mobile_data_viewer| Finish Wireframes|
+| 2    | Basic | Frontend  | basic_mobile_result_viewer| Finish Wireframes|
 | 2-3  | Basic | Frontend  | Data Viewer   | Implementation |
 
