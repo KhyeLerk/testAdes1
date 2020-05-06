@@ -218,27 +218,32 @@ GET /api/performances
 ### Endpoint => /api/performances
 
 ### Request Body
+- performanceId <int(10)> => 1111111111
 - festivalId <int(10)> => 1111111111
 - startTime <time> => 10:30:00
 - endTime <time> => 12:30:00
 	
 ### Response Body
 ```json
- // No content
+ {
+     "performanceId":number
+ }
 ```
 
 ### Error
 ```json
-{
-    "error":string,
-    "code":number,
-}
+    "Server error"
+
+    OR
+
+    "Duplicate error"
 ```
 
 ### Sample Request
 ```http
 Post /api/performances
 <body>
+- performanceId : 1111111111
 - festivalId : 1111111111
 - startTime : 10:30:00
 - endTime : 12:30:00
@@ -246,7 +251,9 @@ Post /api/performances
 
 ### Sample Response
 ```json
-{}
+{
+    "performanceId":1111111111
+}
 ```
 
 # Sample Error
@@ -281,6 +288,8 @@ Post /api/performances
 
 ```js
 "Server error"
+
+"Duplicate error"
 ```
 
 ### Sample Request
