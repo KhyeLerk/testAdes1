@@ -117,22 +117,22 @@ GET /api/performances
         {
             "performancesId":1111111111,
             "festivalId":3333333333,
-            "startTime":1000,
-            "endTime":1200,
+            "startTime":"1000",
+            "endTime":"1200",
         },
 
         {
             "performancesId":2222222222,
             "festivalId":3333333333,
-            "startTime":1100,
-            "endTime":1300,
+            "startTime":"1100",
+            "endTime":"1300",
         },
 
         {
             "performancesId":3333333333,
             "festivalId":3333333333,
-            "startTime":1200,
-            "endTime":1400,
+            "startTime":"1200",
+            "endTime":"1400",
         }
     ]
 }
@@ -185,21 +185,21 @@ GET /api/performances
         {
             "performancesId":1111111111,
             "festivalId":3333333333,
-            "startTime":1000,
-            "endTime":1200,        },
+            "startTime":"1000",
+            "endTime":"1200",        },
 
         {
             "performancesId":2222222222,
             "festivalId":3333333333,
-            "startTime":1100,
-            "endTime":1300,
+            "startTime":"1100",
+            "endTime":"1300",
         },
 
         {
             "performancesId":3333333333,
             "festivalId":3333333333,
-            "startTime":1200,
-            "endTime":1400,
+            "startTime":"1200",
+            "endTime":"1400",
         }
     ]
 }
@@ -219,8 +219,8 @@ GET /api/performances
 
 ### Request Body
 - festivalId <int(10)> => 1111111111
-- startTime <time> => 10:30:00
-- endTime <time> => 12:30:00
+- startTime <time> => 10:30
+- endTime <time> => 12:30
 	
 ### Response Body
 ```json
@@ -240,8 +240,9 @@ GET /api/performances
 Post /api/performances
 <body>
 - festivalId : 1111111111
-- startTime : 10:30:00
-- endTime : 12:30:00
+- startTime : 10:30
+- endTime : 12:30
+</body>
 ```
 
 ### Sample Response
@@ -270,8 +271,8 @@ Post /api/performances
         {
             "performanceId":number,
             "festivalId":number,
-            "startTime":time,
-            "endTime":time,
+            "startTime":"time",
+            "endTime":"time",
         }
     ]
 }
@@ -296,22 +297,22 @@ GET /api/performances/startTime
     	{
             "performancesId":2222222222,
             "festivalId":3333333333,
-            "startTime":1100,
-            "endTime":1300,
+            "startTime":"1100",
+            "endTime":"1300",
         },
 	
         {
             "performancesId":1111111111,
             "festivalId":3333333333,
-            "startTime":1000,
-            "endTime":1200,
+            "startTime":"1000",
+            "endTime":"1200",
         },
 
         {
             "performancesId":3333333333,
             "festivalId":3333333333,
-            "startTime":1200,
-            "endTime":1400,
+            "startTime":"1200",
+            "endTime":"1400",
         }
     ]
 }
@@ -363,24 +364,24 @@ GET /api/performances/festivalId
         {
             "performancesId":1111111111,
             "festivalId":1111111111,
-            "startTime":1000,
-            "endTime":1200,
+            "startTime":"1000",
+            "endTime":"1200",
             "popularity":1
         },
     
     	{
             "performancesId":2222222222,
             "festivalId":3333333333,
-            "startTime":1100,
-            "endTime":1300,
+            "startTime":"1100",
+            "endTime":"1300",
             "popularity":10000
         },
 
         {
             "performancesId":3333333333,
             "festivalId":3333333333,
-            "startTime":1200,
-            "endTime":1400,
+            "startTime":"1200",
+            "endTime":"1400",
             "popularity":1
         }
     ]
