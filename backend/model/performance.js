@@ -58,7 +58,7 @@ var performanceDB = {
        }, 
 
         // 3
-        insertPerformance: function (festivalId, startTime, endTime, callback) {
+        insertPerformance: function (festivalId, startTime, endTime,performanceId, callback) {
             var conn = db.getConnection();
             conn.connect(function (err) {
                 if (err) {
@@ -67,8 +67,8 @@ var performanceDB = {
                 }
                 else {
                     console.log("Connected!");
-                    var sql = 'INSERT INTO performance(festivalId, startTime, endTime)VALUES(?,?,?);';
-                    conn.query(sql,[festivalId, startTime, endTime], function (err, result) {
+                    var sql = 'INSERT INTO performance(festivalId, startTime, endTime, performanceId)VALUES(?,?,?,?);';
+                    conn.query(sql,[festivalId, startTime, endTime,performanceId], function (err, result) {
                         conn.end();
                         if (err) {
                             console.log(err);

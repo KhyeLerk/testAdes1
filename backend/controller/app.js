@@ -55,9 +55,10 @@ app.post('/api/performances', function(req,res){
     var festivalId = req.body.festivalId;
     var startTime = req.body.startTime;
     var endTime = req.body.endTime;
+    var performanceId = req.body.performanceId
     console.log(festivalId)
     
-        performance.insertPerformance(festivalId, startTime, endTime, function(err,result){
+        performance.insertPerformance(festivalId, startTime, endTime,performanceId, function(err,result){
             if(!err){
                 res.status(201).send("{\"performanceId\":"+result.insertId+"}");
             }else{
