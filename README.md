@@ -53,6 +53,16 @@ Music Festival
 2. What did the team plan to do next week?
 - Finish working on basic front end data viewer to display all the data in the database and able to meet all the required functionalities
 
+### Week 3:
+1. What did the team do this week?
+- Connected backend to frontend to display table data
+- Completed pagination function
+- Started to implement filter function
+
+
+2. What did the team plan to do next week?
+- Complete all functionalities of the basic data viewer.
+
 ## Setup
 
 1. Setup a Github account (Using any account)
