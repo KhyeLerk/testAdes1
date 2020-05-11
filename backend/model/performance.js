@@ -82,7 +82,7 @@ var performanceDB = {
            },
 
            // 4
-        getPerformancesByStartTime: function (page, callback) {
+        getPerformancesByStartTime: function (page,startTime, callback) {
             var conn = db.getConnection();
             conn.connect(function (err) {
                 if (err) {
@@ -92,8 +92,8 @@ var performanceDB = {
                 else {
                     console.log("Connected!")
                     var startRow = page*10-10;
-                    var sql = 'SELECT * FROM performance ORDER BY startTime LIMIT ?,10';
-                    conn.query(sql, [startRow],function (err, result) {
+                    var sql = 'SELECT * FROM performance WHERE startTime=? LIMIT ?,10';
+                    conn.query(sql, [startTime,startRow],function (err, result) {
                         conn.end();
                         if (err) {
                             console.log(err);
@@ -107,7 +107,7 @@ var performanceDB = {
            },
 
            // 5
-        getPerformancesByFestivalId: function (page, callback) {
+        getPerformancesByFestivalId: function (page,festivalId, callback) {
             var conn = db.getConnection();
             conn.connect(function (err) {
                 if (err) {
@@ -117,8 +117,8 @@ var performanceDB = {
                 else {
                     console.log("Connected!")
                     var startRow = page*10-10;
-                    var sql = 'SELECT * FROM performance ORDER BY festivalId LIMIT ?,10';
-                    conn.query(sql, [startRow],function (err, result) {
+                    var sql = 'SELECT * FROM performance WHERE festivalId=? LIMIT ?,10';
+                    conn.query(sql, [festivalId,startRow],function (err, result) {
                         conn.end();
                         if (err) {
                             console.log(err);

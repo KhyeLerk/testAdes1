@@ -9,11 +9,14 @@ var app = express();
 var performance = require('../model/performance.js'); 
 var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({extended:false});
+const cors = require("cors")
 
 app.use(express.static("public"));
 
 app.use(bodyParser.json());// parse application/json
 app.use(urlencodedParser); // parse application/x-www-form-urlencoded
+app.options('*',cors());
+app.use(cors());
 
 // APIs
 
@@ -71,8 +74,9 @@ app.post('/api/performances', function(req,res){
 
 app.get('/api/performances/:page/startTime' ,function(req,res){
     var page = req.params.page;
+    var startTime = req.body.startTime;
 
-    performance.getPerformancesByStartTime(page, function(err,result){
+    performance.getPerformancesByStartTime(page,startTime, function(err,result){
         if(!err){
             res.status(200).send(result);
         }else{
@@ -85,8 +89,9 @@ app.get('/api/performances/:page/startTime' ,function(req,res){
 
 app.get('/api/performances/:page/festivalId' ,function(req,res){
     var page = req.params.page
+    var festivalId = req.body.festivalId
 
-    performance.getPerformancesByFestivalId(page, function(err,result){
+    performance.getPerformancesByFestivalId(page,festivalId, function(err,result){
         if(!err){
             res.status(200).send(result);
         }else{
