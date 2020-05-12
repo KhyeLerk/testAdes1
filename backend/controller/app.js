@@ -64,6 +64,12 @@ app.post('/api/performances', function(req,res){
         performance.insertPerformance(festivalId, startTime, endTime,performanceId, function(err,result){
             if(!err){
                 res.status(201).send("{\"performanceId\":"+result.insertId+"}");
+            }
+            else if(err.errno == 1048){
+                res.status(400).send('Null error')
+            }
+            else if(err.errno == 1062){
+                res.status(400).send('Duplicate error')
             }else{
                 res.status(500).send('Server error');
             }
