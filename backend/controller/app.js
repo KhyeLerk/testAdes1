@@ -95,8 +95,8 @@ app.get('/api/performances/:page/startTime' ,function(req,res){
 
 app.get('/api/performances/:page/festivalId' ,function(req,res){
     var page = req.params.page
-    var festivalId = req.body.festivalId
-
+    var festivalId = req.query.festivalId
+    
     performance.getPerformancesByFestivalId(page,festivalId, function(err,result){
         if(!err){
             res.status(200).send(result);
