@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { IonContent, IonButton, IonHeader, IonLabel, IonInput, IonFooter, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonContent, IonButton, IonSearchbar, IonHeader, IonLabel, IonInput, IonFooter, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import TableRow from '../components/dataViewerContent';
 import './dataViewer.css';
 import axios from 'axios';
+import { type } from 'os';
 
 
 const getDataTable = (pages: number) => {
@@ -11,7 +12,6 @@ const getDataTable = (pages: number) => {
     url: `http://localhost:3000/api/performances/${pages}`,
     method: 'get'
   }).then(response => {
-    console.log(response);
     return response.data;
   }).catch(error => {
     console.log("error");
@@ -19,24 +19,58 @@ const getDataTable = (pages: number) => {
   });
 };
 
+const getDataTableFestivalId = (pages: number, festivalId: string) => {
+  //get filtered table data per page 
+  return axios({
+    url: `http://localhost:3000/api/performances/${pages}/${festivalId}/festivalId`,
+    method: 'get'
+  }).then(response => {
+    if (response.data.length != 0)
+      return response.data;
+    else {
+      return [{ "performanceId": "NO RESULTS FOUND", "festivalId": "NO RESULTS FOUND", "startTime": "NO RESULTS FOUND", "endTime": "NO RESULTS FOUND" }]
+    }
+  })
+};
+
+
+const getDataTableStartTime = (pages: number, startTime: string) => {
+  //get filtered table data per page 
+  return axios({
+    url: `http://localhost:3000/api/performances/${pages}/${startTime}/startTime`,
+    method: 'get'
+  }).then(response => {
+    if (response.data.length != 0)
+      return response.data;
+    else {
+      return [{ "performanceId": "NO RESULTS FOUND", "festivalId": "NO RESULTS FOUND", "startTime": "NO RESULTS FOUND", "endTime": "NO RESULTS FOUND" }]
+    }
+  })
+};
+
 const getAllData = () => {
-  //get table data per page
+  //get number of data
   return axios({
     url: `http://localhost:3000/api/performances/`,
     method: 'get'
   }).then(response => {
-    return response.data.length;
+    console.log(response.data[0].count)
+    return response.data[0].count;
   })
 };
 
 const DataViewer: React.FC = () => {
 
   //Data binding
-  const [festivalId, setFestivalId] = useState<number>();
-  const [startTime, setStartTime] = useState<number>();
+  const [festivalId, setFestivalId] = useState<string>("");
+  const [startTime, setStartTime] = useState<string>("");
   const [dataRow, setDataRow] = React.useState([]);
+  const [dataRowFId, setDataRowFId] = React.useState([]);
+  const [dataRowSTime, setDataRowSTime] = React.useState([]);
   const [totalData, setTotalData] = React.useState<number>();
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [searchText, setSearchText] = useState('');
+
   const totalPages = Math.ceil(totalData! / 10);
 
   //gets response data then stores in dataRow array
@@ -46,17 +80,26 @@ const DataViewer: React.FC = () => {
 
   }, []);
 
+
   //gets response data then stores in dataRow array
   React.useEffect(() => {
+    getDataTableFestivalId(1, festivalId).then(data => setDataRowFId(data));
+  }, [festivalId]);
 
+  //gets response data then stores in dataRow array
+  React.useEffect(() => {
+    getDataTableStartTime(1, startTime).then(data => setDataRowSTime(data));
+  }, [startTime]);
+
+  //gets response data then stores in dataRow array
+  React.useEffect(() => {
     getAllData().then(data => setTotalData(data));
-
   });
 
   //change page function
-  function changePage(pageNo:number){
+  function changePage(pageNo: number) {
 
-    if(!(pageNo > totalPages) && !(pageNo < 1) ){
+    if (!(pageNo > totalPages) && !(pageNo < 1)) {
       getDataTable(pageNo).then(data => setDataRow(data))
       setCurrentPage(pageNo);
     }
@@ -70,7 +113,6 @@ const DataViewer: React.FC = () => {
       arrayOfPages.push(i)
     }
     return (
-
       arrayOfPages.map((pageNo) => (
         <a key={pageNo} onClick={() => changePage(pageNo)}>{pageNo}</a>
       )
@@ -78,27 +120,26 @@ const DataViewer: React.FC = () => {
     )
   }
 
+  //Get current entry in data table
+  function getCurrentEntries() {
+    var noOfEntries = dataRow.length;
+    var startingEntry = currentPage;
 
-  function getCurrentEntries(){
-       var noOfEntries = dataRow.length;
-       var startingEntry = currentPage;
-    
-      if(startingEntry! > 9){
-        startingEntry = startingEntry!*10+1
-      }else{
-        startingEntry = (startingEntry!-1)*10 + 1;
-      }
-      var endingEntry = startingEntry!+ noOfEntries -1;
-      return startingEntry + "-" +  endingEntry;
+    if (startingEntry! > 9) {
+      startingEntry = startingEntry! * 10 + 1
+    } else {
+      startingEntry = (startingEntry! - 1) * 10 + 1;
+    }
+    var endingEntry = startingEntry! + noOfEntries - 1;
+    return startingEntry + "-" + endingEntry;
   }
-
 
   return (
     <IonPage>
       <IonContent>
         <IonToolbar id="filter">
-          <IonInput type="number" value={festivalId} onIonChange={e => setFestivalId(parseInt(e.detail.value!, 10))} placeholder="festivalId" inputMode="numeric" className="input"></IonInput>
-          <IonInput type="number" value={startTime} onIonChange={e => setStartTime(parseInt(e.detail.value!, 10))} placeholder="startTime" inputMode="search" className="input"></IonInput>
+          <IonInput type="number" min="0" value={festivalId} placeholder="Filter festivalId" onIonChange={e => setFestivalId(e.detail.value!)} className="input"></IonInput>
+          <IonInput type="number" min="0" value={startTime} placeholder="Filter startTime" onIonChange={e => setStartTime(e.detail.value!)} className="input"></IonInput>
         </IonToolbar>
         <div>
           <table id="row" color="dark">
@@ -111,13 +152,27 @@ const DataViewer: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {
+              {festivalId =="" && startTime ==""?
                 dataRow.map(item => {
                   return (
                     <TableRow key={item['performanceId']} festivalId={item['festivalId']} performanceId={item['performanceId']} startTime={item['startTime']} endTime={item['endTime']} />
                   );
                 })
+                :startTime == ""?
+                dataRowFId.map(item => {
+                  return (
+                    <TableRow key={item['performanceId']} festivalId={item['festivalId']} performanceId={item['performanceId']} startTime={item['startTime']} endTime={item['endTime']} />
+                  );
+                })
+                :
+                dataRowSTime.map(item => {
+                  return (
+                    <TableRow key={item['performanceId']} festivalId={item['festivalId']} performanceId={item['performanceId']} startTime={item['startTime']} endTime={item['endTime']} />
+                  );
+                })
               }
+
+
             </tbody>
           </table>
 
@@ -126,11 +181,10 @@ const DataViewer: React.FC = () => {
       <IonFooter>
         <IonToolbar>
           <IonLabel id="tableSize">Showing {getCurrentEntries()} of {totalData} entries</IonLabel>
-          <IonInput type="number" value={startTime} onIonChange={e => setStartTime(parseInt(e.detail.value!, 10))} placeholder="startTime" inputMode="search" className="input"></IonInput>
 
           <div className="pagination">
             <a onClick={() => changePage(1)}>&laquo;&laquo;</a>
-            <a onClick={() => changePage(currentPage -1)}>&laquo;</a>
+            <a onClick={() => changePage(currentPage - 1)}>&laquo;</a>
             {/* <a className="active" href="#">1</a> */}
             {getPagination()}
 
@@ -138,6 +192,7 @@ const DataViewer: React.FC = () => {
             <a onClick={() => changePage(totalPages)}>&raquo;&raquo;</a>
 
           </div>
+
         </IonToolbar>
       </IonFooter>
     </IonPage >
