@@ -77,7 +77,7 @@ GET /basic/data?id=1234567890
 "Server error"
 ```
 
-# API 1 : Get Performances ( For testing connection with database )
+# API 1 : Get number of Performances in the table
 
 ### HTTP Method => GET
 ### Endpoint => /api/performances
@@ -90,10 +90,7 @@ GET /basic/data?id=1234567890
 {
     "result":[
         {
-            "performanceId":number,
-            "festivalId":number,
-            "startTime":time,
-            "endTime":time,
+            "count":number
         }
     ]
 }
@@ -114,26 +111,7 @@ GET /api/performances
 ```json
 {
     "result":[
-        {
-            "performancesId":1111111111,
-            "festivalId":3333333333,
-            "startTime":"1000",
-            "endTime":"1200",
-        },
-
-        {
-            "performancesId":2222222222,
-            "festivalId":3333333333,
-            "startTime":"1100",
-            "endTime":"1300",
-        },
-
-        {
-            "performancesId":3333333333,
-            "festivalId":3333333333,
-            "startTime":"1200",
-            "endTime":"1400",
-        }
+	"count":100
     ]
 }
 ```
@@ -186,7 +164,8 @@ GET /api/performances
             "performancesId":1111111111,
             "festivalId":3333333333,
             "startTime":"1000",
-            "endTime":"1200",        },
+            "endTime":"1200",        
+	},
 
         {
             "performancesId":2222222222,
