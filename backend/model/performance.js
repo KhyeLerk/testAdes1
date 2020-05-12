@@ -18,7 +18,7 @@ var performanceDB = {
                 }
                 else {
                     console.log("Connected!");
-                    var sql = 'SELECT COUNT(*) "count" FROM performance';
+                    var sql = 'SELECT COUNT(*) FROM performance';
                     conn.query(sql, function (err, result) {
                         conn.end();
                         if (err) {
