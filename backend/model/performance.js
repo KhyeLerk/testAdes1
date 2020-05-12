@@ -18,7 +18,7 @@ var performanceDB = {
                 }
                 else {
                     console.log("Connected!");
-                    var sql = 'SELECT COUNT(*) FROM performance';
+                    var sql = 'SELECT COUNT(*) count FROM performance';
                     conn.query(sql, function (err, result) {
                         conn.end();
                         if (err) {
@@ -92,7 +92,7 @@ var performanceDB = {
                 else {
                     console.log("Connected!")
                     var startRow = page*10-10;
-                    var sql = 'SELECT * FROM performance WHERE startTime=? LIMIT ?,10';
+                    var sql = 'SELECT * FROM performance WHERE startTime>=? LIMIT ?,10';
                     conn.query(sql, [startTime,startRow],function (err, result) {
                         conn.end();
                         if (err) {

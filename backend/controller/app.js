@@ -27,6 +27,7 @@ app.get('/api/performances', function (req, res) {
 
     performance.getPerformances(function (err, result) {
         if (!err) {
+            console.log(result)
             res.status(200).send(result);
         }else{
             res.status(500).send('Server Error');
@@ -78,9 +79,9 @@ app.post('/api/performances', function(req,res){
 
 // ADES : 4
 
-app.get('/api/performances/:page/startTime' ,function(req,res){
+app.get('/api/performances/:page/:startTime/startTime' ,function(req,res){
     var page = req.params.page;
-    var startTime = req.body.startTime;
+    var startTime = req.params.startTime;
 
     performance.getPerformancesByStartTime(page,startTime, function(err,result){
         if(!err){
@@ -93,10 +94,10 @@ app.get('/api/performances/:page/startTime' ,function(req,res){
 
 // ADES : 5
 
-app.get('/api/performances/:page/festivalId' ,function(req,res){
+app.get('/api/performances/:page/:festivalId/festivalId' ,function(req,res){
     var page = req.params.page
-    var festivalId = req.query.festivalId
-    
+    var festivalId = req.params.festivalId
+
     performance.getPerformancesByFestivalId(page,festivalId, function(err,result){
         if(!err){
             res.status(200).send(result);
