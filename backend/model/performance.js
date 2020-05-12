@@ -43,7 +43,7 @@ var performanceDB = {
             else {
                 console.log("Connected!");
                 var startRow = page*10-10;
-                var sql = 'SELECT * FROM performance LIMIT ?,10';
+                var sql = 'SELECT performanceId,festivalId,startTime,endTime FROM performance LIMIT ?,10';
                 conn.query(sql, [startRow], function (err, result) {
                     conn.end();
                     if (err) {
