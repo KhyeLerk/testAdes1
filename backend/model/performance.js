@@ -93,7 +93,7 @@ var performanceDB = {
                     console.log("Connected!")
                     var startRow = page*10-10;
                     var sql;
-                    if(startTime=="") {
+                    if(startTime==0) {
                         sql = 'SELECT * FROM performance WHERE festivalId=? LIMIT ?,10'
                     conn.query(sql, [festivalId,startRow],function (err, result) {
                         conn.end();
@@ -104,7 +104,7 @@ var performanceDB = {
                             return callback(null, result);
                         }
                     });
-                    }else if(festivalId==""){
+                    }else if(festivalId==0){
                         sql = 'SELECT * FROM performance WHERE startTime=? LIMIT ?,10'
                     conn.query(sql, [startTime,startRow],function (err, result) {
                         conn.end();
