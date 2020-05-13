@@ -79,10 +79,10 @@ app.post('/api/performances', function(req,res){
 
 // ADES : 4
 
-app.get('/api/performances/:page/filter' ,function(req,res){
+app.get('/api/performances/:page/:startTime/startTime/:festivalId/festivalId' ,function(req,res){
     var page = req.params.page;
-    var startTime = req.body.startTime;
-    var festivalId = req.body.festivalId;
+    var startTime = req.params.startTime;
+    var festivalId = req.params.festivalId;
 
     performance.getPerformancesFilter(page,startTime,festivalId, function(err,result){
         if(!err){
