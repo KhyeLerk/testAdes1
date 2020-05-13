@@ -79,11 +79,12 @@ app.post('/api/performances', function(req,res){
 
 // ADES : 4
 
-app.get('/api/performances/:page/:startTime/startTime' ,function(req,res){
+app.get('/api/performances/:page/filter' ,function(req,res){
     var page = req.params.page;
-    var startTime = req.params.startTime;
+    var startTime = req.body.startTime;
+    var festivalId = req.body.festivalId;
 
-    performance.getPerformancesByStartTime(page,startTime, function(err,result){
+    performance.getPerformancesFilter(page,startTime,festivalId, function(err,result){
         if(!err){
             res.status(200).send(result);
         }else{
@@ -94,18 +95,18 @@ app.get('/api/performances/:page/:startTime/startTime' ,function(req,res){
 
 // ADES : 5
 
-app.get('/api/performances/:page/:festivalId/festivalId' ,function(req,res){
-    var page = req.params.page
-    var festivalId = req.params.festivalId
+// app.get('/api/performances/:page/:festivalId/festivalId' ,function(req,res){
+//     var page = req.params.page
+//     var festivalId = req.params.festivalId
 
-    performance.getPerformancesByFestivalId(page,festivalId, function(err,result){
-        if(!err){
-            res.status(200).send(result);
-        }else{
-            res.status(500).send('Server error');
-        }
-    })
-})
+//     performance.getPerformancesByFestivalId(page,festivalId, function(err,result){
+//         if(!err){
+//             res.status(200).send(result);
+//         }else{
+//             res.status(500).send('Server error');
+//         }
+//     })
+// })
 
 module.exports= app
 

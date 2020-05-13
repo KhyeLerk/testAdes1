@@ -82,7 +82,7 @@ var performanceDB = {
            },
 
            // 4
-        getPerformancesByStartTime: function (page,startTime, callback) {
+        getPerformancesFilter: function (page,startTime,festivalId, callback) {
             var conn = db.getConnection();
             conn.connect(function (err) {
                 if (err) {
@@ -92,32 +92,9 @@ var performanceDB = {
                 else {
                     console.log("Connected!")
                     var startRow = page*10-10;
-                    var sql = 'SELECT * FROM performance WHERE startTime>=? LIMIT ?,10';
-                    conn.query(sql, [startTime,startRow],function (err, result) {
-                        conn.end();
-                        if (err) {
-                            console.log(err);
-                            return callback(err,null);
-                        } else {
-                            return callback(null, result);
-                        }
-                    });
-                }
-                  });
-           },
-
-           // 5
-        getPerformancesByFestivalId: function (page,festivalId, callback) {
-            var conn = db.getConnection();
-            conn.connect(function (err) {
-                if (err) {
-                    console.log(err);
-                    return callback(err,null);
-                }
-                else {
-                    console.log("Connected!")
-                    var startRow = page*10-10;
-                    var sql = 'SELECT * FROM performance WHERE festivalId=? LIMIT ?,10';
+                    var sql;
+                    if(startTime=="") {
+                        sql = 'SELECT * FROM performance WHERE festivalId=? LIMIT ?,10'
                     conn.query(sql, [festivalId,startRow],function (err, result) {
                         conn.end();
                         if (err) {
@@ -127,9 +104,57 @@ var performanceDB = {
                             return callback(null, result);
                         }
                     });
+                    }else if(festivalId==""){
+                        sql = 'SELECT * FROM performance WHERE startTime=? LIMIT ?,10'
+                    conn.query(sql, [startTime,startRow],function (err, result) {
+                        conn.end();
+                        if (err) {
+                            console.log(err);
+                            return callback(err,null);
+                        } else {
+                            return callback(null, result);
+                        }
+                    });
+                    }else{
+                        sql = 'SELECT * FROM performance WHERE startTime=? AND festivalId=? LIMIT ?,10'
+                        conn.query(sql, [startTime,festivalId,startRow],function (err, result) {
+                            conn.end();
+                            if (err) {
+                                console.log(err);
+                                return callback(err,null);
+                            } else {
+                                return callback(null, result);
+                            }
+                        });  
+                    }
                 }
                   });
            },
+
+           // 5
+        // getPerformancesByFestivalId: function (page,festivalId, callback) {
+        //     var conn = db.getConnection();
+        //     conn.connect(function (err) {
+        //         if (err) {
+        //             console.log(err);
+        //             return callback(err,null);
+        //         }
+        //         else {
+        //             console.log("Connected!")
+        //             var startRow = page*10-10;
+        //             var sql = 'SELECT * FROM performance WHERE festivalId=? LIMIT ?,10';
+        //             conn.query(sql, [festivalId,startRow],function (err, result) {
+        //                 conn.end();
+        //                 if (err) {
+        //                     console.log(err);
+        //                     return callback(err,null);
+        //                 } else {
+        //                     return callback(null, result);
+        //                 }
+        //             });
+        //         }
+        //           });
+        //    },
 }
 
 module.exports = performanceDB
