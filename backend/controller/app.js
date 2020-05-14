@@ -95,18 +95,18 @@ app.get('/api/performances/:page/:startTime/startTime/:festivalId/festivalId' ,f
 
 // ADES : 5
 
-// app.get('/api/performances/:page/:festivalId/festivalId' ,function(req,res){
-//     var page = req.params.page
-//     var festivalId = req.params.festivalId
+app.get('/api/performances/:startTime/startTime/:festivalId/festivalId' ,function(req,res){
+    var startTime = req.params.startTime;
+    var festivalId = req.params.festivalId
 
-//     performance.getPerformancesByFestivalId(page,festivalId, function(err,result){
-//         if(!err){
-//             res.status(200).send(result);
-//         }else{
-//             res.status(500).send('Server error');
-//         }
-//     })
-// })
+    performance.getPerformancesRowsFilter(startTime,festivalId, function(err,result){
+        if(!err){
+            res.status(200).send(result);
+        }else{
+            res.status(500).send('Server error');
+        }
+    })
+})
 
 module.exports= app
 
