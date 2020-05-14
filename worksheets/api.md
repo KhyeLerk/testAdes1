@@ -77,7 +77,7 @@ GET /basic/data?id=1234567890
 "Server error"
 ```
 
-# API 1 : Get number of Performances in the table
+# API 1 : Get Number of Performances
 
 ### HTTP Method => GET
 ### Endpoint => /api/performances
@@ -122,13 +122,14 @@ GET /api/performances
 "Server error"
 ```
 
-# API 2 : Get Performances for certain rows only
+# API 2 : Get Performances Limiting rows only
 
 ### HTTP Method => GET
-### Endpoint => /api/performances/:page
+### Endpoint => /api/performances/:page/:rows
 
 ### Request Parameters
-- page <int(10)> => 1
+- page <int> => 1
+- rows <int> => 3
 
 ### Response Body
 ```json
@@ -152,8 +153,7 @@ GET /api/performances
 
 ### Sample Request
 ```http
-GET /api/performances
-<body> page = 1
+GET /api/performances/1/3
 ```
 
 ### Sample Response
@@ -199,8 +199,8 @@ GET /api/performances
 ### Request Body
 - performanceId <int(10)> => 1111111111
 - festivalId <int(10)> => 1111111111
-- startTime <time> => 10:30
-- endTime <time> => 12:30
+- startTime <varchar(4)> => "1030"
+- endTime <varchar(4)> => "1230"
 	
 ### Response Body
 ```json
@@ -210,12 +210,19 @@ GET /api/performances
 ```
 
 ### Error
+- Partial or complete null input
+```json
+      "Null error"
+```
+
+- Partial or complete duplicate input
+```json
+     "Duplicate Error"
+```
+
+- Other errors
 ```json
     "Server error"
-
-    OR
-
-    "Duplicate error"
 ```
 
 ### Sample Request
@@ -224,8 +231,8 @@ Post /api/performances
 <body>
 - performanceId : 1111111111
 - festivalId : 1111111111
-- startTime : 10:30
-- endTime : 12:30
+- startTime : "1030"
+- endTime : "1230"
 </body>
 ```
 
@@ -237,18 +244,31 @@ Post /api/performances
 ```
 
 # Sample Error
-
-```js
-"Server error"
+- Partial or complete null input
+```json
+      "Null error"
 ```
 
-# API 4: Get Performances sort by startTime in ascending order
+- Partial or complete duplicate input
+```json
+     "Duplicate Error"
+```
+
+- Other errors
+```json
+    "Server error"
+```
+
+# API 4: Get Performances Limiting rows(Filtered) 
 
 ### HTTP Method => GET
-### Endpoint => /api/performances/startTime
+### Endpoint => /api/performances/:page/:startTime/startTime/:festivalId/festivalId/:rows
 
 ### Parameters 
-- N/A
+- page <int> => 1
+- startTime <varchar(4)> => 1200
+- festivalId <int(10)> => 3333333333
+- rows <int> => 2
 
 ### Response Body
 ```json
@@ -257,8 +277,8 @@ Post /api/performances
         {
             "performanceId":number,
             "festivalId":number,
-            "startTime":"time",
-            "endTime":"time",
+            "startTime":"varchar(4)",
+            "endTime":"varchar(4)",
         }
     ]
 }
@@ -268,13 +288,11 @@ Post /api/performances
 
 ```js
 "Server error"
-
-"Duplicate error"
 ```
 
 ### Sample Request
 ```http
-GET /api/performances/startTime
+GET /api/performances/1/1200/startTime/3333333333/festivalId/2
 ```
 
 ### Sample Response
@@ -285,20 +303,13 @@ GET /api/performances/startTime
     	{
             "performancesId":2222222222,
             "festivalId":3333333333,
-            "startTime":"1100",
+            "startTime":"1200",
             "endTime":"1300",
         },
 	
         {
             "performancesId":1111111111,
             "festivalId":3333333333,
-            "startTime":"1000",
-            "endTime":"1200",
-        },
-
-        {
-            "performancesId":3333333333,
-            "festivalId":3333333333,
             "startTime":"1200",
             "endTime":"1400",
         }
@@ -312,23 +323,21 @@ GET /api/performances/startTime
 "Server error"
 ```
 
-# API 5: Get Performances sort by festivalId in ascending order
+# API 5: Get Number of Performances Limiting rows(Filtered) 
 
 ### HTTP Method => GET
-### Endpoint => /api/performances/festivalId
+### Endpoint => /api/performances/:startTime/startTime/:festivalId/festivalId/
 
 ### Parameters 
-- N/A
+- startTime <varchar(4)> => 1200
+- festivalId <int(10)> => 3333333333
 
 ### Response Body
 ```json
 {
     "result":[
         {
-            "performanceId":number,
-            "festivalId":number,
-            "startTime":time,
-            "endTime":time,
+	     "count":number
         }
     ]
 }
@@ -342,7 +351,7 @@ GET /api/performances/startTime
 
 ### Sample Request
 ```http
-GET /api/performances/festivalId
+GET /api/performances/1200/startTime/3333333333/festivalId/
 ```
 
 ### Sample Response
@@ -350,27 +359,7 @@ GET /api/performances/festivalId
 {
     "result":[
         {
-            "performancesId":1111111111,
-            "festivalId":1111111111,
-            "startTime":"1000",
-            "endTime":"1200",
-            "popularity":1
-        },
-    
-    	{
-            "performancesId":2222222222,
-            "festivalId":3333333333,
-            "startTime":"1100",
-            "endTime":"1300",
-            "popularity":10000
-        },
-
-        {
-            "performancesId":3333333333,
-            "festivalId":3333333333,
-            "startTime":"1200",
-            "endTime":"1400",
-            "popularity":1
+	     "count":5
         }
     ]
 }
@@ -381,4 +370,3 @@ GET /api/performances/festivalId
 ```js
 "Server error"
 ```
-
