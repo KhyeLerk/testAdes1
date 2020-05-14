@@ -105,7 +105,7 @@ var performanceDB = {
                         }
                     });
                     }else if(festivalId==0){
-                        sql = 'SELECT * FROM performance WHERE startTime=? LIMIT ?,10'
+                        sql = 'SELECT * FROM performance WHERE startTime>=? LIMIT ?,10'
                     conn.query(sql, [startTime,startRow],function (err, result) {
                         conn.end();
                         if (err) {
@@ -116,7 +116,7 @@ var performanceDB = {
                         }
                     });
                     }else{
-                        sql = 'SELECT * FROM performance WHERE startTime=? AND festivalId=? LIMIT ?,10'
+                        sql = 'SELECT * FROM performance WHERE startTime>=? AND festivalId=? LIMIT ?,10'
                         conn.query(sql, [startTime,festivalId,startRow],function (err, result) {
                             conn.end();
                             if (err) {

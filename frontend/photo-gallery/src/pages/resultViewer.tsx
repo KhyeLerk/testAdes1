@@ -1,6 +1,5 @@
 import React from 'react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/dataViewerContent';
 import './resultViewer.css';
 
 const ResultViewer: React.FC = () => {
