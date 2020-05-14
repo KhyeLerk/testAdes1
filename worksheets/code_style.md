@@ -20,20 +20,20 @@ Based on your chosen rules, give an example of a code that follows the code styl
 ### Good Example
 
 ```js
-var myFirstVariable = [];
-var companyName = shield;
-for(var i = 0;i < 5;i++){
-    myFirstVariable.push(i);
+var myFirstVariable = []; // Following rule one : Using camel case
+var companyName = shield; // Following rule two : Using small letters for acronym
+for(var i = 0;i < 5;i++){ // Following rule three : Using 1TBS indentation style
+    myFirstVariable.push(i); // Following rule 4, 5, 6: Using tabs and 4 spaces for indentation and indentation space respectively.Use ;
 }
 ```
 
 ### Bad Example
 
 ```js
-var myFirst_Variable
-var companyName = Shield;
-for(var i = 0;i < 5;i++)
+var myFirst_Variable // Not following rule one : Not using camel case
+var companyName = Shield; // Not following rule two : Using capital letters for acronym
+for(var i = 0;i < 5;i++) // Not following rule three : Not using 1TBS indentation style
 {
- myFirstVariable.push(i);
+ myFirstVariable.push(i); /* Not following rule 4, 5: Not using tabs and use 1 spaces for indentation and indentation space respectively.*/
 }
 ```
