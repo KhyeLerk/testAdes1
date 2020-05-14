@@ -105,7 +105,7 @@ var performanceDB = {
                         }
                     });
                     }else if(festivalId==0){
-                        sql = 'SELECT * FROM performance WHERE startTime>=? LIMIT ?,?'
+                        sql = 'SELECT * FROM performance WHERE CAST(startTime AS UNSIGNED) >=? LIMIT ?,?'
                     conn.query(sql, [startTime,startRow,parseInt(rows)],function (err, result) {
                         conn.end();
                         if (err) {
@@ -116,7 +116,7 @@ var performanceDB = {
                         }
                     });
                     }else{
-                        sql = 'SELECT * FROM performance WHERE startTime>=? AND festivalId=? LIMIT ?,?'
+                        sql = 'SELECT * FROM performance WHERE CAST(startTime AS UNSIGNED)>=? AND festivalId=? LIMIT ?,?'
                         conn.query(sql, [startTime,festivalId,startRow,parseInt(rows)],function (err, result) {
                             conn.end();
                             if (err) {
@@ -154,7 +154,7 @@ var performanceDB = {
                         }
                     });
                     }else if(festivalId==0){
-                        sql = 'SELECT COUNT(*) count FROM performance WHERE startTime=?'
+                        sql = 'SELECT COUNT(*) count FROM performance WHERE CAST(startTime AS UNSIGNED)>=?'
                     conn.query(sql, [startTime],function (err, result) {
                         conn.end();
                         if (err) {
@@ -165,7 +165,7 @@ var performanceDB = {
                         }
                     });
                     }else{
-                        sql = 'SELECT COUNT(*) count FROM performance WHERE startTime=? AND festivalId=?'
+                        sql = 'SELECT COUNT(*) count FROM performance WHERE CAST(startTime AS UNSIGNED)>=? AND festivalId=?'
                         conn.query(sql, [startTime,festivalId],function (err, result) {
                             conn.end();
                             if (err) {
