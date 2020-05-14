@@ -18,10 +18,10 @@ SELECT * FROM table_name WHERE attr1 == value1 AND attr2 >= value2 LIMIT 10 OFFS
 
 ## INSERT new performances
 ```sql
-INSERT INTO performances(festivalId, startTime, endTime, performanceId) VALUES (1111111111, 12:00:00, 13:00:00, 1);
+INSERT INTO performance(festivalId, startTime, endTime, performanceId)VALUES(2222222222,"1200","1400",1111111111);
 ```
 
-## SELECT all performances filter using festivalId
+## SELECT number of performances
 ```sql
 SELECT * FROM performances WHERE festivalId=1; 
 ```
