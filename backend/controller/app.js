@@ -38,10 +38,11 @@ app.get('/api/performances', function (req, res) {
 });
 
 // ADES : 2
-app.get('/api/performances/:page', function (req, res) {
+app.get('/api/performances/:page/:rows', function (req, res) {
     var page = req.params.page;
+    var rows= req.params.rows
 
-    performance.getPerformancesLimit(page, function (err, result) {
+    performance.getPerformancesLimit(page,rows, function (err, result) {
         if (!err) {
             res.status(200).send(result);
         }else{
@@ -79,12 +80,13 @@ app.post('/api/performances', function(req,res){
 
 // ADES : 4
 
-app.get('/api/performances/:page/:startTime/startTime/:festivalId/festivalId' ,function(req,res){
+app.get('/api/performances/:page/:startTime/startTime/:festivalId/festivalId/:rows' ,function(req,res){
     var page = req.params.page;
     var startTime = req.params.startTime;
     var festivalId = req.params.festivalId;
+    var rows = req.params.rows;
 
-    performance.getPerformancesFilter(page,startTime,festivalId, function(err,result){
+    performance.getPerformancesFilter(page,startTime,festivalId,rows, function(err,result){
         if(!err){
             res.status(200).send(result);
         }else{
@@ -95,9 +97,9 @@ app.get('/api/performances/:page/:startTime/startTime/:festivalId/festivalId' ,f
 
 // ADES : 5
 
-app.get('/api/performances/:startTime/startTime/:festivalId/festivalId' ,function(req,res){
+app.get('/api/performances/:startTime/startTime/:festivalId/festivalId/:rows' ,function(req,res){
     var startTime = req.params.startTime;
-    var festivalId = req.params.festivalId
+    var festivalId = req.params.festivalId;
 
     performance.getPerformancesRowsFilter(startTime,festivalId, function(err,result){
         if(!err){

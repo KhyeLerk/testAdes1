@@ -33,7 +33,7 @@ var performanceDB = {
            },
 
         // 2
-       getPerformancesLimit: function (page, callback) {
+       getPerformancesLimit: function (page,rows, callback) {
         var conn = db.getConnection();
         conn.connect(function (err) {
             if (err) {
@@ -42,9 +42,9 @@ var performanceDB = {
             }
             else {
                 console.log("Connected!");
-                var startRow = page*10-10;
-                var sql = 'SELECT performanceId,festivalId,startTime,endTime FROM performance LIMIT ?,10';
-                conn.query(sql, [startRow], function (err, result) {
+                var startRow = page*rows-rows;
+                var sql = 'SELECT performanceId,festivalId,startTime,endTime FROM performance LIMIT ?,?';
+                conn.query(sql, [startRow,parseInt(rows)], function (err, result) {
                     conn.end();
                     if (err) {
                         console.log(err);
@@ -82,7 +82,7 @@ var performanceDB = {
            },
 
            // 4
-        getPerformancesFilter: function (page,startTime,festivalId, callback) {
+        getPerformancesFilter: function (page,startTime,festivalId,rows, callback) {
             var conn = db.getConnection();
             conn.connect(function (err) {
                 if (err) {
@@ -91,11 +91,11 @@ var performanceDB = {
                 }
                 else {
                     console.log("Connected!")
-                    var startRow = page*10-10;
+                    var startRow = page*rows-rows;
                     var sql;
                     if(startTime==0) {
-                        sql = 'SELECT * FROM performance WHERE festivalId=? LIMIT ?,10'
-                    conn.query(sql, [festivalId,startRow],function (err, result) {
+                        sql = 'SELECT * FROM performance WHERE festivalId=? LIMIT ?,?'
+                    conn.query(sql, [festivalId,startRow,parseInt(rows)],function (err, result) {
                         conn.end();
                         if (err) {
                             console.log(err);
@@ -105,8 +105,8 @@ var performanceDB = {
                         }
                     });
                     }else if(festivalId==0){
-                        sql = 'SELECT * FROM performance WHERE startTime>=? LIMIT ?,10'
-                    conn.query(sql, [startTime,startRow],function (err, result) {
+                        sql = 'SELECT * FROM performance WHERE startTime>=? LIMIT ?,?'
+                    conn.query(sql, [startTime,startRow,parseInt(rows)],function (err, result) {
                         conn.end();
                         if (err) {
                             console.log(err);
@@ -116,8 +116,8 @@ var performanceDB = {
                         }
                     });
                     }else{
-                        sql = 'SELECT * FROM performance WHERE startTime>=? AND festivalId=? LIMIT ?,10'
-                        conn.query(sql, [startTime,festivalId,startRow],function (err, result) {
+                        sql = 'SELECT * FROM performance WHERE startTime>=? AND festivalId=? LIMIT ?,?'
+                        conn.query(sql, [startTime,festivalId,startRow,parseInt(rows)],function (err, result) {
                             conn.end();
                             if (err) {
                                 console.log(err);
