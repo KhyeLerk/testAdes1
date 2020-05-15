@@ -109,10 +109,19 @@
     border-bottom-right-radius: 5px;
 }
 
+.active {
+    background-color: #5280FF!important;
+    color: white!important;
+}
 #pageSize {
     border: 0.5px solid #ddd;
     width: 50px!important;
     height: 36px!important;
     float: right;
     margin-right: 20px;
+}
+
+#pageNumber{
+    float: right;
+    margin-right: 25%
 }

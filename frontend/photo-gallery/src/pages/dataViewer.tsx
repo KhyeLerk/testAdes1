@@ -85,25 +85,30 @@ const DataViewer: React.FC = () => {
 
   //gets default response data then stores in dataRow array
   React.useEffect(() => {
-    if(pressed === 0)
-    getDataTable(1, pageSize).then(data => setDataRow(data));
-  }, [pageSize,pressed]);
+    if (pressed === 0)
+      getDataTable(1, pageSize).then(data => setDataRow(data));
+  }, [pageSize, pressed]);
 
   React.useEffect(() => {
-    if(pageSize === totalDataFiltered)
-    changePage(currentPage - 1, pageSize)
-        if(pressed === 1)
-      getDataTableFiltered(currentPage, festivalIdNum, startTimeNum, pageSize).then(data => { setDataRow(data)})
+    if (pageSize === totalDataFiltered)
+      changePage(currentPage - 1, pageSize)
+    if (pressed === 1 && (festivalIdNum === 0 || startTimeNum === 0)) {
+      getDataTableFiltered(currentPage, festivalIdNum, startTimeNum, pageSize).then(data => { setDataRow(data) })
 
-    
-  }, [currentPage, festivalIdNum, startTimeNum, pageSize,pressed,totalDataFiltered]);
+    }
+    // if(pressed === 1 && (festivalIdNum !== 0 && startTimeNum !== 0)){
+    //   changePage(currentPage,pageSize);
+    // }
 
-  //gets filtered response data then stores in dataRow array
+    // eslint-disable-next-line 
+  }, [currentPage, festivalIdNum, startTimeNum, pageSize, pressed, totalDataFiltered]);
+
+  //gets filtered response data then stores in dataRow array 
   function showFilteredRows() {
     if (festivalId.length !== 0 || startTime.length !== 0) {
-      getDataTableFiltered(currentPage, festivalIdNum, startTimeNum, pageSize).then(data => { setDataRow(data)})
-      getAllFilteredRows(startTimeNum, festivalIdNum).then(data => setTotalDataFiltered(data));
       setCurrentPage(1);
+      getDataTableFiltered(1, festivalIdNum, startTimeNum, pageSize).then(data => { setDataRow(data) })
+      getAllFilteredRows(startTimeNum, festivalIdNum).then(data => setTotalDataFiltered(data));
       setPressed(1);
     }
   }
@@ -117,7 +122,6 @@ const DataViewer: React.FC = () => {
       setFestivalIdNum(0);
     }
     if (festivalIdNum === 0 && startTimeNum === 0) {
-      console.log("bye1")
       getDataTable(currentPage, pageSize).then(data => setDataRow(data));
       setPressed(0);
     }
@@ -125,7 +129,7 @@ const DataViewer: React.FC = () => {
       setPageSize(10);
     }
 
-  }, [startTimeNum, festivalIdNum, pageSize,pressed,currentPage]);
+  }, [startTimeNum, festivalIdNum, pageSize, pressed, currentPage]);
 
 
   //gets total count of response data then stores in dataRow array
@@ -137,24 +141,28 @@ const DataViewer: React.FC = () => {
   //change page function
   function changePage(pageNo: number, pageSize: number) {
     var pages = 0;
-    if(pressed === 0){
+    if (pressed === 0) {
       pages = totalPages
-    }else{
+    } else {
       pages = totalPagesFiltered
     }
 
     if (!(pageNo > pages) && !(pageNo < 1)) {
-      if (festivalIdNum === 0 && startTimeNum ===0) {
+      if (festivalIdNum === 0 && startTimeNum === 0) {
         getDataTable(pageNo, pageSize).then(data => setDataRow(data))
         setCurrentPage(pageNo);
       }
       else {
-        getDataTableFiltered(pageNo, festivalIdNum, startTimeNum, pageSize).then(data => { setDataRow(data)})
+        getDataTableFiltered(pageNo, festivalIdNum, startTimeNum, pageSize).then(data => { setDataRow(data) })
         setCurrentPage(pageNo);
       }
 
     }
+
+
   }
+
+
 
   //function to dynamically create pagination buttons based on response data length
   function getPagination() {
@@ -169,85 +177,92 @@ const DataViewer: React.FC = () => {
         arrayOfPages.push(i)
       }
     }
-    return (
-      arrayOfPages.map((pageNo) => (
-        <button key={pageNo} onClick={() => changePage(pageNo, pageSize)}>{pageNo}</button>
-      )
-      )
-    )
-  }
 
-  //Returns the total count of displayed data
-  function getAllEntries() {
-    if (pressed === 0) {
-      return totalData
-    }
-    else {
-      return totalDataFiltered
-    }
-  }
-  //Get current entry in data table
-  function getCurrentEntries() {
-    var noOfEntries = dataRow.length;
-
-    var startingEntry = currentPage;
-
-    if (startingEntry! > 9) {
-      startingEntry = startingEntry! * pageSize + 1
-    } else {
-      startingEntry = (startingEntry! - 1) * pageSize + 1;
-    }
-    var endingEntry = startingEntry! + noOfEntries - 1;
-    return startingEntry + "-" + endingEntry;
-  }
+  
 
   return (
-    <IonPage>
-      <IonContent>
-        <IonToolbar id="filter">
-          <IonInput type="number" min="0" value={festivalId} placeholder="Filter festivalId" onIonChange={e => { setFestivalId(e.detail.value!); setFestivalIdNum(parseInt(e.detail.value!, 10)); }} className="input"></IonInput>
-          <IonInput type="number" min="0" value={startTime} placeholder="Filter startTime" onIonChange={e => { setStartTime(e.detail.value!); setStartTimeNum(parseInt(e.detail.value!, 10)); }} className="input"></IonInput>
-          <IonButton onClick={() => { showFilteredRows() }} id="search">Search </IonButton>
-        </IonToolbar>
+    arrayOfPages.map((pageNo:number) => (
+      <button key={pageNo} onClick={() => changePage(pageNo, pageSize)} className={(currentPage === pageNo) ? 'active' : 'notActive'}>{pageNo}</button>
+    )
+    )
+  )
+}
 
-        <div>
-          <table id="row" color="dark">
-            <thead>
-              <tr>
-                <th>festivalId</th>
-                <th>performanceId</th>
-                <th>startTime</th>
-                <th>endTime</th>
-              </tr>
-            </thead>
-            <tbody>
-              {dataRow.map(item => {
-                return (
-                  <TableRow key={item['performanceId']} festivalId={item['festivalId']} performanceId={item['performanceId']} startTime={item['startTime']} endTime={item['endTime']} />
-                );
-              })
+//Returns the total count of displayed data
+function getAllEntries() {
+  if (pressed === 0) {
+    return totalData
+  }
+  else {
+    return totalDataFiltered
+  }
+}
+//Get current entry in data table
+function getCurrentEntries() {
+  var noOfEntries = dataRow.length;
 
-              }
-            </tbody>
-          </table>
-        </div>
-      </IonContent>
-      <IonFooter>
-        <IonToolbar>
-          <IonLabel id="tableSize">Showing {getCurrentEntries()} of {getAllEntries()} entries</IonLabel>
-          <div className="pagination">
-            <button onClick={() => changePage(1, pageSize)}>&laquo;&laquo;</button>
-            <button onClick={() => changePage(currentPage - 1, pageSize)}>&laquo;</button>
-            {currentPage}
-            {getPagination()}
-            <button onClick={() => changePage(currentPage + 1, pageSize)}>&raquo;</button>
+  var startingEntry = currentPage;
+
+  if (startingEntry! > 9) {
+    startingEntry = startingEntry! * pageSize + 1
+  } else {
+    startingEntry = (startingEntry! - 1) * pageSize + 1;
+  }
+  var endingEntry = startingEntry! + noOfEntries - 1;
+  return startingEntry + "-" + endingEntry;
+}
+
+return (
+  <IonPage>
+    <IonContent>
+      <IonToolbar id="filter">
+        <IonInput type="number" min="0" value={festivalId} placeholder="Filter festivalId" onIonChange={e => { setFestivalId(e.detail.value!); setFestivalIdNum(parseInt(e.detail.value!, 10)); }} className="input"></IonInput>
+        <IonInput type="number" min="0" value={startTime} placeholder="Filter startTime" onIonChange={e => { setStartTime(e.detail.value!); setStartTimeNum(parseInt(e.detail.value!, 10)); }} className="input"></IonInput>
+        <IonButton onClick={() => { showFilteredRows() }} id="search">Search </IonButton>
+      </IonToolbar>
+
+      <div>
+        <table id="row" color="dark">
+          <thead>
+            <tr>
+              <th>festivalId</th>
+              <th>performanceId</th>
+              <th>startTime</th>
+              <th>endTime</th>
+            </tr>
+          </thead>
+          <tbody>
+            {dataRow.map(item => {
+              return (
+                <TableRow key={item['performanceId']} festivalId={item['festivalId']} performanceId={item['performanceId']} startTime={item['startTime']} endTime={item['endTime']} />
+              );
+            })
+
+            }
+          </tbody>
+        </table>
+      </div>
+    </IonContent>
+    <IonFooter>
+      <IonToolbar>
+        <IonLabel id="tableSize">Showing {getCurrentEntries()} of {getAllEntries()} entries</IonLabel>
+        <div className="pagination">
+          <button onClick={() => changePage(1, pageSize)}>&laquo;&laquo;</button>
+          <button onClick={() => changePage(currentPage - 1, pageSize)}>&laquo;</button>
+          {getPagination()}
+          <button onClick={() => changePage(currentPage + 1, pageSize)}>&raquo;</button>
+          {pressed === 1 ?
+            <button onClick={() => changePage(totalPagesFiltered, pageSize)}>&raquo;&raquo;</button>
+            :
             <button onClick={() => changePage(totalPages, pageSize)}>&raquo;&raquo;</button>
-          </div>
-          <IonInput onKeyDown={(e) => { e.preventDefault(); }} type="number" min="1" value={pageSize} onIonChange={e => { setPageSize(parseInt(e.detail.value!, 10)) }} id="pageSize"></IonInput>
-        </IonToolbar>
-      </IonFooter>
-    </IonPage >
-  );
+          }
+
+        </div>
+        <IonInput onKeyDown={(e) => { e.preventDefault(); }} type="number" min="1" value={pageSize} onIonChange={e => { setPageSize(parseInt(e.detail.value!, 10)) }} id="pageSize"></IonInput>
+      </IonToolbar>
+    </IonFooter>
+  </IonPage >
+);
 };
 
 export default DataViewer;
