@@ -133,8 +133,7 @@ Name of problem: **Weighted Activity Selection**
 
 | Performance # | Performance Id |
 | ------------- | -------------- |
-| 1             | 1000000001     |
-| 2             | 1000000003     |
+| 1             | 1000000003     |
 
 ## Advance Query 2
 
