@@ -92,13 +92,6 @@ const DataViewer: React.FC = () => {
   React.useEffect(() => {
     if (pageSize === totalDataFiltered)
       changePage(currentPage - 1, pageSize)
-    if (pressed === 1 && (festivalIdNum === 0 || startTimeNum === 0)) {
-      getDataTableFiltered(currentPage, festivalIdNum, startTimeNum, pageSize).then(data => { setDataRow(data) })
-
-    }
-    // if(pressed === 1 && (festivalIdNum !== 0 && startTimeNum !== 0)){
-    //   changePage(currentPage,pageSize);
-    // }
 
     // eslint-disable-next-line 
   }, [currentPage, festivalIdNum, startTimeNum, pageSize, pressed, totalDataFiltered]);
