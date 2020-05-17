@@ -7,9 +7,6 @@ Music Festival
 1. `[Eric Ng Yong Wei]`
 2. `[Liew Khye Lerk]`
 
-## Front End
-- React.js
-
 ## Mobile
 - Ionic
 - React
@@ -65,13 +62,15 @@ Music Festival
 
 ### Week 4:
 1. What did the team do this week
-- Debugging front end calling back end http requests
+- Debugging front end such as calling back end http requests and logic errors.
+- Filter function for data viewer implemented
 - Changing up some errors in the documentations
 - Changing APIs to fit the front end UI
 
 2. What did the team plan to do next week
 - Start working on implementing the algorithm
 - Start working on advance back end APIs
+- Start working on mobile data viewer
 
 ## Setup
 
