@@ -109,13 +109,14 @@ const DataViewer: React.FC = () => {
     if (Number.isNaN(pageSize)) {
       setPageSize(10);
     }
-      //gets total count of response data then stores in dataRow array
+    //gets total count of response data then stores in dataRow array
     getAllData().then(data => setTotalData(data));
     if (pageSize === totalDataFiltered)
       changePage(currentPage - 1, pageSize)
-
+      
+    // eslint-disable-next-line
   }, [startTimeNum, festivalIdNum, pageSize, pressed, currentPage]);
-  
+
 
   //change page function
   function changePage(pageNo: number, pageSize: number) {
@@ -157,91 +158,91 @@ const DataViewer: React.FC = () => {
       }
     }
 
-  
+
+
+    return (
+      arrayOfPages.map((pageNo: number) => (
+        <button key={pageNo} onClick={() => changePage(pageNo, pageSize)} className={(currentPage === pageNo) ? 'active' : 'notActive'}>{pageNo}</button>
+      )
+      )
+    )
+  }
+
+  //Returns the total count of displayed data
+  function getAllEntries() {
+    if (pressed === 0) {
+      return totalData
+    }
+    else {
+      return totalDataFiltered
+    }
+  }
+  //Get current entry in data table
+  function getCurrentEntries() {
+    var noOfEntries = dataRow.length;
+
+    var startingEntry = currentPage;
+
+    if (startingEntry! > 9) {
+      startingEntry = startingEntry! * pageSize + 1
+    } else {
+      startingEntry = (startingEntry! - 1) * pageSize + 1;
+    }
+    var endingEntry = startingEntry! + noOfEntries - 1;
+    return startingEntry + "-" + endingEntry;
+  }
 
   return (
-    arrayOfPages.map((pageNo:number) => (
-      <button key={pageNo} onClick={() => changePage(pageNo, pageSize)} className={(currentPage === pageNo) ? 'active' : 'notActive'}>{pageNo}</button>
-    )
-    )
-  )
-}
+    <IonPage>
+      <IonContent>
+        <IonToolbar id="filter">
+          <IonInput type="number" min="0" value={festivalId} placeholder="Filter festivalId" onIonChange={e => { setFestivalId(e.detail.value!); setFestivalIdNum(parseInt(e.detail.value!, 10)); }} className="input"></IonInput>
+          <IonInput type="number" min="0" value={startTime} placeholder="Filter startTime" onIonChange={e => { setStartTime(e.detail.value!); setStartTimeNum(parseInt(e.detail.value!, 10)); }} className="input"></IonInput>
+          <IonButton onClick={() => { showFilteredRows() }} id="search">Search </IonButton>
+        </IonToolbar>
 
-//Returns the total count of displayed data
-function getAllEntries() {
-  if (pressed === 0) {
-    return totalData
-  }
-  else {
-    return totalDataFiltered
-  }
-}
-//Get current entry in data table
-function getCurrentEntries() {
-  var noOfEntries = dataRow.length;
+        <div>
+          <table id="row" color="dark">
+            <thead>
+              <tr>
+                <th>festivalId</th>
+                <th>performanceId</th>
+                <th>startTime</th>
+                <th>endTime</th>
+              </tr>
+            </thead>
+            <tbody>
+              {dataRow.map(item => {
+                return (
+                  <TableRow key={item['performanceId']} festivalId={item['festivalId']} performanceId={item['performanceId']} startTime={item['startTime']} endTime={item['endTime']} />
+                );
+              })
 
-  var startingEntry = currentPage;
-
-  if (startingEntry! > 9) {
-    startingEntry = startingEntry! * pageSize + 1
-  } else {
-    startingEntry = (startingEntry! - 1) * pageSize + 1;
-  }
-  var endingEntry = startingEntry! + noOfEntries - 1;
-  return startingEntry + "-" + endingEntry;
-}
-
-return (
-  <IonPage>
-    <IonContent>
-      <IonToolbar id="filter">
-        <IonInput type="number" min="0" value={festivalId} placeholder="Filter festivalId" onIonChange={e => { setFestivalId(e.detail.value!); setFestivalIdNum(parseInt(e.detail.value!, 10)); }} className="input"></IonInput>
-        <IonInput type="number" min="0" value={startTime} placeholder="Filter startTime" onIonChange={e => { setStartTime(e.detail.value!); setStartTimeNum(parseInt(e.detail.value!, 10)); }} className="input"></IonInput>
-        <IonButton onClick={() => { showFilteredRows() }} id="search">Search </IonButton>
-      </IonToolbar>
-
-      <div>
-        <table id="row" color="dark">
-          <thead>
-            <tr>
-              <th>festivalId</th>
-              <th>performanceId</th>
-              <th>startTime</th>
-              <th>endTime</th>
-            </tr>
-          </thead>
-          <tbody>
-            {dataRow.map(item => {
-              return (
-                <TableRow key={item['performanceId']} festivalId={item['festivalId']} performanceId={item['performanceId']} startTime={item['startTime']} endTime={item['endTime']} />
-              );
-            })
-
-            }
-          </tbody>
-        </table>
-      </div>
-    </IonContent>
-    <IonFooter>
-      <IonToolbar>
-        <IonLabel id="tableSize">Showing {getCurrentEntries()} of {getAllEntries()} entries</IonLabel>
-        <div className="pagination">
-          <button onClick={() => changePage(1, pageSize)}>&laquo;&laquo;</button>
-          <button onClick={() => changePage(currentPage - 1, pageSize)}>&laquo;</button>
-          {getPagination()}
-          <button onClick={() => changePage(currentPage + 1, pageSize)}>&raquo;</button>
-          {pressed === 1 ?
-            <button onClick={() => changePage(totalPagesFiltered, pageSize)}>&raquo;&raquo;</button>
-            :
-            <button onClick={() => changePage(totalPages, pageSize)}>&raquo;&raquo;</button>
-          }
-
+              }
+            </tbody>
+          </table>
         </div>
-        <IonInput onKeyDown={(e) => { e.preventDefault(); }} type="number" min="1" value={pageSize} onIonChange={e => { setPageSize(parseInt(e.detail.value!, 10)) }} id="pageSize"></IonInput>
-      </IonToolbar>
-    </IonFooter>
-  </IonPage >
-);
+      </IonContent>
+      <IonFooter>
+        <IonToolbar>
+          <IonLabel id="tableSize">Showing {getCurrentEntries()} of {getAllEntries()} entries</IonLabel>
+          <div className="pagination">
+            <button onClick={() => changePage(1, pageSize)}>&laquo;&laquo;</button>
+            <button onClick={() => changePage(currentPage - 1, pageSize)}>&laquo;</button>
+            {getPagination()}
+            <button onClick={() => changePage(currentPage + 1, pageSize)}>&raquo;</button>
+            {pressed === 1 ?
+              <button onClick={() => changePage(totalPagesFiltered, pageSize)}>&raquo;&raquo;</button>
+              :
+              <button onClick={() => changePage(totalPages, pageSize)}>&raquo;&raquo;</button>
+            }
+
+          </div>
+          <IonInput onKeyDown={(e) => { e.preventDefault(); }} type="number" min="1" value={pageSize} onIonChange={e => { setPageSize(parseInt(e.detail.value!, 10)) }} id="pageSize"></IonInput>
+        </IonToolbar>
+      </IonFooter>
+    </IonPage >
+  );
 };
 
 export default DataViewer;
