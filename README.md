@@ -63,6 +63,16 @@ Music Festival
 2. What did the team plan to do next week?
 - Complete all functionalities of the basic data viewer.
 
+### Week 4:
+1. What did the team do this week
+- Debugging front end calling back end http requests
+- Changing up some errors in the documentations
+- Changing APIs to fit the front end UI
+
+2. What did the team plan to do next week
+- Start working on implementing the algorithm
+- Start working on advance back end APIs
+
 ## Setup
 
 1. Setup a Github account (Using any account)
