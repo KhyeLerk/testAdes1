@@ -83,18 +83,6 @@ const DataViewer: React.FC = () => {
   //Checks if search is pressed
   const [pressed, setPressed] = useState<number>(0);
 
-  //gets default response data then stores in dataRow array
-  React.useEffect(() => {
-    if (pressed === 0)
-      getDataTable(1, pageSize).then(data => setDataRow(data));
-  }, [pageSize, pressed]);
-
-  React.useEffect(() => {
-    if (pageSize === totalDataFiltered)
-      changePage(currentPage - 1, pageSize)
-
-    // eslint-disable-next-line 
-  }, [currentPage, festivalIdNum, startTimeNum, pageSize, pressed, totalDataFiltered]);
 
   //gets filtered response data then stores in dataRow array 
   function showFilteredRows() {
@@ -121,15 +109,13 @@ const DataViewer: React.FC = () => {
     if (Number.isNaN(pageSize)) {
       setPageSize(10);
     }
+      //gets total count of response data then stores in dataRow array
+    getAllData().then(data => setTotalData(data));
+    if (pageSize === totalDataFiltered)
+      changePage(currentPage - 1, pageSize)
 
   }, [startTimeNum, festivalIdNum, pageSize, pressed, currentPage]);
-
-
-  //gets total count of response data then stores in dataRow array
-  React.useEffect(() => {
-    getAllData().then(data => setTotalData(data));
-  });
-
+  
 
   //change page function
   function changePage(pageNo: number, pageSize: number) {
