@@ -77,6 +77,9 @@ const DataViewer: React.FC = () => {
   //setting for pagination
   var [pageSize, setPageSize] = React.useState<number>(10);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  var [startPage, setStartPage] = React.useState<number>(0);
+  var [endPage, setEndPage] = React.useState<number>(5);
+
   //Setting total pages to variables
   const totalPages = Math.ceil(totalData! / pageSize);
   const totalPagesFiltered = Math.ceil(totalDataFiltered! / pageSize);
@@ -148,6 +151,8 @@ const DataViewer: React.FC = () => {
   function getPagination() {
     let arrayOfPages: number[] = []
     var i = 1;
+
+
     if (pressed === 0) {
       for (i; i <= totalPages; i++) {
         arrayOfPages.push(i)
@@ -158,10 +163,24 @@ const DataViewer: React.FC = () => {
       }
     }
 
+    if(currentPage >= endPage-1){
+      setStartPage(++startPage);
+      setEndPage(++endPage);
+    }
+
+    if((currentPage-1 <= startPage) && !(currentPage < 3)){
+      setStartPage(--startPage);
+      setEndPage(--endPage);
+    }else if(currentPage < 3 && startPage !== 0){
+      setStartPage(--startPage);
+      setEndPage(--endPage);
+    }
+
+    let arrayOfPages1: number[] = arrayOfPages.slice(startPage,endPage);
 
 
     return (
-      arrayOfPages.map((pageNo: number) => (
+      arrayOfPages1.map((pageNo: number) => (
         <button key={pageNo} onClick={() => changePage(pageNo, pageSize)} className={(currentPage === pageNo) ? 'active' : 'notActive'}>{pageNo}</button>
       )
       )
