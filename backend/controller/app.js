@@ -95,7 +95,7 @@ app.get('/api/performances/:page/:startTime/startTime/:festivalId/festivalId/:ro
 
 // ADES : 5
 
-app.get('/api/performances/:startTime/startTime/:festivalId/festivalId/' ,function(req,res){
+app.get('/api/performances/:startTime/startTime/:festivalId/festivalId' ,function(req,res){
     var startTime = req.params.startTime;
     var festivalId = req.params.festivalId;
 

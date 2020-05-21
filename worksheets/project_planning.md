@@ -78,5 +78,15 @@ This document helps you identify the smaller tasks and helps you create a rough 
 | 2    | Basic | Frontend  | basic_frontend_result_viewer| Finish Wireframes|
 | 2    | Basic | Frontend  | basic_mobile_data_viewer| Finish Wireframes|
 | 2    | Basic | Frontend  | basic_mobile_result_viewer| Finish Wireframes|
-| 2-3  | Basic | Frontend  | Data Viewer   | Implementation |
-
+| 2-5  | Basic | Frontend  | Basic Frontend Data Viewer   | Implementation |
+| 5-7  | Basic | Frontend  | Basic Data Viewer - Mobile  | Implementation |
+| 7-9  | Basic | Frontend  | Basic Result Viewer Frontend | Implementation |
+| 7-9  | Basic | Frontend  | Basic Result Viewer Mobile   | Implementation |
+| 10  | Basic | Frontend  | Advance Data Viewer Frontend | Wireframe & Justifications |
+| 10  | Basic | Frontend  | Advance Data Viewer Mobile  |  Wireframe & Justifications  |
+| 10  | Basic | Frontend  | Advance Result Viewer Frontend |  Wireframe & Justifications  |
+| 10  | Basic | Frontend  | Advance Result Viewer Mobile  |  Wireframe & Justifications  |
+| 10-13  | Basic | Frontend  | Advance Data Viewer Frontend | Implementation |
+| 10-13  | Basic | Frontend  | Advance Data Viewer Mobile  | Implementation |
+| 13-16  | Basic | Frontend  | Advance Result Viewer Frontend | Implementation |
+| 13-16 | Basic | Frontend  | Advance Result Viewer Mobile  | Implementation |
