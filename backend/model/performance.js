@@ -85,9 +85,7 @@ var performanceDB = {
                     console.log("Connected!");
                     let i = 1;
                     const template = data.map(performance => `(?,?,?,?)`).join(',');
-                    //const template = data.map(performance => `($${i++}, $${i++}, $${i++}, $${i++})`).join(',');
                     const values = data.reduce((reduced, performance) => [...reduced, performance.performanceId, performance.festivalId, performance.startTime,performance.endTime], [])
-                    // const query = `INSERT INTO performance (performanceId, festivalId, startTime, endTime) VALUES ${template};`;
                     var sql = `INSERT INTO performance(performanceId, festivalId, startTime, endTime)VALUES ${template};`;
                     conn.query(sql,values, function (err, result) {
                         conn.end();
