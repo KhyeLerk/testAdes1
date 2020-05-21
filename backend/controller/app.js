@@ -55,17 +55,15 @@ app.get('/api/performances/:page/:rows', function (req, res) {
 
 // ADES : 3
 
-app.post('/api/performances', function(req,res){
+app.post('/basic/insert', function(req,res){
 
-    var festivalId = req.body.festivalId;
-    var startTime = req.body.startTime;
-    var endTime = req.body.endTime;
-    var performanceId = req.body.performanceId
-    console.log(festivalId)
+    var {data} = req.body
+    console.log(data)
     
-        performance.insertPerformance(festivalId, startTime, endTime,performanceId, function(err,result){
+    
+        performance.insertPerformance(data, function(err,result){
             if(!err){
-                res.status(201).send("{\"performanceId\":"+result.insertId+"}");
+                res.status(201).send("{\"status\":\"success\"}");
             }
             else if(err.errno == 1048){
                 res.status(400).send('Null error')

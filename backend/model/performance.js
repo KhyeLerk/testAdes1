@@ -7,8 +7,23 @@ var db = require('./databaseConfig.js');
 var jwt = require('jsonwebtoken');
 var config = require('../config');
 
+
+
 var performanceDB = {
-        // 1
+    insertCoins: function (performances, callback) {
+            let i = 1;
+            const template = performances.map(performance => `($${i++}, $${i++}, $${i++})`).join(',');
+            const values = performances.reduce((reduced, performance) => [...reduced, performance.performanceId, performance.festivalId, performance.startTime,performance.endTime], [])
+            const query = `INSERT INTO performance (performanceId, festivalId, startTime, endTime) VALUES ${template};`;
+            console.log(values, query);
+    
+            // const client = this.connect();
+            // client.query(query, values, (err, result) => {
+            //     callback(err, result);
+            //     client.end();
+            // });
+        },
+        //1
         getPerformances: function (callback) {
             var conn = db.getConnection();
             conn.connect(function (err) {
@@ -58,7 +73,7 @@ var performanceDB = {
        }, 
 
         // 3
-        insertPerformance: function (festivalId, startTime, endTime,performanceId, callback) {
+        insertPerformance: function (data, callback) {
             var conn = db.getConnection();
             conn.connect(function (err) {
                 if (err) {
@@ -66,9 +81,15 @@ var performanceDB = {
                     return callback(err,null);
                 }
                 else {
+
                     console.log("Connected!");
-                    var sql = 'INSERT INTO performance(festivalId, startTime, endTime, performanceId)VALUES(?,?,?,?);';
-                    conn.query(sql,[festivalId, startTime, endTime,performanceId], function (err, result) {
+                    let i = 1;
+                    const template = data.map(performance => `(?,?,?,?)`).join(',');
+                    //const template = data.map(performance => `($${i++}, $${i++}, $${i++}, $${i++})`).join(',');
+                    const values = data.reduce((reduced, performance) => [...reduced, performance.performanceId, performance.festivalId, performance.startTime,performance.endTime], [])
+                    // const query = `INSERT INTO performance (performanceId, festivalId, startTime, endTime) VALUES ${template};`;
+                    var sql = `INSERT INTO performance(performanceId, festivalId, startTime, endTime)VALUES ${template};`;
+                    conn.query(sql,values, function (err, result) {
                         conn.end();
                         if (err) {
                             console.log(err);
