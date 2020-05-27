@@ -172,5 +172,5 @@ Name of problem: **Weighted Activity Selection**
 
 | Performance # | Performance Id |
 | ------------- | -------------- |
-| 1             | 1000000013     |
-| 2             | 1000000017     |
+| 1             | 1000000018     |
+| 2             | 1000000015     |
