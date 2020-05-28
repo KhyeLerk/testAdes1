@@ -14,7 +14,7 @@ This document should help you explain how your user interfaces are designed. You
 
 > This is just an example, please find your own justifications.
 
-![Photo1](/assets/advance_front_end_data_viewer_1.png)
+![Photo1](https://github.com/ADES-FSP/jibaboom-2b22-astronomia/blob/master/worksheets/wireframes/assets/advance_front_end_data_viewer_1.png)
 
 #### Good Points
 
