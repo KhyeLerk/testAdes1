@@ -72,6 +72,20 @@ Music Festival
 - Start working on advance back end APIs
 - Start working on mobile data viewer
 
+### Week 5:
+1. What did the team do this week
+- Completed interview with teacher
+
+2. What did the team plan to do next week
+- Work on justifications of existing wireframes
+
+### Week 6:
+1. What did the team do this week
+- Completed justifications on 12 wireframes
+
+2. What did the team plan to do the next week
+- Work on APIs for basic and advance, data and insert
+
 ## Setup
 
 1. Setup a Github account (Using any account)
