@@ -93,6 +93,7 @@ Term break, no progress during this period, working on other assignments as they
 1. What did the team do this week 
 - Redesign the database to better fit new requirements
 - Enhancing API
+- Updated schema.md for new database design
 
 2. What did the team plan to do the next week
 - Complete APIs for front end to further progress
