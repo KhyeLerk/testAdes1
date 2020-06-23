@@ -4,9 +4,12 @@ Admission Number : 1940211
 Name : Eric Ng Yong Wei
 */
 
+
 var express = require('express');
 var app = express();
 var performance = require('../model/performance.js'); 
+var basic = require('../computation/basic.js')
+var advanced = require('../computation/advanced.js')
 var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({extended:false});
 const cors = require("cors")
@@ -18,29 +21,16 @@ app.use(urlencodedParser); // parse application/x-www-form-urlencoded
 app.options('*',cors());
 app.use(cors());
 
+/* ===============================================================================================================*/
+
 // APIs
 
-app.get('/', (req, res) => res.send('Hello world! v2'))
+/*================================================================================================================*/
 
-// ADES : 1
-app.get('/api/performances', function (req, res) {
-
-    performance.getPerformances(function (err, result) {
-        if (!err) {
-            console.log(result)
-            res.status(200).send(result);
-        }else{
-            res.status(500).send('Server Error');
-        }
-    });
-
-    
-});
-
-// ADES : 2
-app.get('/api/performances/:page/:rows', function (req, res) {
-    var page = req.params.page;
-    var rows= req.params.rows
+// Basic data
+app.get('/basic/data', function (req, res) {
+    var page = req.body.page;
+    var rows= req.body.rows
 
     performance.getPerformancesLimit(page,rows, function (err, result) {
         if (!err) {
@@ -53,9 +43,28 @@ app.get('/api/performances/:page/:rows', function (req, res) {
     
 });
 
-// ADES : 3
+// Advance data
 
-app.post('/basic/insert', function(req,res){
+app.get('/advance/data', function (req, res) {
+    var page = req.body.page;
+    var rows= req.body.rows
+
+    performance.getPerformancesWithPopularityLimit(page,rows, function (err, result) {
+        if (!err) {
+            res.status(200).send(result);
+        }else{
+            res.status(500).send('Server Error');
+        }
+    });
+
+    
+});
+
+/*================================================================================================================*/
+
+// Basic insert
+
+app.post('/basic/insert/performance', function(req,res){
 
     var {data} = req.body
     console.log(data)
@@ -63,20 +72,44 @@ app.post('/basic/insert', function(req,res){
     
         performance.insertPerformance(data, function(err,result){
             if(!err){
-                res.status(201).send("{\"status\":\"success\"}");
+                res.status(200).send(`{\n"result":"success"\n}`);
             }
             else if(err.errno == 1048){
-                res.status(400).send('Null error')
+                res.status(400).send(`{\n"error":"Null Entry",\n"code":400,\n}`)
             }
             else if(err.errno == 1062){
-                res.status(400).send('Duplicate error')
+                res.status(400).send(`{\n"error":"Duplicate Entry",\n"code":400,\n}`)
             }else{
-                res.status(500).send('Server error');
+                res.status(500).send(`{\n"error":"Server Entry",\n"code":500,\n}`);
             }
         })
     })
 
-// ADES : 4
+// Advance insert
+app.post('/advance/insert/performance', function(req,res){
+
+    var {data} = req.body
+    console.log(data)
+    
+    
+        performance.insertPerformanceWithPopularity(data, function(err,result){
+            if(!err){
+                res.status(200).send(`{\n"result":"success"\n}`);
+            }
+            else if(err.errno == 1048){
+                res.status(400).send(`{\n"error":"Null Entry",\n"code":400,\n}`)
+            }
+            else if(err.errno == 1062){
+                res.status(400).send(`{\n"error":"Duplicate Entry",\n"code":400,\n}`)
+            }else{
+                res.status(500).send(`{\n"error":"Server Entry",\n"code":500,\n}`);
+            }
+        })
+    })
+
+/*================================================================================================================*/
+
+// Basic filter by both attr
 
 app.get('/api/performances/:page/:startTime/startTime/:festivalId/festivalId/:rows' ,function(req,res){
     var page = req.params.page;
@@ -93,7 +126,9 @@ app.get('/api/performances/:page/:startTime/startTime/:festivalId/festivalId/:ro
     })
 })
 
-// ADES : 5
+/*================================================================================================================*/
+
+// FRONT END USE for getting number of rows in performance table
 
 app.get('/api/performances/:startTime/startTime/:festivalId/festivalId' ,function(req,res){
     var startTime = req.params.startTime;
@@ -107,6 +142,59 @@ app.get('/api/performances/:startTime/startTime/:festivalId/festivalId' ,functio
         }
     })
 })
+
+// FRONT END USE for getting number of rows in performancewithpopularity table
+
+app.get('/api/performanceswithpopularity/:startTime/startTime/:festivalId/festivalId' ,function(req,res){
+    var startTime = req.params.startTime;
+    var festivalId = req.params.festivalId;
+
+    performance.getPerformancesWithPopularityRowsFilter(startTime,festivalId, function(err,result){
+        if(!err){
+            res.status(200).send(result);
+        }else{
+            res.status(500).send('Server error');
+        }
+    })
+})
+
+/*================================================================================================================*/
+
+
+// Basic Compute
+
+app.get('/basic/result/' ,function(req,res){
+    var festivalId = req.query.festivalId
+    console.log(festivalId)
+
+    performance.getPerformancesByFestivalId(festivalId, function(err,result){
+        if(!err){
+            var orderedPerformances =result.reduce((reduced, result)=> [...reduced, [result.performanceId, result.startTime, result.endTime]],[])
+            result = JSON.stringify(basic.basicCompute(orderedPerformances))
+            res.status(200).send(result)
+        }else{
+            res.status(500).send('Server error');
+        }
+    })
+})
+
+// Advanced Compute
+
+app.get('/api/advanced/festivalId/:festivalId' , function(req,res){
+    var festivalId = req.params.festivalId;
+
+    performance.getPerformancesByFestivalIdWithPopularity(festivalId, function(err,result){
+        if(!err){
+            var orderedPerformances =result.reduce((reduced, result)=> [...reduced, [result.performanceId, result.startTime, result.endTime, result.popularity]],[])
+            result = JSON.stringify(advanced.advancedCompute(orderedPerformances))
+            res.status(200).send(result);
+        }else{
+            res.status(500).send('Server error');
+        }
+    })
+})
+
+/*================================================================================================================*/
 
 module.exports= app
 
