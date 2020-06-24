@@ -27,6 +27,12 @@ app.use(cors());
 
 /*================================================================================================================*/
 
+// Testing 
+
+app.get('/', function (req,res){
+    res.status(200).send('Awake')
+})
+
 // Basic data
 app.get('/basic/data', function (req, res) {
     var page = req.body.page;
