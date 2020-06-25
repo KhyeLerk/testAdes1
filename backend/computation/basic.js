@@ -1,4 +1,4 @@
-function basicCompute(orderedPerformances){
+ function basicCompute(orderedPerformances){
 
 var selectedList = [orderedPerformances[0]]
 var i=1;
@@ -12,3 +12,5 @@ do{
 
 return selectedList
 }
+
+exports.basicCompute = basicCompute

@@ -33,6 +33,8 @@ app.get('/', function (req,res){
     res.status(200).send('Awake')
 })
 
+/*================================================================================================================*/
+
 // Basic data
 app.get('/basic/data', function (req, res) {
     var page = req.body.page;
@@ -169,8 +171,8 @@ app.get('/api/performanceswithpopularity/:startTime/startTime/:festivalId/festiv
 
 // Basic Compute
 
-app.get('/basic/result/' ,function(req,res){
-    var festivalId = req.query.festivalId
+app.get('/basic/result' ,function(req,res){
+    var festivalId = req.body.festivalId
     console.log(festivalId)
 
     performance.getPerformancesByFestivalId(festivalId, function(err,result){
@@ -186,8 +188,8 @@ app.get('/basic/result/' ,function(req,res){
 
 // Advanced Compute
 
-app.get('/api/advanced/festivalId/:festivalId' , function(req,res){
-    var festivalId = req.params.festivalId;
+app.get('/advance/result' , function(req,res){
+    var festivalId = req.body.festivalId;
 
     performance.getPerformancesByFestivalIdWithPopularity(festivalId, function(err,result){
         if(!err){

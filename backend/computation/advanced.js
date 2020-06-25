@@ -83,3 +83,5 @@ do{
 return enrolledPerformances // return the results here
 
 }
+
+exports.advancedCompute = advancedCompute
