@@ -37,8 +37,8 @@ app.get('/', function (req,res){
 
 // Basic data
 app.get('/basic/data', function (req, res) {
-    var page = req.body.page;
-    var rows= req.body.rows
+    var page = req.query.page;
+    var rows= req.query.rows
 
     performance.getPerformancesLimit(page,rows, function (err, result) {
         if (!err) {
@@ -54,8 +54,8 @@ app.get('/basic/data', function (req, res) {
 // Advance data
 
 app.get('/advance/data', function (req, res) {
-    var page = req.body.page;
-    var rows= req.body.rows
+    var page = req.query.page;
+    var rows= req.query.rows
 
     performance.getPerformancesWithPopularityLimit(page,rows, function (err, result) {
         if (!err) {
@@ -88,7 +88,7 @@ app.post('/basic/insert/performance', function(req,res){
             else if(err.errno == 1062){
                 res.status(400).send(`{\n"error":"Duplicate Entry",\n"code":400,\n}`)
             }else{
-                res.status(500).send(`{\n"error":"Server Entry",\n"code":500,\n}`);
+                res.status(500).send(`{\n"error":"Server Error",\n"code":500,\n}`);
             }
         })
     })
@@ -110,7 +110,7 @@ app.post('/advance/insert/performance', function(req,res){
             else if(err.errno == 1062){
                 res.status(400).send(`{\n"error":"Duplicate Entry",\n"code":400,\n}`)
             }else{
-                res.status(500).send(`{\n"error":"Server Entry",\n"code":500,\n}`);
+                res.status(500).send(`{\n"error":"Server Error",\n"code":500,\n}`);
             }
         })
     })
@@ -119,13 +119,31 @@ app.post('/advance/insert/performance', function(req,res){
 
 // Basic filter by both attr
 
-app.get('/api/performances/:page/:startTime/startTime/:festivalId/festivalId/:rows' ,function(req,res){
-    var page = req.params.page;
-    var startTime = req.params.startTime;
-    var festivalId = req.params.festivalId;
-    var rows = req.params.rows;
+app.get('/basic/filter' ,function(req,res){
+    var page = req.query.page;
+    var startTime = req.query.startTime;
+    var festivalId = req.query.festivalId;
+    var rows = req.query.rows;
 
     performance.getPerformancesFilter(page,startTime,festivalId,rows, function(err,result){
+        if(!err){
+            res.status(200).send(result);
+        }else{
+            res.status(500).send('Server error');
+        }
+    })
+})
+
+// Advance filter by 3 attr
+
+app.get('/advance/filter' ,function(req,res){
+    var page = req.query.page;
+    var startTime = req.query.startTime;
+    var endTime = req.query.endTime;
+    var festivalId = req.query.festivalId;
+    var rows = req.query.rows;
+
+    performance.getPerformancesWithPopularityFilter(page,startTime,endTime,festivalId,rows, function(err,result){
         if(!err){
             res.status(200).send(result);
         }else{
@@ -138,9 +156,9 @@ app.get('/api/performances/:page/:startTime/startTime/:festivalId/festivalId/:ro
 
 // FRONT END USE for getting number of rows in performance table
 
-app.get('/api/performances/:startTime/startTime/:festivalId/festivalId' ,function(req,res){
-    var startTime = req.params.startTime;
-    var festivalId = req.params.festivalId;
+app.get('/basic/count' ,function(req,res){
+    var startTime = req.query.startTime;
+    var festivalId = req.query.festivalId;
 
     performance.getPerformancesRowsFilter(startTime,festivalId, function(err,result){
         if(!err){
@@ -153,9 +171,9 @@ app.get('/api/performances/:startTime/startTime/:festivalId/festivalId' ,functio
 
 // FRONT END USE for getting number of rows in performancewithpopularity table
 
-app.get('/api/performanceswithpopularity/:startTime/startTime/:festivalId/festivalId' ,function(req,res){
-    var startTime = req.params.startTime;
-    var festivalId = req.params.festivalId;
+app.get('/advance/count' ,function(req,res){
+    var startTime = req.query.startTime;
+    var festivalId = req.query.festivalId;
 
     performance.getPerformancesWithPopularityRowsFilter(startTime,festivalId, function(err,result){
         if(!err){
@@ -172,8 +190,7 @@ app.get('/api/performanceswithpopularity/:startTime/startTime/:festivalId/festiv
 // Basic Compute
 
 app.get('/basic/result' ,function(req,res){
-    var festivalId = req.body.festivalId
-    console.log(festivalId)
+    var festivalId = req.query.festivalId
 
     performance.getPerformancesByFestivalId(festivalId, function(err,result){
         if(!err){
@@ -181,15 +198,16 @@ app.get('/basic/result' ,function(req,res){
             result = JSON.stringify(basic.basicCompute(orderedPerformances))
             res.status(200).send(result)
         }else{
-            res.status(500).send('Server error');
+            res.status(500).send(`{\n"error":"Server Error",\n"code":500,\n}`);
         }
     })
 })
 
+
 // Advanced Compute
 
 app.get('/advance/result' , function(req,res){
-    var festivalId = req.body.festivalId;
+    var festivalId = req.query.festivalId;
 
     performance.getPerformancesByFestivalIdWithPopularity(festivalId, function(err,result){
         if(!err){
@@ -197,7 +215,7 @@ app.get('/advance/result' , function(req,res){
             result = JSON.stringify(advanced.advancedCompute(orderedPerformances))
             res.status(200).send(result);
         }else{
-            res.status(500).send('Server error');
+            res.status(500).send(`{\n"error":"Server Error",\n"code":500,\n}`);
         }
     })
 })
