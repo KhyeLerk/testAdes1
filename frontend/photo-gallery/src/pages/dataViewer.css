@@ -176,7 +176,7 @@
     }
 }
 
-@media only screen and (max-width: 320px) {
+@media only screen and (max-width: 360px) {
     #search {
         color: #5280FF;
         margin-left: 10px;
@@ -205,13 +205,14 @@
     color: black;
     background-color: white;
     height: 36px;
-    float: left;
+    display:inline-block;
     padding: 8px 16px;
     text-decoration: none;
     border: 0.5px solid #ddd;
+
 }
 
-.pagination button:focus {
+.pagination button:hover {
     background-color: #5280FF;
     color: white;
 }
@@ -242,22 +243,46 @@
     float: right;
     margin-right: 25%
 }
-
-
+@media only screen and (max-width: 360px) {
+    .pagination button{
+        width: 34px!important;
+        height: 40px;
+        text-align:center;
+        padding: 0;
+        margin: 0 auto!important;
+    
+    }
+}
 
 
 @media only screen and (max-width: 600px) {
-.pagination{
-    width:100%!important;
+    .pagination button{
+        width: 40px;
+        text-align:center;
+        padding: 0;
+        height: 50px;
+        margin: 0 auto!important;
+    
+    }
+.pagination {
+
+    text-align: center;
+    margin: 0px;
     float: none!important;
-    justify-content: center!important;
-    margin-right:auto !important;
-    margin-left:auto!important;
+
 }
 
-#pageSize{
-    width:100%!important;
+
+#tableSize {
+    line-height: 30px;
+    margin-left: 0;
 }
+.pagination button{
+
+    margin: 0 auto!important;
+
+}
+
 
 }
 
@@ -294,4 +319,8 @@ ion-select::part(icon) {
     -webkit-box-shadow: 0px 0px 15px -12px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 0px 15px -12px rgba(0,0,0,0.75);
     box-shadow: 0px 0px 15px -12px rgba(0,0,0,0.75);
+}
+
+#mobilePageSize > *{
+    color: gray
 }

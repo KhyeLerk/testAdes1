@@ -95,7 +95,7 @@ const DataViewer: React.FC = () => {
   const [pressed, setPressed] = useState<number>(0);
   //Variable for table CSS
   var tableRow = 0;
-  
+
   //gets filtered response data then stores in dataRow array 
   function showFilteredRows() {
     if (festivalId.length !== 0 || startTime.length !== 0) {
