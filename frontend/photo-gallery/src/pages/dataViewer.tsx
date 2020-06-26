@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
-import { IonContent, IonButton, IonLabel, IonInput, IonFooter, IonPage, IonToolbar } from '@ionic/react';
+import { IonContent,IonItem, IonButton,IonSelect,IonSelectOption, IonLabel, IonInput, IonFooter, IonPage, IonToolbar } from '@ionic/react';
 import TableRow from '../components/dataViewerContent';
 import './dataViewer.css';
 import axios from 'axios';
+import MediaQuery from 'react-responsive';
 
 
 const getDataTable = (pages: number, rows: number) => {
   //get table data per page
-  return axios({
-    url: `http://localhost:3000/api/performances/${pages}/${rows}`,
-    method: 'get'
-  }).then(response => {
+  return axios.get('https://jibaboom-astronomia.herokuapp.com/basic/data', {
+    params: {
+        page:  pages,
+        rows: rows
+    }}).then(response => {
     return response.data;
   }).catch(error => {
     console.log("error");
@@ -18,10 +20,12 @@ const getDataTable = (pages: number, rows: number) => {
   });
 };
 
+ 
 const getDataTableFiltered = (pages: number, festivalId: number, startTime: number, rows: number) => {
   //get filtered table data per page 
+
   return axios({
-    url: `http://localhost:3000/api/performances/${pages}/${startTime}/startTime/${festivalId}/festivalId/${rows}`,
+    url: `https://jibaboom-astronomia.herokuapp.com/api/performances/${pages}/${startTime}/startTime/${festivalId}/festivalId/${rows}`,
     method: 'get'
   }).then(response => {
     if (response.data.length !== 0)
@@ -37,7 +41,7 @@ const getDataTableFiltered = (pages: number, festivalId: number, startTime: numb
 const getAllFilteredRows = (startTime: number, festivalId: number) => {
   //get filtered table data per page 
   return axios({
-    url: `http://localhost:3000/api/performances/${startTime}/startTime/${festivalId}/festivalId/`,
+    url: `https://jibaboom-astronomia.herokuapp.com/api/performances/${startTime}/startTime/${festivalId}/festivalId/`,
     method: 'get'
   }).then(response => {
     return response.data[0].count;
@@ -50,11 +54,14 @@ const getAllFilteredRows = (startTime: number, festivalId: number) => {
 
 const getAllData = () => {
   //get number of data
-  return axios({
-    url: `http://localhost:3000/api/performances/`,
-    method: 'get'
-  }).then(response => {
-    return response.data[0].count;
+  return axios.get('https://jibaboom-astronomia.herokuapp.com/basic/data',{
+    params: {
+      page:  1,
+      rows: 1000
+  }}).then(response => {
+    console.log(response.data.length)
+  return response.data.length; 
+
   }).catch(error => {
     console.log("error");
     alert(error);
@@ -76,6 +83,7 @@ const DataViewer: React.FC = () => {
   const [totalDataFiltered, setTotalDataFiltered] = React.useState<number>();
   //setting for pagination
   var [pageSize, setPageSize] = React.useState<number>(10);
+  var [pageSizeString, setPageSizeString] = React.useState<String>("10");
   const [currentPage, setCurrentPage] = useState<number>(1);
   var [startPage, setStartPage] = React.useState<number>(0);
   var [endPage, setEndPage] = React.useState<number>(5);
@@ -85,8 +93,9 @@ const DataViewer: React.FC = () => {
   const totalPagesFiltered = Math.ceil(totalDataFiltered! / pageSize);
   //Checks if search is pressed
   const [pressed, setPressed] = useState<number>(0);
-
-
+  //Variable for table CSS
+  var tableRow = 0;
+  
   //gets filtered response data then stores in dataRow array 
   function showFilteredRows() {
     if (festivalId.length !== 0 || startTime.length !== 0) {
@@ -113,7 +122,7 @@ const DataViewer: React.FC = () => {
       setPageSize(10);
     }
     //gets total count of response data then stores in dataRow array
-    getAllData().then(data => setTotalData(data));
+   getAllData().then(data => setTotalData(data));
     if (pageSize === totalDataFiltered)
       changePage(currentPage - 1, pageSize)
       
@@ -132,7 +141,7 @@ const DataViewer: React.FC = () => {
 
     if (!(pageNo > pages) && !(pageNo < 1)) {
       if (festivalIdNum === 0 && startTimeNum === 0) {
-        getDataTable(pageNo, pageSize).then(data => setDataRow(data))
+       getDataTable(pageNo, pageSize).then(data => setDataRow(data))
         setCurrentPage(pageNo);
       }
       else {
@@ -144,7 +153,6 @@ const DataViewer: React.FC = () => {
 
 
   }
-
 
 
   //function to dynamically create pagination buttons based on response data length
@@ -211,16 +219,39 @@ const DataViewer: React.FC = () => {
     return startingEntry + "-" + endingEntry;
   }
 
+  const customPopoverOptions = {
+    header: 'Page Size',
+  };
+
   return (
     <IonPage>
       <IonContent>
         <IonToolbar id="filter">
-          <IonInput type="number" min="0" value={festivalId} placeholder="Filter festivalId" onIonChange={e => { setFestivalId(e.detail.value!); setFestivalIdNum(parseInt(e.detail.value!, 10)); }} className="input"></IonInput>
+          <IonInput type="number" min="0" value={festivalId} placeholder="Filter festivalId" onIonChange={e => { setFestivalId(e.detail.value!); setFestivalIdNum(parseInt(e.detail.value!, 10));}} className="input"></IonInput>
           <IonInput type="number" min="0" value={startTime} placeholder="Filter startTime" onIonChange={e => { setStartTime(e.detail.value!); setStartTimeNum(parseInt(e.detail.value!, 10)); }} className="input"></IonInput>
+          
+          <MediaQuery maxDeviceWidth={600}> 
+          <IonItem id="mobilePageSize">
+          <IonLabel>Page Size</IonLabel>
+
+            <IonSelect interfaceOptions={customPopoverOptions} value={pageSizeString} okText="Select" cancelText="Dismiss" onIonChange={e => { setPageSizeString(e.detail.value!);setPageSize(parseInt(e.detail.value!, 10)) }}>
+              <IonSelectOption value="5">5</IonSelectOption>
+              <IonSelectOption value="10">10</IonSelectOption>
+              <IonSelectOption value="15">15</IonSelectOption>
+              <IonSelectOption value="20">20</IonSelectOption>
+              <IonSelectOption value="25">25</IonSelectOption>
+              <IonSelectOption value="50">50</IonSelectOption>
+              <IonSelectOption value="100">100</IonSelectOption>
+            </IonSelect>
+            </IonItem>
+          </MediaQuery>
+
           <IonButton onClick={() => { showFilteredRows() }} id="search">Search </IonButton>
+
         </IonToolbar>
 
-        <div>
+
+        <div id="table">
           <table id="row" color="dark">
             <thead>
               <tr>
@@ -232,17 +263,18 @@ const DataViewer: React.FC = () => {
             </thead>
             <tbody>
               {dataRow.map(item => {
+                  tableRow++;
+                  console.log(tableRow)
                 return (
-                  <TableRow key={item['performanceId']} festivalId={item['festivalId']} performanceId={item['performanceId']} startTime={item['startTime']} endTime={item['endTime']} />
-                );
+                  <TableRow key={item['performanceId']} festivalId={item['festivalId']} performanceId={item['performanceId']} startTime={item['startTime']} endTime={item['endTime']} className={(tableRow%2 ===  1) ?  'GrayColor' : 'WhiteColor'}/>
+               );
               })
-
               }
             </tbody>
           </table>
         </div>
       </IonContent>
-      <IonFooter>
+      <IonFooter >
         <IonToolbar>
           <IonLabel id="tableSize">Showing {getCurrentEntries()} of {getAllEntries()} entries</IonLabel>
           <div className="pagination">
@@ -257,7 +289,9 @@ const DataViewer: React.FC = () => {
             }
 
           </div>
+          <MediaQuery minDeviceWidth={601}>
           <IonInput onKeyDown={(e) => { e.preventDefault(); }} type="number" min="1" value={pageSize} onIonChange={e => { setPageSize(parseInt(e.detail.value!, 10)) }} id="pageSize"></IonInput>
+          </MediaQuery>
         </IonToolbar>
       </IonFooter>
     </IonPage >
