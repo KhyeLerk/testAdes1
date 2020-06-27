@@ -11,7 +11,7 @@
     border: 1px solid black;
     border-collapse: collapse;
     text-align: center;
-    width:80%;
+    width:85%;
     -webkit-box-shadow: 0px 0px 14px -11px rgba(0, 0, 0, 0.57);
     -moz-box-shadow: 0px 0px 14px -11px rgba(0, 0, 0, 0.57);
     box-shadow: 0px 0px 14px -11px rgba(0, 0, 0, 0.57);
@@ -100,7 +100,7 @@
 }
 
 #row tr, td, th {
-    width: 25%!important;
+    width: 20%!important;
     height: 40px;
     border: 1px solid #ddd;
 }

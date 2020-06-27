@@ -8,7 +8,7 @@ import MediaQuery from 'react-responsive';
 
 const getDataTable = (pages: number, rows: number) => {
   //get table data per page
-  return axios.get('https://jibaboom-astronomia.herokuapp.com/advance/data', {
+  return axios.get('http://localhost:3000/advance/data', {
     params: {
         page:  pages,
         rows: rows
@@ -24,7 +24,7 @@ const getDataTable = (pages: number, rows: number) => {
 const getDataTableFiltered = (pages: number,endTime: number ,festivalId: number, startTime: number, rows: number) => {
   //get filtered table data per page 
 
-  return axios.get(`https://jibaboom-astronomia.herokuapp.com/advance/filter`, {
+  return axios.get(`http://localhost:3000/advance/filter`, {
     params: {
         page:  pages,
         rows: rows,
@@ -35,21 +35,24 @@ const getDataTableFiltered = (pages: number,endTime: number ,festivalId: number,
     if (response.data.length !== 0)
       return response.data;
     else {
-      return [{ "performanceId": "NO RESULTS FOUND", "festivalId": "NO RESULTS FOUND", "startTime": "NO RESULTS FOUND", "endTime": "NO RESULTS FOUND" }];
+      return [{ "performanceId": "NO RESULTS FOUND", "festivalId": "NO RESULTS FOUND", "startTime": "NO RESULTS FOUND", "endTime": "NO RESULTS FOUND" , "popularity": "NO RESULTS FOUND" }];
     }
   }).catch(error => {
     console.log("error");
     alert(error);
   });
 };
-const getAllFilteredRows = (startTime: number, festivalId: number) => {
+const getAllFilteredRows = (pages: number,endTime: number ,festivalId: number, startTime: number, rows: number) => {
   //get filtered table data per page 
-  return axios.get('https://jibaboom-astronomia.herokuapp.com/advance/count',{
+  return axios.get('http://localhost:3000/advance/filter',{
     params: {
-      startTime:  startTime,
-      festivalId: festivalId
+      page:  1,
+      rows: 999999,
+      startTime: startTime,
+      festivalId: festivalId,
+      endTime: endTime
   }}).then(response => {
-    return response.data[0].count;
+    return response.data.length; 
   }).catch(error => {
     console.log("error");
     alert(error);
@@ -59,7 +62,7 @@ const getAllFilteredRows = (startTime: number, festivalId: number) => {
 
 const getAllData = () => {
   //get number of data
-  return axios.get('https://jibaboom-astronomia.herokuapp.com/advance/data',{
+  return axios.get('http://localhost:3000/advance/data',{
     params: {
       page:  1,
       rows: 999999
@@ -110,7 +113,7 @@ const DataViewer: React.FC = () => {
     if (festivalId.length !== 0 || startTime.length !== 0 || endTime.length !==0) {
       setCurrentPage(1);
       getDataTableFiltered(1, endTimeNum, festivalIdNum, startTimeNum, pageSize).then(data => { setDataRow(data) })
-      getAllFilteredRows(startTimeNum, festivalIdNum).then(data => setTotalDataFiltered(data));
+      getAllFilteredRows(1,endTimeNum,festivalIdNum, startTimeNum, pageSize).then(data => setTotalDataFiltered(data));
       setPressed(1);
     }
   }
@@ -122,6 +125,9 @@ const DataViewer: React.FC = () => {
     }
     if (Number.isNaN(festivalIdNum)) {
       setFestivalIdNum(0);
+    }
+    if (Number.isNaN(endTimeNum)) {
+      setEndTimeNum(0);
     }
     if (festivalIdNum === 0 && startTimeNum === 0 && endTimeNum === 0) {
       getDataTable(currentPage, pageSize).then(data => setDataRow(data));
@@ -136,7 +142,7 @@ const DataViewer: React.FC = () => {
       changePage(currentPage - 1, pageSize)
       
     // eslint-disable-next-line
-  }, [startTimeNum, festivalIdNum, pageSize, pressed, currentPage]);
+  }, [startTimeNum,endTimeNum, festivalIdNum, pageSize, pressed, currentPage]);
 
 
   //change page function
