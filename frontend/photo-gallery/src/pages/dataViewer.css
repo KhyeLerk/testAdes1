@@ -3,6 +3,7 @@
    * -------------------------------------------
    */
 
+
 #row {
     margin-right: auto;
     margin-left: auto;
@@ -10,11 +11,88 @@
     border: 1px solid black;
     border-collapse: collapse;
     text-align: center;
-    width: 80%;
+    width:80%;
     -webkit-box-shadow: 0px 0px 14px -11px rgba(0, 0, 0, 0.57);
     -moz-box-shadow: 0px 0px 14px -11px rgba(0, 0, 0, 0.57);
     box-shadow: 0px 0px 14px -11px rgba(0, 0, 0, 0.57);
 }
+
+
+@media only screen and (max-width: 600px) {
+
+    .GrayColor{
+        background: rgb(228, 228, 228);
+    }
+
+    .WhiteColor{
+        background: rgb(255, 255, 255)
+    }
+
+    .WhiteColor:hover, .GrayColor:hover {
+        background: rgb(147, 176, 255)!important;
+    }
+    #row tr:hover {
+        background-color: #5280FF!important;
+        color: black!important;
+    }
+
+    #row tr, td, th {
+        line-height: 45px;
+        height: 45px;
+    } 
+    #row{
+        width: 150%;
+    }
+    #table{
+        position: relative;
+        z-index: 1;
+        margin: auto;
+        overflow-x:scroll;
+        overflow-y:visible;
+        left: -2px;
+    }
+    #table table {
+        margin: auto;
+        border-spacing: 0;
+        overflow-x:scroll;
+        overflow-y:visible;
+      }
+    #table thead th {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+      }
+    
+      td:first-child,th:first-child  {
+        position: -webkit-sticky;
+        position: sticky;
+        left: 0;
+        z-index: 2;
+        border-right: 1px solid #ddd;
+        
+    }
+
+    tr:nth-of-type(odd) {
+        background: rgb(243, 242, 242);
+    }
+
+
+      thead th:first-child,
+    tfoot th:first-child {
+      z-index: 5;
+    }
+    .table-scroll tfoot,
+.table-scroll tfoot th,
+.table-scroll tfoot td {
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
+  background: #666;
+  color: #fff;
+  z-index:4;
+}
+}
+  
 
 #row tr:hover {
     background-color: #5280FF!important;
@@ -22,7 +100,7 @@
 }
 
 #row tr, td, th {
-    width: 25%;
+    width: 25%!important;
     height: 40px;
     border: 1px solid #ddd;
 }
@@ -41,7 +119,23 @@
    * Filter CSS
    * -------------------------------------------
    */
+   @media only screen and (max-width: 600px) {
+    .input {
+        line-height: 10px;
+        border: 0.5px solid #ddd;
+        width: 100%!important;
+        margin-left:auto!important;
+        margin-right:auto!important;
+    }
 
+    #filter {
+        margin-top: 10px;
+        margin-left:auto!important;
+        margin-right:auto!important;
+
+    }
+    
+   }
 #filter {
     margin-top: 10px;
     margin-left: 10%;
@@ -68,6 +162,29 @@
     margin-left: 0;
     margin-bottom: 15px;
 }
+@media only screen and (max-width: 600px) {
+    .input {
+        height: 40px!important;
+        padding-left: 10px!important;
+    }
+    #search {
+        color: #5280FF;
+        margin-left: 10px;
+        margin-top: -35px;
+        height: 50px;
+        width:45%;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+    #search {
+        color: #5280FF;
+        margin-left: 10px;
+        margin-top: -35px;
+        height: 50px;
+        width:38%!important;
+    }
+}
 
 /*
    * Pagination CSS
@@ -88,13 +205,14 @@
     color: black;
     background-color: white;
     height: 36px;
-    float: left;
+    display:inline-block;
     padding: 8px 16px;
     text-decoration: none;
     border: 0.5px solid #ddd;
+
 }
 
-.pagination button:focus {
+.pagination button:hover {
     background-color: #5280FF;
     color: white;
 }
@@ -124,4 +242,85 @@
 #pageNumber{
     float: right;
     margin-right: 25%
+}
+@media only screen and (max-width: 360px) {
+    .pagination button{
+        width: 34px!important;
+        height: 40px;
+        text-align:center;
+        padding: 0;
+        margin: 0 auto!important;
+    
+    }
+}
+
+
+@media only screen and (max-width: 600px) {
+    .pagination button{
+        width: 40px;
+        text-align:center;
+        padding: 0;
+        height: 50px;
+        margin: 0 auto!important;
+    
+    }
+.pagination {
+
+    text-align: center;
+    margin: 0px;
+    float: none!important;
+
+}
+
+
+#tableSize {
+    line-height: 30px;
+    margin-left: 0;
+}
+.pagination button{
+
+    margin: 0 auto!important;
+
+}
+
+
+}
+
+ion-select {
+  width: 50px;
+
+  justify-content: center;
+    margin-left: 10px!important;
+    padding-left: 0px!important;
+    padding-bottom: 10px!important;
+    line-height: 20px;
+    height: 50px!important  ;
+    /* Set a different placeholder color */
+  
+    /* Set full opacity on the placeholder */
+  }
+
+ion-select::part(icon) {
+    opacity: 1;
+
+  }
+
+  ion-select::part(text) {
+    opacity: 0.6;
+
+  }
+
+
+
+#mobilePageSize{
+    margin-top: 10px;
+    height: 50px!important;
+    border: 0.5px solid #ddd;
+    -webkit-box-shadow: 0px 0px 15px -12px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 15px -12px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 15px -12px rgba(0,0,0,0.75);
+}
+
+#mobilePageSize > *{
+    color: gray
 }
