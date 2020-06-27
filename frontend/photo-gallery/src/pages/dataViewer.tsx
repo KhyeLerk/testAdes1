@@ -24,10 +24,13 @@ const getDataTable = (pages: number, rows: number) => {
 const getDataTableFiltered = (pages: number, festivalId: number, startTime: number, rows: number) => {
   //get filtered table data per page 
 
-  return axios({
-    url: `https://jibaboom-astronomia.herokuapp.com/api/performances/${pages}/${startTime}/startTime/${festivalId}/festivalId/${rows}`,
-    method: 'get'
-  }).then(response => {
+  return axios.get(`https://jibaboom-astronomia.herokuapp.com/basic/filter`, {
+    params: {
+        page:  pages,
+        rows: rows,
+        startTime: startTime,
+        festivalId: festivalId
+    }}).then(response => {
     if (response.data.length !== 0)
       return response.data;
     else {
@@ -40,10 +43,11 @@ const getDataTableFiltered = (pages: number, festivalId: number, startTime: numb
 };
 const getAllFilteredRows = (startTime: number, festivalId: number) => {
   //get filtered table data per page 
-  return axios({
-    url: `https://jibaboom-astronomia.herokuapp.com/api/performances/${startTime}/startTime/${festivalId}/festivalId/`,
-    method: 'get'
-  }).then(response => {
+  return axios.get('https://jibaboom-astronomia.herokuapp.com/basic/count',{
+    params: {
+      startTime:  startTime,
+      festivalId: festivalId
+  }}).then(response => {
     return response.data[0].count;
   }).catch(error => {
     console.log("error");
@@ -57,7 +61,7 @@ const getAllData = () => {
   return axios.get('https://jibaboom-astronomia.herokuapp.com/basic/data',{
     params: {
       page:  1,
-      rows: 1000
+      rows: 999999
   }}).then(response => {
     console.log(response.data.length)
   return response.data.length; 
@@ -264,7 +268,6 @@ const DataViewer: React.FC = () => {
             <tbody>
               {dataRow.map(item => {
                   tableRow++;
-                  console.log(tableRow)
                 return (
                   <TableRow key={item['performanceId']} festivalId={item['festivalId']} performanceId={item['performanceId']} startTime={item['startTime']} endTime={item['endTime']} className={(tableRow%2 ===  1) ?  'GrayColor' : 'WhiteColor'}/>
                );
