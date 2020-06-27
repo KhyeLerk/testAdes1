@@ -447,7 +447,7 @@ var performanceDB = {
                 }
                 else {
                     console.log("Connected!")
-                    var sql = 'SELECT performanceId, startTime, endTime, popularity FROM performance WHERE festivalId=? AND popularity IS NOT NULL ORDER BY endTime'
+                    var sql = 'SELECT performanceId, startTime, endTime, popularity FROM performancewithpopularity WHERE festivalId=? ORDER BY endTime'
                         conn.query(sql, [festivalId],function (err, result) {
                             conn.end();
                             if (err) {

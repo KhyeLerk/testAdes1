@@ -1,3 +1,5 @@
+const { search } = require("../controller/app")
+
 function advancedCompute(performances){
 
 var performances= performances
@@ -51,6 +53,11 @@ do{
     i++
 }while(i<index)
 
+possiblePerformances.push(performances[index][0])
+
+// Return if there is only one possible performances
+if(possiblePerformances.length <=1) return performance[searchIndex(possiblePerformances[0])]
+
 /* Trying to find the actual performances that were responsible for the max popularity */
 
 function searchIndex(possiblePerformance){
@@ -60,24 +67,33 @@ function searchIndex(possiblePerformance){
     }
 }
 
-var enrolledPerformances = [performances[index][0]]
+var enrolledPerformances = []
 i =0
+console.log("All possiblePerformances: "+possiblePerformances)
+console.log(performances)
 do{
+    console.log(i)
+    // console.log(possiblePerformances[i])
+    // console.log(searchIndex(possiblePerformances[i]))
     if(i == (possiblePerformances.length-1)){
-        if(performances[searchIndex(possiblePerformances[i])][2] <= performances[searchIndex(enrolledPerformances[0])][1]){
-            enrolledPerformances.push(performances[i][0])
-        } 
+        enrolledPerformances.push(performances[searchIndex(possiblePerformances[i])])
+        // if(performances[searchIndex(possiblePerformances[i])][2] <= performances[searchIndex(enrolledPerformances[0][0])][1]){
+        //     enrolledPerformances.push(performances[i])
+        // } 
     }
+
     else if(performances[searchIndex(possiblePerformances[i])][2] > performances[searchIndex(possiblePerformances[i+1])][1]){
-        if(performances[i][3] > performances[i+1][3]) {
-            enrolledPerformances.push(performances[i][0]);
+        if(performances[searchIndex(possiblePerformances[i])][3] > performances[searchIndex(possiblePerformances[i+1])][3]) {
+            enrolledPerformances.push(performances[i]);
             i++
         }
     }else{
-        enrolledPerformances.push(performances[i][0])
+        enrolledPerformances.push(performances[i])
         console.log(enrolledPerformances)
     }
     i++
+
+
 }while(i < possiblePerformances.length)
 
 return enrolledPerformances // return the results here

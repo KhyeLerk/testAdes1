@@ -195,8 +195,21 @@ app.get('/basic/result' ,function(req,res){
     performance.getPerformancesByFestivalId(festivalId, function(err,result){
         if(!err){
             var orderedPerformances =result.reduce((reduced, result)=> [...reduced, [result.performanceId, result.startTime, result.endTime]],[])
-            result = JSON.stringify(basic.basicCompute(orderedPerformances))
-            res.status(200).send(result)
+            // Checking for null returns
+            if(orderedPerformances.length == 0){
+                res.status(400).send(`{\n"error":"Null Entry",\n"code":400,\n}`);
+            }
+            // If not null run this
+            else{
+            var selectedActAry = basic.basicCompute(orderedPerformances)
+            console.log(selectedActAry) // Testing array output
+            result=[]
+            for(var i=0; i< selectedActAry.length;i++){
+                result.push({performanceId : selectedActAry[i][0] , startTime : selectedActAry[i][1] , endTime :selectedActAry[i][2]})
+            }
+             result = JSON.stringify(result)
+            res.status(200).send(`{\n\t"result": [\n${result}\n]\n}`)
+            }
         }else{
             res.status(500).send(`{\n"error":"Server Error",\n"code":500,\n}`);
         }
@@ -212,8 +225,24 @@ app.get('/advance/result' , function(req,res){
     performance.getPerformancesByFestivalIdWithPopularity(festivalId, function(err,result){
         if(!err){
             var orderedPerformances =result.reduce((reduced, result)=> [...reduced, [result.performanceId, result.startTime, result.endTime, result.popularity]],[])
-            result = JSON.stringify(advanced.advancedCompute(orderedPerformances))
-            res.status(200).send(result);
+            // Checking for null returns
+            if(orderedPerformances.length == 0){
+                res.status(400).send(`{\n"error":"Null Entry",\n"code":400,\n}`)
+            }    
+             // If not null run this
+             else{
+                 console.log(orderedPerformances)
+                var selectedActAry = advanced.advancedCompute(orderedPerformances)
+                console.log(selectedActAry) // Testing array output
+                result=[]
+                for(var i=0; i< selectedActAry.length;i++){
+                    result.push({performanceId : selectedActAry[i][0] , startTime : selectedActAry[i][1] , endTime :selectedActAry[i][2] , popularity : selectedActAry[i][3]})
+                }
+                 result = JSON.stringify(result)
+                res.status(200).send(`{\n\t"result": [\n${result}\n]\n}`)
+                }
+            // result = JSON.stringify(advanced.advancedCompute(orderedPerformances))
+            // res.status(200).send(result);
         }else{
             res.status(500).send(`{\n"error":"Server Error",\n"code":500,\n}`);
         }
