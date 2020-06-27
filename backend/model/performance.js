@@ -176,7 +176,7 @@ var performanceDB = {
 
                     // Condition one : startTime and endTime is NULL
                     if(startTime==0 && endTime ==0) {
-                        sql = 'SELECT * FROM performance WHERE festivalId=? LIMIT ?,?'
+                        sql = 'SELECT * FROM performancewithpopularity WHERE festivalId=? LIMIT ?,?'
                     conn.query(sql, [festivalId,startRow,parseInt(rows)],function (err, result) {
                         conn.end();
                         if (err) {
@@ -188,7 +188,7 @@ var performanceDB = {
                     });
                     // Condition two : startTime and festivalId is NULL
                     }else if(startTime==0 && festivalId == 0) {
-                        sql = 'SELECT * FROM performance WHERE CAST(endTime AS UNSIGNED) < ? LIMIT ?,?'
+                        sql = 'SELECT * FROM performancewithpopularity WHERE CAST(endTime AS UNSIGNED) < ? LIMIT ?,?'
                     conn.query(sql, [endTime,startRow,parseInt(rows)],function (err, result) {
                         conn.end();
                         if (err) {
@@ -200,7 +200,7 @@ var performanceDB = {
                     });
                     // Condition three : endTime and festivalId is NULL
                     }else if(endTime==0 && festivalId == 0) {
-                        sql = 'SELECT * FROM performance WHERE CAST(startTime AS UNSIGNED) >= ? LIMIT ?,?'
+                        sql = 'SELECT * FROM performancewithpopularity WHERE CAST(startTime AS UNSIGNED) >= ? LIMIT ?,?'
                     conn.query(sql, [startTime,startRow,parseInt(rows)],function (err, result) {
                         conn.end();
                         if (err) {
@@ -212,7 +212,7 @@ var performanceDB = {
                     });
                     // Condition four : Only startTime is NULL
                     }else if(startTime==0) {
-                        sql = 'SELECT * FROM performance WHERE festivalId=? AND CAST(endTime AS UNSIGNED) < ? LIMIT ?,?'
+                        sql = 'SELECT * FROM performancewithpopularity WHERE festivalId=? AND CAST(endTime AS UNSIGNED) < ? LIMIT ?,?'
                     conn.query(sql, [festivalId,endTime,startRow,parseInt(rows)],function (err, result) {
                         conn.end();
                         if (err) {
@@ -224,7 +224,7 @@ var performanceDB = {
                     });
                     // Condition five : Only festivalId is NULL
                     }else if(festivalId==0){
-                        sql = 'SELECT * FROM performance WHERE CAST(startTime AS UNSIGNED) >= ? AND CAST(endTime AS UNSIGNED) < ? LIMIT ?,?'
+                        sql = 'SELECT * FROM performancewithpopularity WHERE CAST(startTime AS UNSIGNED) >= ? AND CAST(endTime AS UNSIGNED) < ? LIMIT ?,?'
                     conn.query(sql, [startTime,endTime,startRow,parseInt(rows)],function (err, result) {
                         conn.end();
                         if (err) {
@@ -236,7 +236,7 @@ var performanceDB = {
                     });
                     // Condition six : Only endTime is NULL
                     }else if(endTime==0){
-                        sql = 'SELECT * FROM performance WHERE CAST(startTime AS UNSIGNED) >= ? AND festivalId = ? LIMIT ?,?'
+                        sql = 'SELECT * FROM performancewithpopularity WHERE CAST(startTime AS UNSIGNED) >= ? AND festivalId = ? LIMIT ?,?'
                     conn.query(sql, [startTime,festivalId,startRow,parseInt(rows)],function (err, result) {
                         conn.end();
                         if (err) {
@@ -248,7 +248,7 @@ var performanceDB = {
                     });
                     // Condition seven : ALL is NOT NULL
                     }else{
-                        sql = 'SELECT * FROM performance WHERE CAST(startTime AS UNSIGNED) >= ? AND CAST(endTime AS UNSIGNED) < ? AND festivalId=?  LIMIT ?,?'
+                        sql = 'SELECT * FROM performancewithpopularity WHERE CAST(startTime AS UNSIGNED) >= ? AND CAST(endTime AS UNSIGNED) < ? AND festivalId=?  LIMIT ?,?'
                         conn.query(sql, [startTime,endTime,festivalId,startRow,parseInt(rows)],function (err, result) {
                             conn.end();
                             if (err) {
