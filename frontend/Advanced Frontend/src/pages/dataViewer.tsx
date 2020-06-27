@@ -8,7 +8,7 @@ import MediaQuery from 'react-responsive';
 
 const getDataTable = (pages: number, rows: number) => {
   //get table data per page
-  return axios.get('https://jibaboom-astronomia.herokuapp.com/basic/data', {
+  return axios.get('https://jibaboom-astronomia.herokuapp.com/advance/data', {
     params: {
         page:  pages,
         rows: rows
@@ -21,15 +21,16 @@ const getDataTable = (pages: number, rows: number) => {
 };
 
  
-const getDataTableFiltered = (pages: number, festivalId: number, startTime: number, rows: number) => {
+const getDataTableFiltered = (pages: number,endTime: number ,festivalId: number, startTime: number, rows: number) => {
   //get filtered table data per page 
 
-  return axios.get(`https://jibaboom-astronomia.herokuapp.com/basic/filter`, {
+  return axios.get(`https://jibaboom-astronomia.herokuapp.com/advance/filter`, {
     params: {
         page:  pages,
         rows: rows,
         startTime: startTime,
-        festivalId: festivalId
+        festivalId: festivalId,
+        endTime: endTime
     }}).then(response => {
     if (response.data.length !== 0)
       return response.data;
@@ -43,7 +44,7 @@ const getDataTableFiltered = (pages: number, festivalId: number, startTime: numb
 };
 const getAllFilteredRows = (startTime: number, festivalId: number) => {
   //get filtered table data per page 
-  return axios.get('https://jibaboom-astronomia.herokuapp.com/basic/count',{
+  return axios.get('https://jibaboom-astronomia.herokuapp.com/advance/count',{
     params: {
       startTime:  startTime,
       festivalId: festivalId
@@ -58,7 +59,7 @@ const getAllFilteredRows = (startTime: number, festivalId: number) => {
 
 const getAllData = () => {
   //get number of data
-  return axios.get('https://jibaboom-astronomia.herokuapp.com/basic/data',{
+  return axios.get('https://jibaboom-astronomia.herokuapp.com/advance/data',{
     params: {
       page:  1,
       rows: 999999
@@ -78,8 +79,12 @@ const DataViewer: React.FC = () => {
   //Setting for input filter
   const [festivalId, setFestivalId] = useState<string>("");
   const [startTime, setStartTime] = useState<string>("");
+  const [endTime, setEndTime] = useState<string>("");
+
   const [festivalIdNum, setFestivalIdNum] = useState<number>(0);
   const [startTimeNum, setStartTimeNum] = useState<number>(0);
+  const [endTimeNum, setEndTimeNum] = useState<number>(0);
+
   //setting for rows to be displayed 
   const [dataRow, setDataRow] = React.useState([]);
   //setting for total count of returned rows
@@ -102,9 +107,9 @@ const DataViewer: React.FC = () => {
 
   //gets filtered response data then stores in dataRow array 
   function showFilteredRows() {
-    if (festivalId.length !== 0 || startTime.length !== 0) {
+    if (festivalId.length !== 0 || startTime.length !== 0 || endTime.length !==0) {
       setCurrentPage(1);
-      getDataTableFiltered(1, festivalIdNum, startTimeNum, pageSize).then(data => { setDataRow(data) })
+      getDataTableFiltered(1, endTimeNum, festivalIdNum, startTimeNum, pageSize).then(data => { setDataRow(data) })
       getAllFilteredRows(startTimeNum, festivalIdNum).then(data => setTotalDataFiltered(data));
       setPressed(1);
     }
@@ -118,7 +123,7 @@ const DataViewer: React.FC = () => {
     if (Number.isNaN(festivalIdNum)) {
       setFestivalIdNum(0);
     }
-    if (festivalIdNum === 0 && startTimeNum === 0) {
+    if (festivalIdNum === 0 && startTimeNum === 0 && endTimeNum === 0) {
       getDataTable(currentPage, pageSize).then(data => setDataRow(data));
       setPressed(0);
     }
@@ -149,7 +154,7 @@ const DataViewer: React.FC = () => {
         setCurrentPage(pageNo);
       }
       else {
-        getDataTableFiltered(pageNo, festivalIdNum, startTimeNum, pageSize).then(data => { setDataRow(data) })
+        getDataTableFiltered(pageNo, endTimeNum,festivalIdNum, startTimeNum, pageSize).then(data => { setDataRow(data) })
         setCurrentPage(pageNo);
       }
 
@@ -233,7 +238,8 @@ const DataViewer: React.FC = () => {
         <IonToolbar id="filter">
           <IonInput type="number" min="0" value={festivalId} placeholder="Filter festivalId" onIonChange={e => { setFestivalId(e.detail.value!); setFestivalIdNum(parseInt(e.detail.value!, 10));}} className="input"></IonInput>
           <IonInput type="number" min="0" value={startTime} placeholder="Filter startTime" onIonChange={e => { setStartTime(e.detail.value!); setStartTimeNum(parseInt(e.detail.value!, 10)); }} className="input"></IonInput>
-          
+          <IonInput type="number" min="0" value={endTime} placeholder="Filter endTime" onIonChange={e => { setEndTime(e.detail.value!); setEndTimeNum(parseInt(e.detail.value!, 10)); }} className="input"></IonInput>
+
           <MediaQuery maxDeviceWidth={600}> 
           <IonItem id="mobilePageSize">
           <IonLabel>Page Size</IonLabel>
@@ -263,13 +269,15 @@ const DataViewer: React.FC = () => {
                 <th>performanceId</th>
                 <th>startTime</th>
                 <th>endTime</th>
+                <th>popularity</th>
+
               </tr>
             </thead>
             <tbody>
               {dataRow.map(item => {
                   tableRow++;
                 return (
-                  <TableRow key={item['performanceId']} festivalId={item['festivalId']} performanceId={item['performanceId']} startTime={item['startTime']} endTime={item['endTime']} className={(tableRow%2 ===  1) ?  'GrayColor' : 'WhiteColor'}/>
+                  <TableRow key={item['performanceId']}  popularity={item['popularity']} festivalId={item['festivalId']} performanceId={item['performanceId']} startTime={item['startTime']} endTime={item['endTime']} className={(tableRow%2 ===  1) ?  'GrayColor' : 'WhiteColor'}/>
                );
               })
               }

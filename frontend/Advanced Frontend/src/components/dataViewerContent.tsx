@@ -7,15 +7,18 @@ interface ContainerProps {
   startTime: string;
   endTime: string;
   className: string;
+  popularity: string;
 }
 
-const TableRow: React.FC<ContainerProps> = ({ festivalId , performanceId, startTime, endTime,className }) => {
+const TableRow: React.FC<ContainerProps> = ({ festivalId , performanceId, startTime, endTime,className, popularity }) => {
   return (
     <tr>
       <td className={className}>{festivalId}</td>
       <td>{performanceId}</td>
       <td>{startTime}</td>
       <td>{endTime}</td>
+      <td>{popularity}</td>
+
     </tr>
   );
 };
