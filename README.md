@@ -94,10 +94,15 @@ Term break, no progress during this period, working on other assignments as they
 - Redesign the database to better fit new requirements
 - Enhancing API
 - Updated schema.md for new database design
+- Completed Advanced and Basic mobile data viewer wireframe. 
+- Started and completed implementing Basic and Advanced data viewer for mobile
+- Completed implementing Advanced data viewer for front end
 
 2. What did the team plan to do the next week
 - Complete APIs for front end to further progress
 - Add in API changes to api.md worksheet
+- Create advanced data viewer wireframe.
+- start implementing basic dataviewer frontend
 
 ## Setup
 
