@@ -208,7 +208,7 @@ app.get('/basic/result' ,function(req,res){
                 result.push({performanceId : selectedActAry[i][0] , startTime : selectedActAry[i][1] , endTime :selectedActAry[i][2]})
             }
              result = JSON.stringify(result)
-            res.status(200).send(`{\n\t"result": [\n${result}\n]\n}`)
+            res.status(200).send(`{\n\t"result": \n${result}\n}`)
             }
         }else{
             res.status(500).send(`{\n"error":"Server Error",\n"code":500,\n}`);
@@ -231,18 +231,14 @@ app.get('/advance/result' , function(req,res){
             }    
              // If not null run this
              else{
-                 console.log(orderedPerformances)
                 var selectedActAry = advanced.advancedCompute(orderedPerformances)
-                console.log(selectedActAry) // Testing array output
                 result=[]
                 for(var i=0; i< selectedActAry.length;i++){
                     result.push({performanceId : selectedActAry[i][0] , startTime : selectedActAry[i][1] , endTime :selectedActAry[i][2] , popularity : selectedActAry[i][3]})
                 }
                  result = JSON.stringify(result)
-                res.status(200).send(`{\n\t"result": [\n${result}\n]\n}`)
+                res.status(200).send(`{\n\t"result": \n${result}\n}`)
                 }
-            // result = JSON.stringify(advanced.advancedCompute(orderedPerformances))
-            // res.status(200).send(result);
         }else{
             res.status(500).send(`{\n"error":"Server Error",\n"code":500,\n}`);
         }
