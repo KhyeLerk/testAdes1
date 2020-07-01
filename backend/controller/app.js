@@ -29,9 +29,9 @@ app.use(cors());
 
 // Testing 
 
-app.get('/', function (req,res){
-    res.status(200).send('Awake')
-})
+// app.get('/', function(req, res) {
+//     res.send('hello from worker #' + worker.id);
+// });
 
 /*================================================================================================================*/
 
