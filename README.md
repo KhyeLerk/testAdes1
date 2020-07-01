@@ -104,6 +104,15 @@ Term break, no progress during this period, working on other assignments as they
 - Create advanced data viewer wireframe.
 - start implementing basic dataviewer frontend
 
+### Week 11
+1. What did the team do this week
+- Completed temporary full application features hosting on Heroku (backend hosting)
+- Completed fixed on advance algorithm API
+- Completed documentation of all APIs
+
+2. What did the team plan to do the next week
+- Testing of API performances on front end and mobile
+
 ## Setup
 
 1. Setup a Github account (Using any account)
