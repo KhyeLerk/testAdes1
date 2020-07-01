@@ -174,8 +174,9 @@ app.get('/basic/count' ,function(req,res){
 app.get('/advance/count' ,function(req,res){
     var startTime = req.query.startTime;
     var festivalId = req.query.festivalId;
+    var endTime = req.query.endTime;
 
-    performance.getPerformancesWithPopularityRowsFilter(startTime,festivalId, function(err,result){
+    performance.getPerformancesWithPopularityRowsFilter(startTime,festivalId,endTime, function(err,result){
         if(!err){
             res.status(200).send(result);
         }else{

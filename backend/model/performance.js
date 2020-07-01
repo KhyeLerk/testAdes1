@@ -274,7 +274,18 @@ var performanceDB = {
                 else {
                     console.log("Connected!")
                     var sql;
-                    if(startTime==0) {
+                    if(startTime==0 && festivalId==0) {
+                        sql = 'SELECT COUNT(*) count FROM performance'
+                    conn.query(sql,function (err, result) {
+                        conn.end();
+                        if (err) {
+                            console.log(err);
+                            return callback(err,null);
+                        } else {
+                            return callback(null, result);
+                        }
+                    });
+                    }else if(startTime==0) {
                         sql = 'SELECT COUNT(*) count FROM performance WHERE festivalId=?'
                     conn.query(sql, [festivalId],function (err, result) {
                         conn.end();
@@ -313,7 +324,7 @@ var performanceDB = {
            },
 
                     //  FRONT END USE for getting number of rows in performancewithpopularity table
-                    getPerformancesWithPopularityRowsFilter: function (startTime,festivalId, callback) {
+                    getPerformancesWithPopularityRowsFilter: function (startTime,festivalId,endTime, callback) {
             var conn = db.getConnection();
             conn.connect(function (err) {
                 if (err) {
@@ -323,10 +334,10 @@ var performanceDB = {
                 else {
                     console.log("Connected!")
                     var sql;
-                      // Condition one : startTime and endTime is NULL
-                      if(startTime==0 && endTime ==0) {
-                        sql = 'SELECT COUNT(*) FROM performance WHERE festivalId=?'
-                    conn.query(sql, [festivalId,startRow,parseInt(rows)],function (err, result) {
+                    // Condition one : ALL is NULL
+                    if(startTime==0 && endTime ==0 && festivalId==0) {
+                        sql = 'SELECT COUNT(*) count FROM performance'
+                    conn.query(sql,function (err, result) {
                         conn.end();
                         if (err) {
                             console.log(err);
@@ -335,10 +346,22 @@ var performanceDB = {
                             return callback(null, result);
                         }
                     });
-                    // Condition two : startTime and festivalId is NULL
+                    // Condition two : startTime and endTime is NULL
+                    }else if(startTime==0 && endTime ==0) {
+                        sql = 'SELECT COUNT(*) count FROM performance WHERE festivalId=?'
+                    conn.query(sql, [festivalId],function (err, result) {
+                        conn.end();
+                        if (err) {
+                            console.log(err);
+                            return callback(err,null);
+                        } else {
+                            return callback(null, result);
+                        }
+                    });
+                    // Condition three : startTime and festivalId is NULL
                     }else if(startTime==0 && festivalId == 0) {
-                        sql = 'SELECT COUNT(*) FROM performance WHERE CAST(endTime AS UNSIGNED) < ?'
-                    conn.query(sql, [endTime,startRow,parseInt(rows)],function (err, result) {
+                        sql = 'SELECT COUNT(*) count FROM performance WHERE CAST(endTime AS UNSIGNED) < ?'
+                    conn.query(sql, [endTime],function (err, result) {
                         conn.end();
                         if (err) {
                             console.log(err);
@@ -347,10 +370,10 @@ var performanceDB = {
                             return callback(null, result);
                         }
                     });
-                    // Condition three : endTime and festivalId is NULL
+                    // Condition four : endTime and festivalId is NULL
                     }else if(endTime==0 && festivalId == 0) {
-                        sql = 'SELECT COUNT(*) FROM performance WHERE CAST(startTime AS UNSIGNED) >= ?'
-                    conn.query(sql, [startTime,startRow,parseInt(rows)],function (err, result) {
+                        sql = 'SELECT COUNT(*) count FROM performance WHERE CAST(startTime AS UNSIGNED) >= ?'
+                    conn.query(sql, [startTime],function (err, result) {
                         conn.end();
                         if (err) {
                             console.log(err);
@@ -359,10 +382,10 @@ var performanceDB = {
                             return callback(null, result);
                         }
                     });
-                    // Condition four : Only startTime is NULL
+                    // Condition five : Only startTime is NULL
                     }else if(startTime==0) {
-                        sql = 'SELECT COUNT(*) FROM performance WHERE festivalId=? AND CAST(endTime AS UNSIGNED) < ?'
-                    conn.query(sql, [festivalId,endTime,startRow,parseInt(rows)],function (err, result) {
+                        sql = 'SELECT COUNT(*) count FROM performance WHERE festivalId=? AND CAST(endTime AS UNSIGNED) < ?'
+                    conn.query(sql, [festivalId,endTime],function (err, result) {
                         conn.end();
                         if (err) {
                             console.log(err);
@@ -371,10 +394,10 @@ var performanceDB = {
                             return callback(null, result);
                         }
                     });
-                    // Condition five : Only festivalId is NULL
+                    // Condition six : Only festivalId is NULL
                     }else if(festivalId==0){
-                        sql = 'SELECT COUNT(*) FROM performance WHERE CAST(startTime AS UNSIGNED) >= ? AND CAST(endTime AS UNSIGNED) < ?'
-                    conn.query(sql, [startTime,endTime,startRow,parseInt(rows)],function (err, result) {
+                        sql = 'SELECT COUNT(*) count FROM performance WHERE CAST(startTime AS UNSIGNED) >= ? AND CAST(endTime AS UNSIGNED) < ?'
+                    conn.query(sql, [startTime,endTime],function (err, result) {
                         conn.end();
                         if (err) {
                             console.log(err);
@@ -383,10 +406,10 @@ var performanceDB = {
                             return callback(null, result);
                         }
                     });
-                    // Condition six : Only endTime is NULL
+                    // Condition seven : Only endTime is NULL
                     }else if(endTime==0){
-                        sql = 'SELECT COUNT(*) FROM performance WHERE CAST(startTime AS UNSIGNED) >= ? AND festivalId = ?'
-                    conn.query(sql, [startTime,festivalId,startRow,parseInt(rows)],function (err, result) {
+                        sql = 'SELECT COUNT(*) count FROM performance WHERE CAST(startTime AS UNSIGNED) >= ? AND festivalId = ?'
+                    conn.query(sql, [startTime,festivalId],function (err, result) {
                         conn.end();
                         if (err) {
                             console.log(err);
@@ -395,10 +418,10 @@ var performanceDB = {
                             return callback(null, result);
                         }
                     });
-                    // Condition seven : ALL is NOT NULL
+                    // Condition eight : ALL is NOT NULL
                     }else{
-                        sql = 'SELECT COUNT(*) FROM performance WHERE CAST(startTime AS UNSIGNED) >= ? AND CAST(endTime AS UNSIGNED) < ? AND festivalId=?'
-                        conn.query(sql, [startTime,endTime,festivalId,startRow,parseInt(rows)],function (err, result) {
+                        sql = 'SELECT COUNT(*) count FROM performance WHERE CAST(startTime AS UNSIGNED) >= ? AND CAST(endTime AS UNSIGNED) < ? AND festivalId=?'
+                        conn.query(sql, [startTime,endTime,festivalId],function (err, result) {
                             conn.end();
                             if (err) {
                                 console.log(err);
@@ -412,7 +435,7 @@ var performanceDB = {
                   });
            },
 
-           // ADES : Get performances by festivalId
+           // ADES : Get performances by festivalId // Basic Compute
            getPerformancesByFestivalId: function (festivalId, callback) {
             var conn = db.getConnection();
             conn.connect(function (err) {
@@ -437,7 +460,7 @@ var performanceDB = {
                   });
            },
 
-           // ADES : Get performances with popularity by festivalId
+           // ADES : Get performances with popularity by festivalId // Advance Compute
            getPerformancesByFestivalIdWithPopularity: function (festivalId, callback) {
             var conn = db.getConnection();
             conn.connect(function (err) {
