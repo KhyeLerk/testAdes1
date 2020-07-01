@@ -1114,7 +1114,7 @@ GET /advance/count?festivalId=1100000004&startTime=1100&endTime=1400
 "Server error"
 ```
 
-# API 9 : Get performances without filtering
+# API 9 : Compute results for basic 
 
 ### HTTP Method => GET
 ### Endpoint => /basic/result
@@ -1158,7 +1158,7 @@ GET /basic/result?festivalId=1100000001
 "Server error"
 ```
 
-# API 9 : Get performances with popularity without filtering
+# API 10 : Compute results for advance
 
 ### HTTP Method => GET
 ### Endpoint => /advance/result
@@ -1185,7 +1185,7 @@ GET /basic/result?festivalId=1100000001
 
 ### Sample Request
 ```http
-GET /basic/result?festivalId=1100000001
+GET /advance/result?festivalId=1100000001
 ```
 
 ### Sample Response
