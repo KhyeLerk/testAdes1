@@ -45,8 +45,11 @@ Each API should include
 
 ### Error
 
-```js
-"Server error"
+```json
+{
+    "error":"Server Error",
+    "code":500
+}
 ```
 
 ### Sample Request
@@ -102,8 +105,11 @@ GET /basic/data?id=1234567890
 
 ### Error
 
-```js
-"Server error"
+```json
+{
+    "error":"Server Error",
+    "code": 500
+}
 ```
 
 ### Sample Request
@@ -149,8 +155,11 @@ GET /basic/data?page=1&rows=5
 
 # Sample Error
 
-```js
-"Server error"
+```json
+{
+    "error":"Server Error",
+    "code": 500
+}
 ```
 
 # API 2 : Get limited performances with popularity without filtering
@@ -178,8 +187,11 @@ GET /basic/data?page=1&rows=5
 
 ### Error
 
-```js
-"Server error"
+```json
+{
+    "error":"Server Error",
+    "code": 500
+}
 ```
 
 ### Sample Request
@@ -231,8 +243,11 @@ GET /advance/data?page=1&rows=5
 # Sample Error
 
 
-```js
-"Server error"
+```json
+{
+    "error":"Server Error",
+    "code": 500
+}
 ```
 
 # API 3 : Insert new performances into table
@@ -309,7 +324,7 @@ Post /basic/insert
 ### Sample Response
 ```json
 {
-    "result": "success"
+    "result":"success"
 }
 ```
 
@@ -360,7 +375,7 @@ Post /basic/insert
 ### Response Body
 ```json
 {
-    "result": "success"
+    "result":"success"
 }
 ```
 
@@ -416,7 +431,7 @@ Post /advance/insert
 ### Sample Response
 ```json
 {
-    "result": "success"
+    "result":"success"
 }
 ```
 
@@ -472,8 +487,11 @@ Post /advance/insert
 
 ### Error
 
-```js
-"Server error"
+```json
+{
+    "error":"Server Error",
+    "code": 500
+}
 ```
 
 ### Sample Request (3 types of requests)
@@ -581,8 +599,11 @@ GET /basic/filter?page=1&rows=5&startTime=0&festivalId=1100000001
 
 # Sample Error
 
-```js
-"Server error"
+```json
+{
+    "error":"Server Error",
+    "code": 500
+}
 ```
 
 # API 6 : Get limited performances with popularity with filtering by three attributes (advance)
@@ -613,8 +634,11 @@ GET /basic/filter?page=1&rows=5&startTime=0&festivalId=1100000001
 
 ### Error
 
-```js
-"Server error"
+```json
+{
+    "error":"Server Error",
+    "code": 500
+}
 ```
 
 ### Sample Request (7 types of requests)
@@ -897,8 +921,11 @@ GET /advance/filter?page=1&rows=5&startTime=1030&festivalId=1100000001&endTime=1
 
 ### Error
 
-```js
-"Server error"
+```json
+{
+    "error":"Server Error",
+    "code": 500
+}
 ```
 
 ### Sample Request
@@ -963,8 +990,11 @@ GET /basic/count?festivalId=1100000004&startTime=1100
 
 # Sample Error
 
-```js
-"Server error"
+```json
+{
+    "error":"Server Error",
+    "code": 500
+}
 ```
 
 # API 8 : Get number(count) of performances with popularity with filtering
@@ -1124,18 +1154,21 @@ GET /advance/count?festivalId=1100000004&startTime=1100&endTime=1400
 
 ### Response Body
 ```json
-{
-"result":
-[{"performanceId":number,"startTime":time,"endTime":time}]
-}
+[
+    {
+        "performanceId": number,
+        "startTime": string,
+        "endTime": string
+    }
+]
 ```
 
 ### Error
 
-```js
+```json
 {
-    "error":"Servor Error",
-    "code":500
+    "error":"Server Error",
+    "code": 500
 }
 ```
 
@@ -1146,16 +1179,22 @@ GET /basic/result?festivalId=1100000001
 
 ### Sample Response
 ```json
-{
-"result":
-[{"performanceId":1000000001,"startTime":"1000","endTime":"1100"}]
-}
+[
+    {
+        "performanceId": 1000000001,
+        "startTime": "1000",
+        "endTime": "1100"
+    }
+]
 ```
 
 # Sample Error
 
-```js
-"Server error"
+```json
+{
+    "error":"Server Error",
+    "code": 500
+}
 ```
 
 # API 10 : Compute results for advance
@@ -1168,18 +1207,22 @@ GET /basic/result?festivalId=1100000001
 
 ### Response Body
 ```json
-{
-"result":
-[{"performanceId":number,"startTime":time,"endTime":time,"popularity":number}]
-}
+[
+    {
+        "performanceId": number,
+        "startTime": time,
+        "endTime": time,
+        "popularity": number
+    }
+]
 ```
 
 ### Error
 
-```js
+```json
 {
-    "error":"Servor Error",
-    "code":500
+    "error":"Server Error",
+    "code": 500
 }
 ```
 
@@ -1190,14 +1233,21 @@ GET /advance/result?festivalId=1100000001
 
 ### Sample Response
 ```json
-{
-"result":
-[{"performanceId":1000000001,"startTime":"1000","endTime":"1100"}]
-}
+[
+    {
+        "performanceId": 1000000003,
+        "startTime": "1030",
+        "endTime": "1130",
+        "popularity": 10
+    }
+]
 ```
 
 # Sample Error
 
-```js
-"Server error"
+```json
+{
+    "error":"Server Error",
+    "code": 500
+}
 ```
