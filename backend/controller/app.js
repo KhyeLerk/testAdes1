@@ -8,11 +8,14 @@ Name : Eric Ng Yong Wei
 var express = require('express');
 var app = express();
 var performance = require('../model/performance.js'); 
+
 var basic = require('../computation/basic.js')
 var advanced = require('../computation/advanced.js')
+
 var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({extended:false});
 const cors = require("cors")
+var cache = require('memory-cache')
 
 app.use(express.static("public"));
 
@@ -27,24 +30,20 @@ app.use(cors());
 
 /*================================================================================================================*/
 
-// Testing 
-
-// app.get('/', function(req, res) {
-//     res.send('hello from worker #' + worker.id);
-// });
-
-/*================================================================================================================*/
-
 // Basic data
 app.get('/basic/data', function (req, res) {
     var page = req.query.page;
     var rows= req.query.rows
 
+    var cachedData = cache.get(`cache/basic/data/${page}/${rows}`)
+    if(cachedData != null) return res.status(200).send(JSON.parse(cachedData))
+
     performance.getPerformancesLimit(page,rows, function (err, result) {
         if (!err) {
-            res.status(200).send(result);
+            cache.put(`cache/basic/data/${page}/${rows}`, JSON.stringify(result[0]), 300000)
+            res.status(200).send(result[0]);
         }else{
-            res.status(500).send('Server Error');
+            res.status(500).send(JSON.parse(`{"error":"Server Error","code":500}`));
         }
     });
 
@@ -57,11 +56,15 @@ app.get('/advance/data', function (req, res) {
     var page = req.query.page;
     var rows= req.query.rows
 
+    var cachedData = cache.get(`cache/advance/data/${page}/${rows}`)
+    if(cachedData != null) return res.status(200).send(JSON.parse(cachedData))
+
     performance.getPerformancesWithPopularityLimit(page,rows, function (err, result) {
         if (!err) {
-            res.status(200).send(result);
+            cache.put(`cache/advance/data/${page}/${rows}`, JSON.stringify(result[0]), 300000)
+            res.status(200).send(result[0]);
         }else{
-            res.status(500).send('Server Error');
+            res.status(500).send(JSON.parse(`{"error":"Server Error","code":500}`));
         }
     });
 
@@ -75,20 +78,19 @@ app.get('/advance/data', function (req, res) {
 app.post('/basic/insert/performance', function(req,res){
 
     var {data} = req.body
-    console.log(data)
-    
+    cache.clear()    
     
         performance.insertPerformance(data, function(err,result){
             if(!err){
-                res.status(200).send(`{\n"result":"success"\n}`);
+                res.status(200).send(JSON.parse(`{"result":"success"}`));
             }
             else if(err.errno == 1048){
-                res.status(400).send(`{\n"error":"Null Entry",\n"code":400,\n}`)
+                res.status(400).send(JSON.parse(`{"error":"Null Entry","code":400}`))
             }
             else if(err.errno == 1062){
-                res.status(400).send(`{\n"error":"Duplicate Entry",\n"code":400,\n}`)
+                res.status(400).send(JSON.parse(`{"error":"Duplicate Entry","code":400}`))
             }else{
-                res.status(500).send(`{\n"error":"Server Error",\n"code":500,\n}`);
+                res.status(500).send(JSON.parse(`{"error":"Server Error","code":500}`));
             }
         })
     })
@@ -97,20 +99,19 @@ app.post('/basic/insert/performance', function(req,res){
 app.post('/advance/insert/performance', function(req,res){
 
     var {data} = req.body
-    console.log(data)
-    
+    cache.clear()    
     
         performance.insertPerformanceWithPopularity(data, function(err,result){
             if(!err){
-                res.status(200).send(`{\n"result":"success"\n}`);
+                res.status(200).send(JSON.parse(`{"result":"success"}`));
             }
             else if(err.errno == 1048){
-                res.status(400).send(`{\n"error":"Null Entry",\n"code":400,\n}`)
+                res.status(400).send(JSON.parse(`{"error":"Null Entry","code":400}`))
             }
             else if(err.errno == 1062){
-                res.status(400).send(`{\n"error":"Duplicate Entry",\n"code":400,\n}`)
+                res.status(400).send(JSON.parse(`{"error":"Duplicate Entry","code":400}`))
             }else{
-                res.status(500).send(`{\n"error":"Server Error",\n"code":500,\n}`);
+                res.status(500).send(JSON.parse(`{"error":"Server Error","code":500}`));
             }
         })
     })
@@ -125,11 +126,15 @@ app.get('/basic/filter' ,function(req,res){
     var festivalId = req.query.festivalId;
     var rows = req.query.rows;
 
+    var cachedData = cache.get(`cache/basic/filter/${page}/${startTime}/${festivalId}/${rows}`)
+    if(cachedData != null) return res.status(200).send(JSON.parse(cachedData))
+
     performance.getPerformancesFilter(page,startTime,festivalId,rows, function(err,result){
         if(!err){
-            res.status(200).send(result);
+            cache.put(`cache/basic/filter/${page}/${startTime}/${festivalId}/${rows}`, JSON.stringify(result[0]), 300000)
+            res.status(200).send(result[0]);
         }else{
-            res.status(500).send('Server error');
+            res.status(500).send(JSON.parse(`{"error":"Server Error","code":500}`));
         }
     })
 })
@@ -143,11 +148,15 @@ app.get('/advance/filter' ,function(req,res){
     var festivalId = req.query.festivalId;
     var rows = req.query.rows;
 
+    var cachedData = cache.get(`cache/advance/filter/${page}/${startTime}/${endTime}/${festivalId}/${rows}`)
+    if(cachedData != null) return res.status(200).send(JSON.parse(cachedData))
+
     performance.getPerformancesWithPopularityFilter(page,startTime,endTime,festivalId,rows, function(err,result){
         if(!err){
-            res.status(200).send(result);
+            cache.put(`cache/advance/filter/${page}/${startTime}/${endTime}/${festivalId}/${rows}`, JSON.stringify(result[0]), 300000)
+            res.status(200).send(result[0]);
         }else{
-            res.status(500).send('Server error');
+            res.status(500).send(JSON.parse(`{"error":"Server Error","code":500}`));
         }
     })
 })
@@ -160,11 +169,15 @@ app.get('/basic/count' ,function(req,res){
     var startTime = req.query.startTime;
     var festivalId = req.query.festivalId;
 
+    var cachedData = cache.get(`cache/basic/count/${startTime}/${festivalId}`)
+    if(cachedData != null) return res.status(200).send(JSON.parse(cachedData))
+
     performance.getPerformancesRowsFilter(startTime,festivalId, function(err,result){
         if(!err){
-            res.status(200).send(result);
+            cache.put(`cache/basic/count/${startTime}/${festivalId}`,JSON.stringify(result[0]), 300000)
+            res.status(200).send(result[0]);
         }else{
-            res.status(500).send('Server error');
+            res.status(500).send(JSON.parse(`{"error":"Server Error","code":500}`));
         }
     })
 })
@@ -176,11 +189,15 @@ app.get('/advance/count' ,function(req,res){
     var festivalId = req.query.festivalId;
     var endTime = req.query.endTime;
 
+    var cachedData = cache.get(`cache/advance/count/${startTime}/${festivalId}/${endTime}`)
+    if(cachedData != null) return res.status(200).send(JSON.parse(cachedData))
+
     performance.getPerformancesWithPopularityRowsFilter(startTime,festivalId,endTime, function(err,result){
         if(!err){
-            res.status(200).send(result);
+            cache.put(`cache/advance/count/${startTime}/${festivalId}/${endTime}`, JSON.stringify(result[0]), 300000)
+            res.status(200).send(result[0]);
         }else{
-            res.status(500).send('Server error');
+            res.status(500).send(JSON.parse(`{"error":"Server Error","code":500}`));
         }
     })
 })
@@ -193,26 +210,29 @@ app.get('/advance/count' ,function(req,res){
 app.get('/basic/result' ,function(req,res){
     var festivalId = req.query.festivalId
 
+    var cachedData = cache.get(`cache/basic/result/${festivalId}`)
+    if(cachedData != null) return res.status(200).send(JSON.parse(cachedData))
+
     performance.getPerformancesByFestivalId(festivalId, function(err,result){
         if(!err){
             var orderedPerformances =result.reduce((reduced, result)=> [...reduced, [result.performanceId, result.startTime, result.endTime]],[])
             // Checking for null returns
             if(orderedPerformances.length == 0){
-                res.status(400).send(`{\n"error":"Null Entry",\n"code":400,\n}`);
+                res.status(400).send(JSON.parse(`{"error":"Null Input","code":400}`));
             }
             // If not null run this
             else{
             var selectedActAry = basic.basicCompute(orderedPerformances)
-            console.log(selectedActAry) // Testing array output
             result=[]
             for(var i=0; i< selectedActAry.length;i++){
                 result.push({performanceId : selectedActAry[i][0] , startTime : selectedActAry[i][1] , endTime :selectedActAry[i][2]})
             }
-             result = JSON.stringify(result)
-            res.status(200).send(`{\n\t"result": \n${result}\n}`)
+            cache.put(`cache/basic/result/${festivalId}`, JSON.stringify(result), 300000)
+            result = JSON.parse(JSON.stringify(result))
+            res.status(200).send(result)
             }
         }else{
-            res.status(500).send(`{\n"error":"Server Error",\n"code":500,\n}`);
+            res.status(500).send(JSON.parse(`{"error":"Server Error","code":500}`));
         }
     })
 })
@@ -223,12 +243,15 @@ app.get('/basic/result' ,function(req,res){
 app.get('/advance/result' , function(req,res){
     var festivalId = req.query.festivalId;
 
+    var cachedData = cache.get(`cache/advance/result/${festivalId}`)
+    if(cachedData != null) return res.status(200).send(JSON.parse(cachedData))
+
     performance.getPerformancesByFestivalIdWithPopularity(festivalId, function(err,result){
         if(!err){
             var orderedPerformances =result.reduce((reduced, result)=> [...reduced, [result.performanceId, result.startTime, result.endTime, result.popularity]],[])
             // Checking for null returns
             if(orderedPerformances.length == 0){
-                res.status(400).send(`{\n"error":"Null Entry",\n"code":400,\n}`)
+                res.status(400).send(JSON.parse(`{"error":"Null Input","code":400}`))
             }    
              // If not null run this
              else{
@@ -237,11 +260,12 @@ app.get('/advance/result' , function(req,res){
                 for(var i=0; i< selectedActAry.length;i++){
                     result.push({performanceId : selectedActAry[i][0] , startTime : selectedActAry[i][1] , endTime :selectedActAry[i][2] , popularity : selectedActAry[i][3]})
                 }
-                 result = JSON.stringify(result)
-                res.status(200).send(`{\n\t"result": \n${result}\n}`)
+                cache.put(`cache/advance/result/${festivalId}`, JSON.stringify(result), 300000)
+                result = JSON.parse(JSON.stringify(result))
+                res.status(200).send(result)
                 }
         }else{
-            res.status(500).send(`{\n"error":"Server Error",\n"code":500,\n}`);
+            res.status(500).send(JSON.parse(`{"error":"Server Error","code":500}`));
         }
     })
 })
@@ -249,5 +273,3 @@ app.get('/advance/result' , function(req,res){
 /*================================================================================================================*/
 
 module.exports= app
-
-

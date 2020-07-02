@@ -17,7 +17,7 @@ var performanceDB = {
             else {
                 console.log("Connected!");
                 var startRow = page*rows-rows;
-                var sql = 'SELECT performanceId,festivalId,startTime,endTime FROM performance LIMIT ?,?';
+                var sql = 'CALL selectAllActsLimit(?,?)';
                 conn.query(sql, [startRow,parseInt(rows)], function (err, result) {
                     conn.end();
                     if (err) {
@@ -42,7 +42,7 @@ var performanceDB = {
             else {
                 console.log("Connected!");
                 var startRow = page*rows-rows;
-                var sql = 'SELECT performanceId,festivalId,startTime,endTime,popularity FROM performancewithpopularity LIMIT ?,?';
+                var sql = 'SELECT selectAllActsWithPopLimit(?,?)';
                 conn.query(sql, [startRow,parseInt(rows)], function (err, result) {
                     conn.end();
                     if (err) {
@@ -124,7 +124,7 @@ var performanceDB = {
                     var startRow = page*rows-rows;
                     var sql;
                     if(startTime==0) {
-                        sql = 'SELECT * FROM performance WHERE festivalId=? LIMIT ?,?'
+                        sql = 'CALL filterBasicCondOne(?,?,?)'
                     conn.query(sql, [festivalId,startRow,parseInt(rows)],function (err, result) {
                         conn.end();
                         if (err) {
@@ -135,7 +135,7 @@ var performanceDB = {
                         }
                     });
                     }else if(festivalId==0){
-                        sql = 'SELECT * FROM performance WHERE CAST(startTime AS UNSIGNED) >=? LIMIT ?,?'
+                        sql = 'CALL filterBasicCondTwo(?,?,?)'
                     conn.query(sql, [startTime,startRow,parseInt(rows)],function (err, result) {
                         conn.end();
                         if (err) {
@@ -146,7 +146,7 @@ var performanceDB = {
                         }
                     });
                     }else{
-                        sql = 'SELECT * FROM performance WHERE CAST(startTime AS UNSIGNED)>=? AND festivalId=? LIMIT ?,?'
+                        sql = 'CALL filterBasicCondThree(?,?,?,?)'
                         conn.query(sql, [startTime,festivalId,startRow,parseInt(rows)],function (err, result) {
                             conn.end();
                             if (err) {
@@ -176,7 +176,7 @@ var performanceDB = {
 
                     // Condition one : startTime and endTime is NULL
                     if(startTime==0 && endTime ==0) {
-                        sql = 'SELECT * FROM performancewithpopularity WHERE festivalId=? LIMIT ?,?'
+                        sql = 'CALL filterAdvanceCondOne(?,?,?)'
                     conn.query(sql, [festivalId,startRow,parseInt(rows)],function (err, result) {
                         conn.end();
                         if (err) {
@@ -188,7 +188,7 @@ var performanceDB = {
                     });
                     // Condition two : startTime and festivalId is NULL
                     }else if(startTime==0 && festivalId == 0) {
-                        sql = 'SELECT * FROM performancewithpopularity WHERE CAST(endTime AS UNSIGNED) < ? LIMIT ?,?'
+                        sql = 'CALL filterAdvanceCondTwo(?,?,?)'
                     conn.query(sql, [endTime,startRow,parseInt(rows)],function (err, result) {
                         conn.end();
                         if (err) {
@@ -200,7 +200,7 @@ var performanceDB = {
                     });
                     // Condition three : endTime and festivalId is NULL
                     }else if(endTime==0 && festivalId == 0) {
-                        sql = 'SELECT * FROM performancewithpopularity WHERE CAST(startTime AS UNSIGNED) >= ? LIMIT ?,?'
+                        sql = 'CALL filterAdvanceCondThree(?,?,?)'
                     conn.query(sql, [startTime,startRow,parseInt(rows)],function (err, result) {
                         conn.end();
                         if (err) {
@@ -212,7 +212,7 @@ var performanceDB = {
                     });
                     // Condition four : Only startTime is NULL
                     }else if(startTime==0) {
-                        sql = 'SELECT * FROM performancewithpopularity WHERE festivalId=? AND CAST(endTime AS UNSIGNED) < ? LIMIT ?,?'
+                        sql = 'CALL filterAdvanceCondFour(?,?,?,?)'
                     conn.query(sql, [festivalId,endTime,startRow,parseInt(rows)],function (err, result) {
                         conn.end();
                         if (err) {
@@ -224,7 +224,7 @@ var performanceDB = {
                     });
                     // Condition five : Only festivalId is NULL
                     }else if(festivalId==0){
-                        sql = 'SELECT * FROM performancewithpopularity WHERE CAST(startTime AS UNSIGNED) >= ? AND CAST(endTime AS UNSIGNED) < ? LIMIT ?,?'
+                        sql = 'CALL filterAdvanceCondFive(?,?,?,?)'
                     conn.query(sql, [startTime,endTime,startRow,parseInt(rows)],function (err, result) {
                         conn.end();
                         if (err) {
@@ -236,7 +236,7 @@ var performanceDB = {
                     });
                     // Condition six : Only endTime is NULL
                     }else if(endTime==0){
-                        sql = 'SELECT * FROM performancewithpopularity WHERE CAST(startTime AS UNSIGNED) >= ? AND festivalId = ? LIMIT ?,?'
+                        sql = 'CALL filterAdvanceCondSix(?,?,?,?)'
                     conn.query(sql, [startTime,festivalId,startRow,parseInt(rows)],function (err, result) {
                         conn.end();
                         if (err) {
@@ -248,7 +248,7 @@ var performanceDB = {
                     });
                     // Condition seven : ALL is NOT NULL
                     }else{
-                        sql = 'SELECT * FROM performancewithpopularity WHERE CAST(startTime AS UNSIGNED) >= ? AND CAST(endTime AS UNSIGNED) < ? AND festivalId=?  LIMIT ?,?'
+                        sql = 'CALL filterAdvanceCondSeven(?,?,?,?,?)'
                         conn.query(sql, [startTime,endTime,festivalId,startRow,parseInt(rows)],function (err, result) {
                             conn.end();
                             if (err) {
@@ -275,7 +275,7 @@ var performanceDB = {
                     console.log("Connected!")
                     var sql;
                     if(startTime==0 && festivalId==0) {
-                        sql = 'SELECT COUNT(*) count FROM performance'
+                        sql = 'CALL countBasicCondOne()'
                     conn.query(sql,function (err, result) {
                         conn.end();
                         if (err) {
@@ -286,7 +286,7 @@ var performanceDB = {
                         }
                     });
                     }else if(startTime==0) {
-                        sql = 'SELECT COUNT(*) count FROM performance WHERE festivalId=?'
+                        sql = 'CALL countBasicCondTwo(?)'
                     conn.query(sql, [festivalId],function (err, result) {
                         conn.end();
                         if (err) {
@@ -297,7 +297,7 @@ var performanceDB = {
                         }
                     });
                     }else if(festivalId==0){
-                        sql = 'SELECT COUNT(*) count FROM performance WHERE CAST(startTime AS UNSIGNED)>=?'
+                        sql = 'CALL countBasicCondThree(?)'
                     conn.query(sql, [startTime],function (err, result) {
                         conn.end();
                         if (err) {
@@ -308,7 +308,7 @@ var performanceDB = {
                         }
                     });
                     }else{
-                        sql = 'SELECT COUNT(*) count FROM performance WHERE CAST(startTime AS UNSIGNED)>=? AND festivalId=?'
+                        sql = 'CALL countBasicCondFour(?,?)'
                         conn.query(sql, [startTime,festivalId],function (err, result) {
                             conn.end();
                             if (err) {
@@ -336,7 +336,7 @@ var performanceDB = {
                     var sql;
                     // Condition one : ALL is NULL
                     if(startTime==0 && endTime ==0 && festivalId==0) {
-                        sql = 'SELECT COUNT(*) count FROM performance'
+                        sql = 'CALL countAdvanceCondOne()'
                     conn.query(sql,function (err, result) {
                         conn.end();
                         if (err) {
@@ -348,7 +348,7 @@ var performanceDB = {
                     });
                     // Condition two : startTime and endTime is NULL
                     }else if(startTime==0 && endTime ==0) {
-                        sql = 'SELECT COUNT(*) count FROM performance WHERE festivalId=?'
+                        sql = 'CALL countAdvanceCondTwo(?)'
                     conn.query(sql, [festivalId],function (err, result) {
                         conn.end();
                         if (err) {
@@ -360,7 +360,7 @@ var performanceDB = {
                     });
                     // Condition three : startTime and festivalId is NULL
                     }else if(startTime==0 && festivalId == 0) {
-                        sql = 'SELECT COUNT(*) count FROM performance WHERE CAST(endTime AS UNSIGNED) < ?'
+                        sql = 'CALL countAdvanceCondThree(?)'
                     conn.query(sql, [endTime],function (err, result) {
                         conn.end();
                         if (err) {
@@ -372,7 +372,7 @@ var performanceDB = {
                     });
                     // Condition four : endTime and festivalId is NULL
                     }else if(endTime==0 && festivalId == 0) {
-                        sql = 'SELECT COUNT(*) count FROM performance WHERE CAST(startTime AS UNSIGNED) >= ?'
+                        sql = 'CALL countAdvanceCondFour(?)'
                     conn.query(sql, [startTime],function (err, result) {
                         conn.end();
                         if (err) {
@@ -384,8 +384,8 @@ var performanceDB = {
                     });
                     // Condition five : Only startTime is NULL
                     }else if(startTime==0) {
-                        sql = 'SELECT COUNT(*) count FROM performance WHERE festivalId=? AND CAST(endTime AS UNSIGNED) < ?'
-                    conn.query(sql, [festivalId,endTime],function (err, result) {
+                        sql = 'CALL countAdvanceCondFive(?,?)'
+                    conn.query(sql, [endTime, festivalId],function (err, result) {
                         conn.end();
                         if (err) {
                             console.log(err);
@@ -396,7 +396,7 @@ var performanceDB = {
                     });
                     // Condition six : Only festivalId is NULL
                     }else if(festivalId==0){
-                        sql = 'SELECT COUNT(*) count FROM performance WHERE CAST(startTime AS UNSIGNED) >= ? AND CAST(endTime AS UNSIGNED) < ?'
+                        sql = 'CALL countAdvanceCondSix(?,?)'
                     conn.query(sql, [startTime,endTime],function (err, result) {
                         conn.end();
                         if (err) {
@@ -408,7 +408,7 @@ var performanceDB = {
                     });
                     // Condition seven : Only endTime is NULL
                     }else if(endTime==0){
-                        sql = 'SELECT COUNT(*) count FROM performance WHERE CAST(startTime AS UNSIGNED) >= ? AND festivalId = ?'
+                        sql = 'CALL countAdvanceCondSeven(?,?)'
                     conn.query(sql, [startTime,festivalId],function (err, result) {
                         conn.end();
                         if (err) {
@@ -420,7 +420,7 @@ var performanceDB = {
                     });
                     // Condition eight : ALL is NOT NULL
                     }else{
-                        sql = 'SELECT COUNT(*) count FROM performance WHERE CAST(startTime AS UNSIGNED) >= ? AND CAST(endTime AS UNSIGNED) < ? AND festivalId=?'
+                        sql = 'CALL countAdvanceCondEight(?,?,?)'
                         conn.query(sql, [startTime,endTime,festivalId],function (err, result) {
                             conn.end();
                             if (err) {
@@ -445,14 +445,14 @@ var performanceDB = {
                 }
                 else {
                     console.log("Connected!")
-                    var sql = 'SELECT performanceId, startTime, endTime FROM performance WHERE festivalId=? ORDER BY endTime'
+                    var sql = 'CALL BasicOrderAct(?)'
                         conn.query(sql, [festivalId],function (err, result) {
                             conn.end();
                             if (err) {
                                 console.log(err);
                                 return callback(err,null);
                             } else {
-                                return callback(null, result);
+                                return callback(null, result[0]);
                             }
                         });  
                     
@@ -470,14 +470,14 @@ var performanceDB = {
                 }
                 else {
                     console.log("Connected!")
-                    var sql = 'SELECT performanceId, startTime, endTime, popularity FROM performancewithpopularity WHERE festivalId=? ORDER BY endTime'
+                    var sql = 'CALL AdvanceOrderAct(?)'
                         conn.query(sql, [festivalId],function (err, result) {
                             conn.end();
                             if (err) {
                                 console.log(err);
                                 return callback(err,null);
                             } else {
-                                return callback(null, result);
+                                return callback(null, result[0]);
                             }
                         });  
                     
