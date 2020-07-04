@@ -123,20 +123,21 @@ var performanceDB = {
                     console.log("Connected!")
                     var startRow = page*rows-rows;
                     var sql;
+                    var values;
+                    // Condition 1 : Filter using festivalId
                     if(startTime==0) {
                         sql = 'CALL filterBasicCondOne(?,?,?)'
-                    conn.query(sql, [festivalId,startRow,parseInt(rows)],function (err, result) {
-                        conn.end();
-                        if (err) {
-                            console.log(err);
-                            return callback(err,null);
-                        } else {
-                            return callback(null, result);
-                        }
-                    });
+                        values = [festivalId,startRow,parseInt(rows)]
+                    // Condition 2 : Filter using startTime
                     }else if(festivalId==0){
                         sql = 'CALL filterBasicCondTwo(?,?,?)'
-                    conn.query(sql, [startTime,startRow,parseInt(rows)],function (err, result) {
+                        values = [startTime,startRow,parseInt(rows)]
+                    // Condition 3 : Filter using both attr
+                    }else{
+                        sql = 'CALL filterBasicCondThree(?,?,?,?)'
+                        values = [startTime,festivalId,startRow,parseInt(rows)]  
+                    }
+                    conn.query(sql, values, function (err, result) {
                         conn.end();
                         if (err) {
                             console.log(err);
@@ -145,18 +146,6 @@ var performanceDB = {
                             return callback(null, result);
                         }
                     });
-                    }else{
-                        sql = 'CALL filterBasicCondThree(?,?,?,?)'
-                        conn.query(sql, [startTime,festivalId,startRow,parseInt(rows)],function (err, result) {
-                            conn.end();
-                            if (err) {
-                                console.log(err);
-                                return callback(err,null);
-                            } else {
-                                return callback(null, result);
-                            }
-                        });  
-                    }
                 }
                   });
            },
@@ -173,71 +162,38 @@ var performanceDB = {
                     console.log("Connected!")
                     var startRow = page*rows-rows;
                     var sql;
+                    var values;
 
                     // Condition one : startTime and endTime is NULL
                     if(startTime==0 && endTime ==0) {
                         sql = 'CALL filterAdvanceCondOne(?,?,?)'
-                    conn.query(sql, [festivalId,startRow,parseInt(rows)],function (err, result) {
-                        conn.end();
-                        if (err) {
-                            console.log(err);
-                            return callback(err,null);
-                        } else {
-                            return callback(null, result);
-                        }
-                    });
+                        values = [festivalId,startRow,parseInt(rows)]
                     // Condition two : startTime and festivalId is NULL
                     }else if(startTime==0 && festivalId == 0) {
                         sql = 'CALL filterAdvanceCondTwo(?,?,?)'
-                    conn.query(sql, [endTime,startRow,parseInt(rows)],function (err, result) {
-                        conn.end();
-                        if (err) {
-                            console.log(err);
-                            return callback(err,null);
-                        } else {
-                            return callback(null, result);
-                        }
-                    });
+                        values = [endTime,startRow,parseInt(rows)]
                     // Condition three : endTime and festivalId is NULL
                     }else if(endTime==0 && festivalId == 0) {
                         sql = 'CALL filterAdvanceCondThree(?,?,?)'
-                    conn.query(sql, [startTime,startRow,parseInt(rows)],function (err, result) {
-                        conn.end();
-                        if (err) {
-                            console.log(err);
-                            return callback(err,null);
-                        } else {
-                            return callback(null, result);
-                        }
-                    });
+                        values = [startTime,startRow,parseInt(rows)]
                     // Condition four : Only startTime is NULL
                     }else if(startTime==0) {
                         sql = 'CALL filterAdvanceCondFour(?,?,?,?)'
-                    conn.query(sql, [festivalId,endTime,startRow,parseInt(rows)],function (err, result) {
-                        conn.end();
-                        if (err) {
-                            console.log(err);
-                            return callback(err,null);
-                        } else {
-                            return callback(null, result);
-                        }
-                    });
+                        values = [festivalId,endTime,startRow,parseInt(rows)]
                     // Condition five : Only festivalId is NULL
                     }else if(festivalId==0){
                         sql = 'CALL filterAdvanceCondFive(?,?,?,?)'
-                    conn.query(sql, [startTime,endTime,startRow,parseInt(rows)],function (err, result) {
-                        conn.end();
-                        if (err) {
-                            console.log(err);
-                            return callback(err,null);
-                        } else {
-                            return callback(null, result);
-                        }
-                    });
+                        values = [startTime,endTime,startRow,parseInt(rows)]
                     // Condition six : Only endTime is NULL
                     }else if(endTime==0){
                         sql = 'CALL filterAdvanceCondSix(?,?,?,?)'
-                    conn.query(sql, [startTime,festivalId,startRow,parseInt(rows)],function (err, result) {
+                        values =  [startTime,festivalId,startRow,parseInt(rows)]
+                    // Condition seven : ALL is NOT NULL
+                    }else{
+                        sql = 'CALL filterAdvanceCondSeven(?,?,?,?,?)'
+                        values = [startTime,endTime,festivalId,startRow,parseInt(rows)]
+                    }
+                    conn.query(sql, values,function (err, result) {
                         conn.end();
                         if (err) {
                             console.log(err);
@@ -246,19 +202,6 @@ var performanceDB = {
                             return callback(null, result);
                         }
                     });
-                    // Condition seven : ALL is NOT NULL
-                    }else{
-                        sql = 'CALL filterAdvanceCondSeven(?,?,?,?,?)'
-                        conn.query(sql, [startTime,endTime,festivalId,startRow,parseInt(rows)],function (err, result) {
-                            conn.end();
-                            if (err) {
-                                console.log(err);
-                                return callback(err,null);
-                            } else {
-                                return callback(null, result);
-                            }
-                        });  
-                    }
                 }
                   });
            },
@@ -273,32 +216,22 @@ var performanceDB = {
                 }
                 else {
                     console.log("Connected!")
-                    var sql;
+                    var sql, values;
+                    // Condition 1 : All is NULL
                     if(startTime==0 && festivalId==0) {
                         sql = 'CALL countBasicCondOne()'
-                    conn.query(sql,function (err, result) {
-                        conn.end();
-                        if (err) {
-                            console.log(err);
-                            return callback(err,null);
-                        } else {
-                            return callback(null, result);
-                        }
-                    });
+                        values = []
                     }else if(startTime==0) {
                         sql = 'CALL countBasicCondTwo(?)'
-                    conn.query(sql, [festivalId],function (err, result) {
-                        conn.end();
-                        if (err) {
-                            console.log(err);
-                            return callback(err,null);
-                        } else {
-                            return callback(null, result);
-                        }
-                    });
+                        values = [festivalId]
                     }else if(festivalId==0){
                         sql = 'CALL countBasicCondThree(?)'
-                    conn.query(sql, [startTime],function (err, result) {
+                        values = [startTime]
+                    }else{
+                        sql = 'CALL countBasicCondFour(?,?)'
+                        values = [startTime,festivalId]
+                    }
+                    conn.query(sql, values, function (err, result) {
                         conn.end();
                         if (err) {
                             console.log(err);
@@ -307,18 +240,6 @@ var performanceDB = {
                             return callback(null, result);
                         }
                     });
-                    }else{
-                        sql = 'CALL countBasicCondFour(?,?)'
-                        conn.query(sql, [startTime,festivalId],function (err, result) {
-                            conn.end();
-                            if (err) {
-                                console.log(err);
-                                return callback(err,null);
-                            } else {
-                                return callback(null, result);
-                            }
-                        });  
-                    }
                 }
                   });
            },
@@ -333,83 +254,41 @@ var performanceDB = {
                 }
                 else {
                     console.log("Connected!")
-                    var sql;
+                    var sql, values;
                     // Condition one : ALL is NULL
                     if(startTime==0 && endTime ==0 && festivalId==0) {
                         sql = 'CALL countAdvanceCondOne()'
-                    conn.query(sql,function (err, result) {
-                        conn.end();
-                        if (err) {
-                            console.log(err);
-                            return callback(err,null);
-                        } else {
-                            return callback(null, result);
-                        }
-                    });
+                        values = []
                     // Condition two : startTime and endTime is NULL
                     }else if(startTime==0 && endTime ==0) {
                         sql = 'CALL countAdvanceCondTwo(?)'
-                    conn.query(sql, [festivalId],function (err, result) {
-                        conn.end();
-                        if (err) {
-                            console.log(err);
-                            return callback(err,null);
-                        } else {
-                            return callback(null, result);
-                        }
-                    });
+                        values = [festivalId]
                     // Condition three : startTime and festivalId is NULL
                     }else if(startTime==0 && festivalId == 0) {
                         sql = 'CALL countAdvanceCondThree(?)'
-                    conn.query(sql, [endTime],function (err, result) {
-                        conn.end();
-                        if (err) {
-                            console.log(err);
-                            return callback(err,null);
-                        } else {
-                            return callback(null, result);
-                        }
-                    });
+                        values = [endTime]
                     // Condition four : endTime and festivalId is NULL
                     }else if(endTime==0 && festivalId == 0) {
                         sql = 'CALL countAdvanceCondFour(?)'
-                    conn.query(sql, [startTime],function (err, result) {
-                        conn.end();
-                        if (err) {
-                            console.log(err);
-                            return callback(err,null);
-                        } else {
-                            return callback(null, result);
-                        }
-                    });
+                        values = [startTime]
                     // Condition five : Only startTime is NULL
                     }else if(startTime==0) {
                         sql = 'CALL countAdvanceCondFive(?,?)'
-                    conn.query(sql, [endTime, festivalId],function (err, result) {
-                        conn.end();
-                        if (err) {
-                            console.log(err);
-                            return callback(err,null);
-                        } else {
-                            return callback(null, result);
-                        }
-                    });
+                        values =  [endTime, festivalId]
                     // Condition six : Only festivalId is NULL
                     }else if(festivalId==0){
                         sql = 'CALL countAdvanceCondSix(?,?)'
-                    conn.query(sql, [startTime,endTime],function (err, result) {
-                        conn.end();
-                        if (err) {
-                            console.log(err);
-                            return callback(err,null);
-                        } else {
-                            return callback(null, result);
-                        }
-                    });
+                        values = [startTime,endTime]
                     // Condition seven : Only endTime is NULL
                     }else if(endTime==0){
                         sql = 'CALL countAdvanceCondSeven(?,?)'
-                    conn.query(sql, [startTime,festivalId],function (err, result) {
+                        values = [startTime,festivalId]
+                    // Condition eight : ALL is NOT NULL
+                    }else{
+                        sql = 'CALL countAdvanceCondEight(?,?,?)'
+                        values = [startTime,endTime,festivalId]
+                    }
+                    conn.query(sql, values, function (err, result) {
                         conn.end();
                         if (err) {
                             console.log(err);
@@ -418,19 +297,6 @@ var performanceDB = {
                             return callback(null, result);
                         }
                     });
-                    // Condition eight : ALL is NOT NULL
-                    }else{
-                        sql = 'CALL countAdvanceCondEight(?,?,?)'
-                        conn.query(sql, [startTime,endTime,festivalId],function (err, result) {
-                            conn.end();
-                            if (err) {
-                                console.log(err);
-                                return callback(err,null);
-                            } else {
-                                return callback(null, result);
-                            }
-                        });  
-                    }
                 }
                   });
            },
@@ -496,21 +362,27 @@ var performanceDB = {
                 else {
                     console.log("Connected!");
                     var sql,values;
+                    // Condition 1 : Update festivalId only
                     if(parseInt(startTime) == 0 && parseInt(endTime==0)){
                         sql = `UPDATE performance SET festivalId = ? WHERE performanceId = ?`
                         values = [festivalId, performanceId]
+                    // Condition 2 : Update endTime only
                     }else if(parseInt(startTime) == 0 && festivalId == 0){
                         sql = `UPDATE performance SET endTime= ? WHERE performanceId = ?`
                         values = [endTime, performanceId]
+                    // Condition 3 : Update startTime only
                     }else if(parseInt(endTime) == 0 && festivalId == 0){
                         sql = `UPDATE performance SET startTime = ? WHERE performanceId = ?`
                         values = [startTime, performanceId]
+                    // Condition 4 : Update endTime and festivalId
                     }else if(parseInt(startTime) == 0){
                         sql = `UPDATE performance SET endTime = ? , festivalId = ? WHERE performanceId = ?`
                         values = [endTime, festivalId, performanceId]
+                    // Condition 5 : Update startTime and festivalId
                     }else if(parseInt(endTime) == 0){
                         sql = `UPDATE performance SET startTime = ? , festivalId = ? WHERE performanceId = ?`
                         values = [startTime, festivalId, performanceId]
+                    // Condition 6 : Update endTime and festivalId
                     }else if(festivalId == 0){
                         sql = `UPDATE performance SET startTime = ? , endTime = ? WHERE performanceId = ?`
                         values = [startTime, endTime, performanceId]
