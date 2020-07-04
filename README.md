@@ -108,10 +108,15 @@ Term break, no progress during this period, working on other assignments as they
 1. What did the team do this week
 - Completed temporary full application features hosting on Heroku (backend hosting)
 - Completed fixed on advance algorithm API
-- Completed documentation of all APIs
+- Completed documentation of all APIs (not included new additional feats API)
+- Added additional feat. Stored proc
+- Added additional feat. express-cluster
+- Added additional feat. Back-End caching
 
 2. What did the team plan to do the next week
 - Testing of API performances on front end and mobile
+- Complete put and delete documentation of API.md
+- Complete all additional features
 
 ## Setup
 
