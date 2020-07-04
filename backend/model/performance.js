@@ -484,6 +484,188 @@ var performanceDB = {
                 }
                   });
            },
+
+           // Basic update
+           updatePerformance: function (performanceId,festivalId,startTime,endTime, callback) {
+            var conn = db.getConnection();
+            conn.connect(function (err) {
+                if (err) {
+                    console.log(err);
+                    return callback(err,null);
+                }
+                else {
+                    console.log("Connected!");
+                    var sql,values;
+                    if(parseInt(startTime) == 0 && parseInt(endTime==0)){
+                        sql = `UPDATE performance SET festivalId = ? WHERE performanceId = ?`
+                        values = [festivalId, performanceId]
+                    }else if(parseInt(startTime) == 0 && festivalId == 0){
+                        sql = `UPDATE performance SET endTime= ? WHERE performanceId = ?`
+                        values = [endTime, performanceId]
+                    }else if(parseInt(endTime) == 0 && festivalId == 0){
+                        sql = `UPDATE performance SET startTime = ? WHERE performanceId = ?`
+                        values = [startTime, performanceId]
+                    }else if(parseInt(startTime) == 0){
+                        sql = `UPDATE performance SET endTime = ? , festivalId = ? WHERE performanceId = ?`
+                        values = [endTime, festivalId, performanceId]
+                    }else if(parseInt(endTime) == 0){
+                        sql = `UPDATE performance SET startTime = ? , festivalId = ? WHERE performanceId = ?`
+                        values = [startTime, festivalId, performanceId]
+                    }else if(festivalId == 0){
+                        sql = `UPDATE performance SET startTime = ? , endTime = ? WHERE performanceId = ?`
+                        values = [startTime, endTime, performanceId]
+                    }else{
+                        sql = `UPDATE performance SET startTime = ? , endTime = ? , festivalId = ? WHERE performanceId = ?`
+                        values = [startTime, endTime, festivalId, performanceId]
+                    }
+
+                    conn.query(sql,values, function (err, result) {
+                        conn.end();
+                        if (err) {
+                            console.log(err);
+                            return callback(err,null);
+                        } else {
+                            return callback(null, result);
+                        }
+                    });
+                }
+                  });
+           },
+
+                      // Advanced update
+                      updatePerformance: function (performanceId,festivalId,startTime,endTime,popularity, callback) {
+                        var conn = db.getConnection();
+                        conn.connect(function (err) {
+                            if (err) {
+                                console.log(err);
+                                return callback(err,null);
+                            }
+                            else {
+                                console.log("Connected!");
+                                var sql,values;
+
+                                // Condition 1 : Update festivalId
+                                if(parseInt(startTime) == 0 && parseInt(endTime==0) && popularity == 0){
+                                    sql = `UPDATE performanceWithPopularity SET festivalId = ? WHERE performanceId = ?`
+                                    values = [festivalId, performanceId]
+                                // Condition 2 : Update endTime
+                                }else if(parseInt(startTime) == 0 && festivalId == 0 && popularity == 0){
+                                    sql = `UPDATE performanceWithPopularity SET endTime= ? WHERE performanceId = ?`
+                                    values = [endTime, performanceId]
+                                // Condition 3 : Update startTime
+                                }else if(parseInt(endTime) == 0 && festivalId == 0 && popularity == 0){
+                                    sql = `UPDATE performanceWithPopularity SET startTime = ? WHERE performanceId = ?`
+                                    values = [startTime, performanceId]
+                                // Condition 4 : Update popularity
+                                }else if(parseInt(endTime) == 0 && festivalId == 0 && startTime == 0){
+                                    sql = `UPDATE performanceWithPopularity SET popularity = ? WHERE performanceId = ?`
+                                    values = [popularity, performanceId]
+                                // Condition 5 : Update festivalId & popularity
+                                }else if(parseInt(endTime) == 0 && parseInt(startTime) == 0){
+                                    sql = `UPDATE performanceWithPopularity SET popularity = ? , festivalId = ? WHERE performanceId = ?`
+                                    values = [popularity, festivalId, performanceId]
+                                // Condition 6 : Update festivalId & startTime
+                                }else if(parseInt(endTime) == 0 && popularity == 0){
+                                    sql = `UPDATE performanceWithPopularity SET startTime = ? , festivalId = ? WHERE performanceId = ?`
+                                    values = [startTime, festivalId, performanceId]
+                                // Condition 7 : Update festivalId & endTime
+                                }else if(parseInt(startTime) == 0 && popularity == 0){
+                                    sql = `UPDATE performanceWithPopularity SET endTime= ? , festivalId = ? WHERE performanceId = ?`
+                                    values = [endTime, festivalId, performanceId]
+                                // Condition 8 : Update startTime & endTime
+                                }else if(popularity == 0 && festivalId == 0){
+                                    sql = `UPDATE performanceWithPopularity SET startTime = ? , endTime = ? WHERE performanceId = ?`
+                                    values = [startTime, endTime, performanceId]
+                                // Condition 9 : Update startTime & popularity
+                                }else if(parseInt(endTime) == 0 && festivalId == 0){
+                                    sql = `UPDATE performanceWithPopularity SET startTime = ? , popularity = ? WHERE performanceId = ?`
+                                    values = [startTime, popularity, performanceId]
+                                // Condition 10 : Update popularity & endTime
+                                }else if(parseInt(startTime) == 0 && festivalId == 0){
+                                    sql = `UPDATE performanceWithPopularity SET popularity = ? , endTime = ? WHERE performanceId = ?`
+                                    values = [popularity, endTime, performanceId]
+                                // Condition 11 : Update all except startTime
+                                }else if(startTime == 0){
+                                    sql = `UPDATE performanceWithPopularity SET popularity = ? , festivalId = ? , endTime = ? WHERE performanceId = ?`
+                                    values = [popularity, festivalId, endTime, performanceId]
+                                // Condition 12 : Update all except endTime
+                                }else if(endTime == 0){
+                                    sql = `UPDATE performanceWithPopularity SET startTime= ? , festivalId = ? , popularity = ? WHERE performanceId = ?`
+                                    values = [startTime, festivalId, popularity, performanceId]
+                                // Condition 12 : Update all except festivalId
+                                }else if(festivalId == 0){
+                                    sql = `UPDATE performanceWithPopularity SET startTime = ? , endTime = ? , popularity =? WHERE performanceId = ?`
+                                    values = [startTime, endTime, popularity, performanceId]
+                                // Condition 13 : Update all except popoularity
+                                }else if(popularity == 0){
+                                    sql = `UPDATE performanceWithPopularity SET startTime = ? , endTime = ? , festivalId = ? WHERE performanceId = ?`
+                                    values = [startTime, endTime, festivalId, performanceId]
+                                // Condition 14 : Update everything
+                                }else{
+                                    sql = `UPDATE performanceWithPopularity SET startTime = ? , endTime = ? , festivalId = ? , popularity = ? WHERE performanceId = ?`
+                                    values = [startTime, endTime, festivalId, popularity, performanceId]
+                                }
+            
+                                conn.query(sql,values, function (err, result) {
+                                    conn.end();
+                                    if (err) {
+                                        console.log(err);
+                                        return callback(err,null);
+                                    } else {
+                                        return callback(null, result);
+                                    }
+                                });
+                            }
+                              });
+                       },
+
+            // Basic delete
+           deletePerformances: function (performanceId, callback) {
+            var conn = db.getConnection();
+            conn.connect(function (err) {
+                if (err) {
+                    console.log(err);
+                    return callback(err,null);
+                }
+                else {
+                    console.log("Connected!");
+                    var sql = 'DELETE FROM performance WHERE performanceId = ?'
+                    conn.query(sql, [performanceId], function (err, result) {
+                        conn.end();
+                        if (err) {
+                            console.log(err);
+                            return callback(err,null);
+                        } else {
+                            return callback(null, result);
+                        }
+                    });
+                }
+                  });
+           }, 
+
+            // Advance delete
+            deletePerformancesWithPopularity: function (performanceId, callback) {
+                var conn = db.getConnection();
+                conn.connect(function (err) {
+                    if (err) {
+                        console.log(err);
+                        return callback(err,null);
+                    }
+                    else {
+                        console.log("Connected!");
+                        var sql = 'DELETE FROM performancewithpopularity WHERE performanceId = ?'
+                        conn.query(sql, [performanceId], function (err, result) {
+                            conn.end();
+                            if (err) {
+                                console.log(err);
+                                return callback(err,null);
+                            } else {
+                                return callback(null, result);
+                            }
+                        });
+                    }
+                      });
+               }, 
 }
 
 module.exports = performanceDB

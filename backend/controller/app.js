@@ -75,7 +75,7 @@ app.get('/advance/data', function (req, res) {
 
 // Basic insert
 
-app.post('/basic/insert/performance', function(req,res){
+app.post('/basic/insert', function(req,res){
 
     var {data} = req.body
     cache.clear()    
@@ -96,7 +96,7 @@ app.post('/basic/insert/performance', function(req,res){
     })
 
 // Advance insert
-app.post('/advance/insert/performance', function(req,res){
+app.post('/advance/insert', function(req,res){
 
     var {data} = req.body
     cache.clear()    
@@ -271,5 +271,82 @@ app.get('/advance/result' , function(req,res){
 })
 
 /*================================================================================================================*/
+
+// Additional Features ( Put + Delete )
+
+/*================================================================================================================*/
+
+// Basic Update
+app.put('/basic/update', function(req,res){
+
+    var performanceId = req.query.performanceId
+    var festivalId = req.query.festivalId
+    var startTime = req.query.startTime
+    var endTime = req.query.endTime
+
+    cache.clear()  
+    
+        performance.updatePerformance(performanceId,festivalId,startTime,endTime, function(err,result){
+            if(!err){
+                res.status(200).send(JSON.parse(`{"result":"success"}`));
+            }else{
+                res.status(500).send(JSON.parse(`{"error":"Server Error","code":500}`));
+            }
+        })
+    })
+
+// Advance update
+app.put('/advance/update', function(req,res){
+
+       var performanceId = req.query.performanceId
+       var festivalId = req.query.festivalId
+       var startTime = req.query.startTime
+       var endTime = req.query.endTime
+       var popularity = req.query.popularity
+   
+       cache.clear()  
+       
+           performance.updatePerformanceWithPopularity(performanceId,festivalId,startTime,endTime,popularity, function(err,result){
+               if(!err){
+                   res.status(200).send(JSON.parse(`{"result":"success"}`));
+               }else{
+                   res.status(500).send(JSON.parse(`{"error":"Server Error","code":500}`));
+               }
+           })
+       })
+
+// Basic delete
+app.delete('/basic/delete', function (req, res) {
+    var performanceId = req.query.performanceId
+
+    cache.clear()
+
+    performance.deletePerformances(performanceId, function (err, result) {
+        if (!err) {
+            res.status(200).send(JSON.parse(`{"result":"success"}`));
+        }else{
+            res.status(500).send(JSON.parse(`{"error":"Server Error","code":500}`));
+        }
+    });
+
+    
+});
+
+// Advance delete
+app.delete('/advance/delete', function (req, res) {
+    var performanceId = req.query.performanceId
+
+    cache.clear()
+
+    performance.deletePerformancesWithPopularity(performanceId, function (err, result) {
+        if (!err) {
+            res.status(200).send(JSON.parse(`{"result":"success"}`));
+        }else{
+            res.status(500).send(JSON.parse(`{"error":"Server Error","code":500}`));
+        }
+    });
+
+    
+});
 
 module.exports= app
