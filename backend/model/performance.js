@@ -364,30 +364,31 @@ var performanceDB = {
                     var sql,values;
                     // Condition 1 : Update festivalId only
                     if(parseInt(startTime) == 0 && parseInt(endTime==0)){
-                        sql = `UPDATE performance SET festivalId = ? WHERE performanceId = ?`
+                        sql = `CALL UpdateBasicCondOne(?,?)`
                         values = [festivalId, performanceId]
                     // Condition 2 : Update endTime only
                     }else if(parseInt(startTime) == 0 && festivalId == 0){
-                        sql = `UPDATE performance SET endTime= ? WHERE performanceId = ?`
+                        sql = `CALL UpdateBasicCondTwo(?,?)`
                         values = [endTime, performanceId]
                     // Condition 3 : Update startTime only
                     }else if(parseInt(endTime) == 0 && festivalId == 0){
-                        sql = `UPDATE performance SET startTime = ? WHERE performanceId = ?`
+                        sql = `CALL UpdateBasicCondThree(?,?)`
                         values = [startTime, performanceId]
                     // Condition 4 : Update endTime and festivalId
                     }else if(parseInt(startTime) == 0){
-                        sql = `UPDATE performance SET endTime = ? , festivalId = ? WHERE performanceId = ?`
+                        sql = `CALL UpdateBasicCondFour(?,?,?)`
                         values = [endTime, festivalId, performanceId]
                     // Condition 5 : Update startTime and festivalId
                     }else if(parseInt(endTime) == 0){
-                        sql = `UPDATE performance SET startTime = ? , festivalId = ? WHERE performanceId = ?`
+                        sql = `CALL UpdateBasicCondFive(?,?,?)`
                         values = [startTime, festivalId, performanceId]
                     // Condition 6 : Update endTime and festivalId
                     }else if(festivalId == 0){
-                        sql = `UPDATE performance SET startTime = ? , endTime = ? WHERE performanceId = ?`
+                        sql = `CALL UpdateBasicCondSix(?,?,?)`
                         values = [startTime, endTime, performanceId]
+                    // Condition 7 : Update ALL attr
                     }else{
-                        sql = `UPDATE performance SET startTime = ? , endTime = ? , festivalId = ? WHERE performanceId = ?`
+                        sql = `CALL UpdateBasicCondSeven(?,?,?,?)`
                         values = [startTime, endTime, festivalId, performanceId]
                     }
 
@@ -418,63 +419,63 @@ var performanceDB = {
 
                                 // Condition 1 : Update festivalId
                                 if(parseInt(startTime) == 0 && parseInt(endTime==0) && popularity == 0){
-                                    sql = `UPDATE performanceWithPopularity SET festivalId = ? WHERE performanceId = ?`
+                                    sql = `CALL UpdateAdvanceCondOne(?,?)`
                                     values = [festivalId, performanceId]
                                 // Condition 2 : Update endTime
                                 }else if(parseInt(startTime) == 0 && festivalId == 0 && popularity == 0){
-                                    sql = `UPDATE performanceWithPopularity SET endTime= ? WHERE performanceId = ?`
+                                    sql = `CALL UpdateAdvanceCondTwo(?,?)`
                                     values = [endTime, performanceId]
                                 // Condition 3 : Update startTime
                                 }else if(parseInt(endTime) == 0 && festivalId == 0 && popularity == 0){
-                                    sql = `UPDATE performanceWithPopularity SET startTime = ? WHERE performanceId = ?`
+                                    sql = `CALL UpdateAdvanceCondThree(?,?)`
                                     values = [startTime, performanceId]
                                 // Condition 4 : Update popularity
                                 }else if(parseInt(endTime) == 0 && festivalId == 0 && startTime == 0){
-                                    sql = `UPDATE performanceWithPopularity SET popularity = ? WHERE performanceId = ?`
+                                    sql = `CALL UpdateAdvanceCondFour(?,?)`
                                     values = [popularity, performanceId]
                                 // Condition 5 : Update festivalId & popularity
                                 }else if(parseInt(endTime) == 0 && parseInt(startTime) == 0){
-                                    sql = `UPDATE performanceWithPopularity SET popularity = ? , festivalId = ? WHERE performanceId = ?`
+                                    sql = `CALL UpdateAdvanceCondFive(?,?,?)`
                                     values = [popularity, festivalId, performanceId]
                                 // Condition 6 : Update festivalId & startTime
                                 }else if(parseInt(endTime) == 0 && popularity == 0){
-                                    sql = `UPDATE performanceWithPopularity SET startTime = ? , festivalId = ? WHERE performanceId = ?`
+                                    sql = `CALL UpdateAdvanceCondSix(?,?,?)`
                                     values = [startTime, festivalId, performanceId]
                                 // Condition 7 : Update festivalId & endTime
                                 }else if(parseInt(startTime) == 0 && popularity == 0){
-                                    sql = `UPDATE performanceWithPopularity SET endTime= ? , festivalId = ? WHERE performanceId = ?`
+                                    sql = `CALL UpdateAdvanceCondSeven(?,?,?)`
                                     values = [endTime, festivalId, performanceId]
                                 // Condition 8 : Update startTime & endTime
                                 }else if(popularity == 0 && festivalId == 0){
-                                    sql = `UPDATE performanceWithPopularity SET startTime = ? , endTime = ? WHERE performanceId = ?`
+                                    sql = `CALL UpdateAdvanceCondEight(?,?,?)`
                                     values = [startTime, endTime, performanceId]
                                 // Condition 9 : Update startTime & popularity
                                 }else if(parseInt(endTime) == 0 && festivalId == 0){
-                                    sql = `UPDATE performanceWithPopularity SET startTime = ? , popularity = ? WHERE performanceId = ?`
+                                    sql = `CALL UpdateAdvanceCondNine(?,?,?)`
                                     values = [startTime, popularity, performanceId]
                                 // Condition 10 : Update popularity & endTime
                                 }else if(parseInt(startTime) == 0 && festivalId == 0){
-                                    sql = `UPDATE performanceWithPopularity SET popularity = ? , endTime = ? WHERE performanceId = ?`
+                                    sql = `CALL UpdateAdvanceCondTen(?,?,?)`
                                     values = [popularity, endTime, performanceId]
                                 // Condition 11 : Update all except startTime
                                 }else if(startTime == 0){
-                                    sql = `UPDATE performanceWithPopularity SET popularity = ? , festivalId = ? , endTime = ? WHERE performanceId = ?`
+                                    sql = `CALL UpdateAdvanceCondEleven(?,?,?,?)`
                                     values = [popularity, festivalId, endTime, performanceId]
                                 // Condition 12 : Update all except endTime
                                 }else if(endTime == 0){
-                                    sql = `UPDATE performanceWithPopularity SET startTime= ? , festivalId = ? , popularity = ? WHERE performanceId = ?`
+                                    sql = `CALL UpdateAdvanceCondTwelve(?,?,?,?)`
                                     values = [startTime, festivalId, popularity, performanceId]
-                                // Condition 12 : Update all except festivalId
+                                // Condition 13 : Update all except festivalId
                                 }else if(festivalId == 0){
-                                    sql = `UPDATE performanceWithPopularity SET startTime = ? , endTime = ? , popularity =? WHERE performanceId = ?`
+                                    sql = `CALL UpdateAdvanceCondThirteen(?,?,?,?)`
                                     values = [startTime, endTime, popularity, performanceId]
-                                // Condition 13 : Update all except popoularity
+                                // Condition 14 : Update all except popoularity
                                 }else if(popularity == 0){
-                                    sql = `UPDATE performanceWithPopularity SET startTime = ? , endTime = ? , festivalId = ? WHERE performanceId = ?`
+                                    sql = `CALL UpdateAdvanceCondFourteen(?,?,?,?)`
                                     values = [startTime, endTime, festivalId, performanceId]
-                                // Condition 14 : Update everything
+                                // Condition 15 : Update everything
                                 }else{
-                                    sql = `UPDATE performanceWithPopularity SET startTime = ? , endTime = ? , festivalId = ? , popularity = ? WHERE performanceId = ?`
+                                    sql = `CALL UpdateAdvanceCondFifteen(?,?,?,?,?)`
                                     values = [startTime, endTime, festivalId, popularity, performanceId]
                                 }
             
@@ -501,7 +502,7 @@ var performanceDB = {
                 }
                 else {
                     console.log("Connected!");
-                    var sql = 'DELETE FROM performance WHERE performanceId = ?'
+                    var sql = 'CALL deleteBasic(?)'
                     conn.query(sql, [performanceId], function (err, result) {
                         conn.end();
                         if (err) {
@@ -525,7 +526,7 @@ var performanceDB = {
                     }
                     else {
                         console.log("Connected!");
-                        var sql = 'DELETE FROM performancewithpopularity WHERE performanceId = ?'
+                        var sql = 'CALL deleteAdvance(?)'
                         conn.query(sql, [performanceId], function (err, result) {
                             conn.end();
                             if (err) {

@@ -54,8 +54,8 @@ app.get('/basic/data', function (req, res) {
 
 app.get('/advance/data', function (req, res) {
     var page = req.query.page;
-    var rows= req.query.rows
-
+    var rows= req.query.rows;
+    
     var cachedData = cache.get(`cache/advance/data/${page}/${rows}`)
     if(cachedData != null) return res.status(200).send(JSON.parse(cachedData))
 
@@ -78,7 +78,7 @@ app.get('/advance/data', function (req, res) {
 app.post('/basic/insert', function(req,res){
 
     var {data} = req.body
-    cache.clear()    
+    cache.clear()
     
         performance.insertPerformance(data, function(err,result){
             if(!err){
