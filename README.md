@@ -122,10 +122,11 @@ Term break, no progress during this period, working on other assignments as they
 
 ### Week 12
 1. What did the team do this week
-
+- Completed implementing basic data viewer frontend
 
 2. What did the team plan to do the next week
-
+-Complete implementing advanced data viewer frontend
+-Start implementing advanced and basic data viewer for mobile 
 
 
 ## Setup
