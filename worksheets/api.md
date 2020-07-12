@@ -1251,3 +1251,206 @@ GET /advance/result?festivalId=1100000001
     "code": 500
 }
 ```
+
+# API 11 : Update performance in the table
+
+### HTTP Method => POST
+### Endpoint => /basic/update
+
+### Request Body
+- performanceId <int> => 1000000001
+- festivalId <int> => 1100000001
+- startTime <time> => 1000
+- endTime <time> => 1100
+
+### Response Body
+```json
+{
+    "result":"success"
+}
+```
+
+### Error
+```json
+{
+    "error":"Server Error",
+    "code":500
+}
+```
+
+### Sample Request
+```http
+Put /basic/update
+{
+    "festivalId": 1234567890,
+    "performanceId": 1234567890,
+    "startTime": "1000",
+    "endTime": "1030", 
+    "popularity": 10000
+}
+
+```
+
+### Sample Response
+```json
+{
+    "result":"success"
+}
+```
+
+# Sample Error
+```json
+{
+    "error":"Server Error",
+    "code":500
+}
+```
+
+# API 12 : Update performance with popularity in the table
+
+### HTTP Method => POST
+### Endpoint => /advance/update
+
+### Request Body
+- performanceId <int> => 1000000001
+- festivalId <int> => 1100000001
+- startTime <time> => 1000
+- endTime <time> => 1100
+- popularity <int> =>10
+
+### Response Body
+```json
+{
+    "result":"success"
+}
+```
+
+### Error
+```json
+{
+    "error":"Server Error",
+    "code":500
+}
+```
+
+### Sample Request
+```http
+Put /advance/update
+{
+    "festivalId": 1234567890,
+    "performanceId": 1234567890,
+    "startTime": "1000",
+    "endTime": "1030", 
+    "popularity": 10
+}
+
+```
+
+### Sample Response
+```json
+{
+    "result":"success"
+}
+```
+
+# Sample Error
+```json
+{
+    "error":"Server Error",
+    "code":500
+}
+```
+
+# API 13 : Delete performance in the table
+
+### HTTP Method => POST
+### Endpoint => /basic/delete
+
+### Request Body
+- performanceId <int> => 1000000001
+
+### Response Body
+```json
+{
+    "result":"success"
+}
+```
+
+### Error
+```json
+{
+    "error":"Server Error",
+    "code":500
+}
+```
+
+### Sample Request
+```http
+Delete /basic/delete
+{
+    "performanceId": 1234567890
+}
+
+```
+
+### Sample Response
+```json
+{
+    "result":"success"
+}
+```
+
+# Sample Error
+```json
+{
+    "error":"Server Error",
+    "code":500
+}
+```
+
+# API 14 : Delete performance with popularity in the table
+
+### HTTP Method => POST
+### Endpoint => /advance/delete
+
+### Request Body
+- performanceId <int> => 1000000001
+
+### Response Body
+```json
+{
+    "result":"success"
+}
+```
+
+### Error
+```json
+{
+    "error":"Server Error",
+    "code":500
+}
+```
+
+### Sample Request
+```http
+Delete /advance/delete
+{
+    "performanceId": 1234567890
+}
+
+```
+
+### Sample Response
+```json
+{
+    "result":"success"
+}
+```
+
+# Sample Error
+```json
+{
+    "error":"Server Error",
+    "code":500
+}
+```

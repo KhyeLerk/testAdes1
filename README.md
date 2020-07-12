@@ -112,11 +112,22 @@ Term break, no progress during this period, working on other assignments as they
 - Added additional feat. Stored proc
 - Added additional feat. express-cluster
 - Added additional feat. Back-End caching
+- Started implementing basic data viewer frontend
 
 2. What did the team plan to do the next week
 - Testing of API performances on front end and mobile
 - Complete put and delete documentation of API.md
 - Complete all additional features
+- Complete basic data viewer frontend
+
+### Week 12
+1. What did the team do this week
+- Completed implementing basic data viewer frontend
+
+2. What did the team plan to do the next week
+-Complete implementing advanced data viewer frontend
+-Start implementing advanced and basic data viewer for mobile 
+
 
 ## Setup
 
