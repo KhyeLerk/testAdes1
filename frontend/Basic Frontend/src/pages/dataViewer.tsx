@@ -23,7 +23,6 @@ const getDataTable = (pages: number, rows: number) => {
  
 const getDataTableFiltered = (pages: number, festivalId: number, startTime: number, rows: number) => {
   //get filtered table data per page 
-
   return axios.get(`https://jibaboom-astronomia.herokuapp.com/basic/filter`, {
     params: {
         page:  pages,
@@ -31,8 +30,10 @@ const getDataTableFiltered = (pages: number, festivalId: number, startTime: numb
         startTime: startTime,
         festivalId: festivalId
     }}).then(response => {
-    if (response.data.length !== 0)
+    if (response.data.length !== 0){
+    console.log(response.data)
       return response.data;
+    }
     else {
       return [{ "performanceId": "NO RESULTS FOUND", "festivalId": "NO RESULTS FOUND", "startTime": "NO RESULTS FOUND", "endTime": "NO RESULTS FOUND" }];
     }
@@ -48,6 +49,7 @@ const getAllFilteredRows = (startTime: number, festivalId: number) => {
       startTime:  startTime,
       festivalId: festivalId
   }}).then(response => {
+    console.log(response.data[0].count)
     return response.data[0].count;
   }).catch(error => {
     console.log("error");
