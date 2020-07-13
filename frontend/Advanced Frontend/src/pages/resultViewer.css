@@ -1,0 +1,108 @@
+#mainText{
+    font-size: 45px;
+    margin-top: 100px;
+    text-align:center;
+  color: #3880FF;
+  
+}
+
+#center{
+    position: relative;
+  
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+}
+
+#mainInput{
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center; 
+    height: 60px;
+    margin-top: 40px;
+    border-radius: 30px;
+    border: 0.5px black solid!important;
+    width: 500px;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
+
+#time {
+    display: inline-block;
+}
+
+#search {
+    color: rgb(255, 255, 255);
+    margin-left: 0;
+    margin-bottom: 15px;
+}
+
+
+ion-col {
+    border: 2px solid #aeb7ca;
+  }
+
+table {
+    margin-right: auto;
+    margin-left:auto;
+    width: 80%;
+    text-align:center;
+}
+
+.tallRow{
+    height: 100px;
+}
+
+.performance{
+    background-color: rgb(226, 226, 226);
+}
+
+.hidden > *{
+    display: none;
+    visibility: hidden;
+}
+
+#leftMain{
+    font-size: 35px;
+    text-align:left!important;
+  color: #3880FF;
+  line-height: 10px;
+
+  
+}
+
+td{
+    width: auto!important   ;
+}
+
+#rightInput{
+    float:right;
+    margin-top: 5px;
+    right: 20%;
+    border-radius: 35px;
+    height: 40px!important;
+    border: 0.5px rgb(161, 161, 161) solid!important;
+    width: 300px;
+}
+#searchRight{
+    float:right;
+    height: 40px!important;
+    margin-right: -170px!important;
+
+}
+#afterSearch {
+    margin-left: 10%;
+}
+
+#afterSearch>* {
+    margin-left: 2px;
+    display: inline-block;
+    height: 30px;
+}
+
+.HideRow{
+    border: 0px !important;
+    display: none;
+}

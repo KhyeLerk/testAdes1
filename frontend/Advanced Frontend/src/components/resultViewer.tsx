@@ -5,9 +5,10 @@ interface ContainerProps {
   performanceId: string;
   i: number;
   timeArr: string[];
+  popularity: string;
 }
 
-const TableRow: React.FC<ContainerProps> = ({ performanceId, i, timeArr }) => {
+const TableRow: React.FC<ContainerProps> = ({ performanceId, i, timeArr, popularity }) => {
   return (
     <tr className='tallRow'>
 
@@ -20,7 +21,7 @@ const TableRow: React.FC<ContainerProps> = ({ performanceId, i, timeArr }) => {
       {i === 7 ? <td colSpan={6} /> : null}
       {i === 8 ? <td colSpan={7} /> : null}
 
-      <td key={performanceId} className="performance">{performanceId}</td>
+      <td key={performanceId} className="performance">{performanceId}<br></br>({popularity})</td>
       {i === 1 && timeArr.length > 1 ? <td colSpan={timeArr.length > 2? 5 : 1} /> : null}
       {i === 2 && timeArr.length !==2 ? <td colSpan={5} /> : null}
       {i === 3 && timeArr.length !==3? <td colSpan={5} /> : null}

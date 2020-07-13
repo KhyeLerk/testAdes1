@@ -54,6 +54,9 @@ table {
 .tallRow{
     height: 100px;
 }
+td{
+    width: auto!important   ;
+}
 
 .performance{
     background-color: rgb(226, 226, 226);
