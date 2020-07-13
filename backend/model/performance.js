@@ -42,7 +42,7 @@ var performanceDB = {
             else {
                 console.log("Connected!");
                 var startRow = page*rows-rows;
-                var sql = 'SELECT selectAllActsWithPopLimit(?,?)';
+                var sql = 'CALL selectAllActsWithPopLimit(?,?)';
                 conn.query(sql, [startRow,parseInt(rows)], function (err, result) {
                     conn.end();
                     if (err) {
