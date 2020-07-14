@@ -128,6 +128,11 @@ Term break, no progress during this period, working on other assignments as they
 -Complete implementing advanced data viewer frontend
 -Start implementing advanced and basic data viewer for mobile 
 
+### Week 13
+1. What did the team do this week
+- Changes to API return result (According to marking scheme)
+
+2. What did the tame plan to do next week
 
 ## Setup
 
