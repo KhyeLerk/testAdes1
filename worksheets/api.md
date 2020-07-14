@@ -1154,13 +1154,15 @@ GET /advance/count?festivalId=1100000004&startTime=1100&endTime=1400
 
 ### Response Body
 ```json
-[
-    {
-        "performanceId": number,
-        "startTime": string,
-        "endTime": string
-    }
-]
+{
+    "result": [
+        {
+            "performanceId": number,
+            "startTime": time,
+            "endTime": time
+        }
+    ]
+}
 ```
 
 ### Error
@@ -1207,14 +1209,16 @@ GET /basic/result?festivalId=1100000001
 
 ### Response Body
 ```json
-[
-    {
-        "performanceId": number,
-        "startTime": time,
-        "endTime": time,
-        "popularity": number
-    }
-]
+{
+    "result": [
+        {
+            "performanceId": number,
+            "startTime": time,
+            "endTime": time,
+            "popularity": number
+        }
+    ]
+}
 ```
 
 ### Error
