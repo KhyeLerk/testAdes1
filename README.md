@@ -131,9 +131,11 @@ Term break, no progress during this period, working on other assignments as they
 ### Week 13
 1. What did the team do this week
 - Changes to API return result (According to marking scheme)
+-Complete implementing advanced data viewer frontend
+-Started implementing basic data viewer for mobile 
 
-2. What did the tame plan to do next week
-
+2. What did the team plan to do next week
+-Complete all frontend implementations
 ## Setup
 
 1. Setup a Github account (Using any account)
