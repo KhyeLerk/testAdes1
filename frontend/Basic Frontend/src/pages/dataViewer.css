@@ -4,7 +4,7 @@
    */
 
 
-#row {
+   #row {
     margin-right: auto;
     margin-left: auto;
     color: black;
@@ -36,7 +36,17 @@
         color: black!important;
     }
 
-    #row tr, td, th {
+    #mPer{
+        background-color: #BDF2CB;
+        width: 80%;
+        height: 60px;
+        text-align: center;
+        line-height: 60px;
+        margin: 0 auto;
+        border-radius: 15px;
+    }
+
+    #row tr, #row td, #row th {
         line-height: 45px;
         height: 45px;
     } 
@@ -63,7 +73,7 @@
         top: 0;
       }
     
-      td:first-child,th:first-child  {
+      #table  td:first-child,  #table th:first-child  {
         position: -webkit-sticky;
         position: sticky;
         left: 0;
@@ -72,13 +82,13 @@
         
     }
 
-    tr:nth-of-type(odd) {
+    #table>tr:nth-of-type(odd) {
         background: rgb(243, 242, 242);
     }
 
 
-      thead th:first-child,
-    tfoot th:first-child {
+    #table>  thead th:first-child,
+    #table> tfoot th:first-child {
       z-index: 5;
     }
     .table-scroll tfoot,
@@ -99,7 +109,7 @@
     color: white;
 }
 
-#row tr, td, th {
+#row tr, #row td, #row th {
     width: 25%!important;
     height: 40px;
     border: 1px solid #ddd;
@@ -161,7 +171,9 @@
     color: #5280FF;
     margin-left: 0;
     margin-bottom: 15px;
+    margin-top: auto;
 }
+
 @media only screen and (max-width: 600px) {
     .input {
         height: 40px!important;
@@ -169,8 +181,8 @@
     }
     #search {
         color: #5280FF;
-        margin-left: 10px;
-        margin-top: -35px;
+        margin-left: 10px!important;
+        margin-top: -35px!important;
         height: 50px;
         width:45%;
     }
@@ -178,10 +190,6 @@
 
 @media only screen and (max-width: 360px) {
     #search {
-        color: #5280FF;
-        margin-left: 10px;
-        margin-top: -35px;
-        height: 50px;
         width:38%!important;
     }
 }
