@@ -227,8 +227,8 @@ app.get('/basic/result' ,function(req,res){
             for(var i=0; i< selectedActAry.length;i++){
                 result.push({performanceId : selectedActAry[i][0] , startTime : selectedActAry[i][1] , endTime :selectedActAry[i][2]})
             }
-            cache.put(`cache/basic/result/${festivalId}`, JSON.stringify(result), 300000)
-            result = JSON.parse(JSON.stringify(result))
+            cache.put(`cache/basic/result/${festivalId}`, JSON.stringify({"result":result}), 300000)
+            result = JSON.parse(JSON.stringify({"result":result}))
             res.status(200).send(result)
             }
         }else{
@@ -260,8 +260,8 @@ app.get('/advance/result' , function(req,res){
                 for(var i=0; i< selectedActAry.length;i++){
                     result.push({performanceId : selectedActAry[i][0] , startTime : selectedActAry[i][1] , endTime :selectedActAry[i][2] , popularity : selectedActAry[i][3]})
                 }
-                cache.put(`cache/advance/result/${festivalId}`, JSON.stringify(result), 300000)
-                result = JSON.parse(JSON.stringify(result))
+                cache.put(`cache/advance/result/${festivalId}`, JSON.stringify({"result":result}), 300000)
+                result = JSON.parse(JSON.stringify({"result":result}))
                 res.status(200).send(result)
                 }
         }else{
