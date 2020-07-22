@@ -16,7 +16,7 @@ const getBasicResults = (festivalId: number) => {
   }).then(response => {
     return response.data;
   }).catch(error => {
-    return [{ "performanceId": "festivalId not found! Please enter a valid festivalId" }];
+    return [{ "performanceId": "festivalId not found!" }];
   });
 };
 const ResultViewer: React.FC = () => {
