@@ -14,7 +14,8 @@ const getBasicResults = (festivalId: number) => {
       festivalId: festivalId
     }
   }).then(response => {
-    return response.data;
+    return response.data.result;
+    
   }).catch(error => {
     return [{ "performanceId": "festivalId not found!" }];
   });
@@ -46,7 +47,7 @@ const ResultViewer: React.FC = () => {
   }
 
   function hide() {
-    if (pressed === 1) {
+    if (pressed === 1 && dataRow.length !== 0) {
       return "hidden"
     }
     else return ""
@@ -55,7 +56,7 @@ const ResultViewer: React.FC = () => {
 
   function hide1() {
     console.log(pressed)
-    if (pressed === 1) {
+    if (pressed === 1 && dataRow.length !== 0) {
       return ""
     }
     else return "hidden"
@@ -90,6 +91,7 @@ const ResultViewer: React.FC = () => {
 
         <MediaQuery minDeviceWidth={600}>
 
+
         <table className="W">
           {dataRow.map(item => {
             timeArr[j] = [<td key={item['startTime']}>{item['startTime']}-{item['endTime']}</td>]
@@ -99,9 +101,12 @@ const ResultViewer: React.FC = () => {
             return true;
           })
           }
+          
+          <p className={pressed === 1 && dataRow.length ===0  ? "red" : "HideRow1 red"}>FestivalId not Found!</p>
+
           <tbody>
             <tr>
-              <td className={pressed === 1 ? "ShowRow" : "HideRow"}></td>
+              <td className={pressed === 1 && dataRow.length !==0 ? "ShowRow" : "HideRow"}></td>
               {
                 timeArr
               }
@@ -122,12 +127,14 @@ const ResultViewer: React.FC = () => {
         <MediaQuery maxDeviceWidth={600}>
           <table className='M'>
             <tbody>
+            <p className={pressed === 1 && dataRow.length ===0  ? "red" : "HideRow1 red"}>FestivalId not Found!</p>
+
               <tr>
-              <td className={pressed === 1 ? "ShowRow M" : "HideRow"}>
+              <td className={pressed === 1  && dataRow.length !== 0? "ShowRow M" : "HideRow"}>
                   
                   <p>Time</p>
                 </td>
-                <td className={pressed === 1 ? "ShowRow M" : "HideRow"}>
+                <td className={pressed === 1  && dataRow.length !== 0? "ShowRow M" : "HideRow"}>
                   <p>performanceId</p>
                 </td>
               </tr>

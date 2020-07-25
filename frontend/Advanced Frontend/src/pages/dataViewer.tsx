@@ -8,7 +8,7 @@ import MediaQuery from 'react-responsive';
 
 const getDataTable = (pages: number, rows: number) => {
   //get table data per page
-  return axios.get('https://https://jibaboom-astronomia.herokuapp.com/advance/data', {
+  return axios.get('https://jibaboom-astronomia.herokuapp.com/advance/data', {
     params: {
         page:  pages,
         rows: rows
@@ -24,7 +24,7 @@ const getDataTable = (pages: number, rows: number) => {
 const getDataTableFiltered = (pages: number,endTime: number ,festivalId: number, startTime: number, rows: number) => {
   //get filtered table data per page 
 
-  return axios.get(`https://https://jibaboom-astronomia.herokuapp.com/advance/filter`, {
+  return axios.get(`https://jibaboom-astronomia.herokuapp.com/advance/filter`, {
     params: {
         page:  pages,
         rows: rows,
@@ -44,7 +44,7 @@ const getDataTableFiltered = (pages: number,endTime: number ,festivalId: number,
 };
 const getAllFilteredRows = (pages: number,endTime: number ,festivalId: number, startTime: number, rows: number) => {
   //get filtered table data per page 
-  return axios.get('https://https://jibaboom-astronomia.herokuapp.com/advance/filter',{
+  return axios.get('https://jibaboom-astronomia.herokuapp.com/advance/filter',{
     params: {
       page:  1,
       rows: 999999,
@@ -62,7 +62,7 @@ const getAllFilteredRows = (pages: number,endTime: number ,festivalId: number, s
 
 const getAllData = () => {
   //get number of data
-  return axios.get('https://https://jibaboom-astronomia.herokuapp.com/advance/data',{
+  return axios.get('https://jibaboom-astronomia.herokuapp.com/advance/data',{
     params: {
       page:  1,
       rows: 999999
@@ -280,6 +280,7 @@ const DataViewer: React.FC = () => {
               </tr>
             </thead>
             <tbody>
+             { console.log(dataRow)}
               {dataRow.map(item => {
                   tableRow++;
                 return (

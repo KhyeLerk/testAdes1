@@ -183,3 +183,13 @@ td {
     border: 0px !important;
     display: none;
 }
+
+.red{
+    color: red
+}
+
+
+.HideRow1 {
+    border: none !important;
+    display: none;
+}

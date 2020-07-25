@@ -13,7 +13,7 @@ const getBasicResults = (festivalId: number) => {
       festivalId: festivalId
     }
   }).then(response => {
-    return response.data;
+    return response.data.result;
   }).catch(error => {
     return [{ "performanceId": "festivalId not found!" }];
   });
@@ -48,7 +48,7 @@ const ResultViewer: React.FC = () => {
   }
 
   function hide() {
-    if (pressed === 1) {
+    if (pressed === 1 && dataRow.length !== 0) {
       return "hidden"
     }
     else return ""
@@ -56,7 +56,7 @@ const ResultViewer: React.FC = () => {
   }
 
   function hide1() {
-    if (pressed === 1) {
+    if (pressed === 1 && dataRow.length !== 0) {
       return ""
     }
     else return "hidden"
@@ -103,6 +103,8 @@ const ResultViewer: React.FC = () => {
 
             }
             <tbody>
+            <p className={pressed === 1 && dataRow.length ===0  ? "red" : "HideRow1 red"}>FestivalId not Found!</p>
+
               <tr>
                 <td className={pressed === 1 ? "ShowRow" : "HideRow"}></td>
                 {
@@ -119,7 +121,7 @@ const ResultViewer: React.FC = () => {
 
                 );
               })}
-              <td className={pressed === 1 && !Number.isNaN(totalPopularity) ? "ShowRow" : "HideRow"}>Total popularity: {totalPopularity}</td>
+              <td className={pressed === 1 && dataRow.length !== 0 && !Number.isNaN(totalPopularity) ? "ShowRow" : "HideRow"}>Total popularity: {totalPopularity}</td>
             </tbody>
           </table>
         </MediaQuery>
@@ -127,12 +129,14 @@ const ResultViewer: React.FC = () => {
         <MediaQuery maxDeviceWidth={600}>
           <table className='M'>
             <tbody>
+            <p className={pressed === 1 && dataRow.length ===0  ? "red" : "HideRow1 red"}>FestivalId not Found!</p>
+
               <tr>
-              <td className={pressed === 1 ? "ShowRow M" : "HideRow"}>
+              <td className={pressed === 1 && dataRow.length !== 0 ? "ShowRow M" : "HideRow"}>
                   
                   <p>Time</p>
                 </td>
-                <td className={pressed === 1 ? "ShowRow M" : "HideRow"}>
+                <td className={pressed === 1 && dataRow.length !== 0? "ShowRow M" : "HideRow"}>
                   <p>performanceId</p>
                 </td>
               </tr>
@@ -145,7 +149,7 @@ const ResultViewer: React.FC = () => {
                 );
               })}
             </tbody>
-            <td className={pressed === 1 && !Number.isNaN(totalPopularity) ? "ShowRow" : "HideRow"}><p className="blue">Total popularity: {totalPopularity}</p></td>
+            <td className={pressed === 1 &&dataRow.length !== 0 && !Number.isNaN(totalPopularity) ? "ShowRow" : "HideRow"}><p className="blue">Total popularity: {totalPopularity}</p></td>
             <td className={hide1()}></td>
           </table>
         </MediaQuery>

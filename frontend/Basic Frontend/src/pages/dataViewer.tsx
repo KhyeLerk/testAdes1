@@ -13,6 +13,7 @@ const getDataTable = (pages: number, rows: number) => {
         page:  pages,
         rows: rows
     }}).then(response => {
+      console.log(response.data)
     return response.data;
   }).catch(error => {
     console.log("error");
