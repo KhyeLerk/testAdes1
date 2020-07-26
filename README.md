@@ -142,6 +142,8 @@ Term break, no progress during this period, working on other assignments as they
 - Changes to API return result (According to marking scheme)
 - Complete implementing advanced result viewer for mobile
 - Complete implementing basic result viewer for mobile 
+- Bug fixes on some stored proc.
+- Uploaded wireframes to github 
 
 2. What did the team plan to do next week
 
