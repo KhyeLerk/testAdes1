@@ -1,10 +1,10 @@
 ## Wireframe
 
 ## Wireframe part 1
-![Wireframe](assets/result viewer 1.png)
+![Wireframe](assets/result-viewer-1.png)
 
 ## Wireframe part 2
-![Wireframe](assets/advance result viewer.png)
+![Wireframe](assets/advance-result-viewer.png)
 
 ## Justifications
 
