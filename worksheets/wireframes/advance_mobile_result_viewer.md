@@ -1,6 +1,6 @@
 ## Wireframe
 ### Wireframe part 1
-![Wireframe1](assets/basic-wireframe-result-viewer-mobile-1.png)
+![Wireframe1](assets/result-viewer-mobile.png)
 ### Wireframe part 2
 ![Wireframe2](assets/advance-wireframe-result-viewer-mobile.png)
 
