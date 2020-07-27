@@ -1,3 +1,12 @@
+
+## Wireframe
+### Wireframe part 1
+![Wireframe1](assets/advance-wireframe-data-viewer-mobile-1.png)
+
+### Wireframe part 2
+![Wireframe2](assets/advance-wireframe-data-viewer-mobile-2.png)
+
+
 ## Justifications
 
 ### Justification 1

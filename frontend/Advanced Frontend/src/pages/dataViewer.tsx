@@ -280,6 +280,7 @@ const DataViewer: React.FC = () => {
               </tr>
             </thead>
             <tbody>
+             { console.log(dataRow)}
               {dataRow.map(item => {
                   tableRow++;
                 return (

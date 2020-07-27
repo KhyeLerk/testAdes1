@@ -122,12 +122,30 @@ Term break, no progress during this period, working on other assignments as they
 
 ### Week 12
 1. What did the team do this week
-- Completed implementing basic data viewer frontend
+- Completed implementing basic result data viewer frontend
 
 2. What did the team plan to do the next week
--Complete implementing advanced data viewer frontend
--Start implementing advanced and basic data viewer for mobile 
+- Complete implementing advanced data viewer frontend
+- Start implementing advanced and basic result viewer for mobile 
 
+### Week 13
+1. What did the team do this week
+- Changes to API return result (According to marking scheme)
+- Complete implementing advanced result viewer frontend
+- Started implementing basic result viewer for mobile 
+
+2. What did the team plan to do next week
+- Complete all frontend implementations
+
+### Week 14
+1. What did the team do this week
+- Changes to API return result (According to marking scheme)
+- Complete implementing advanced result viewer for mobile
+- Complete implementing basic result viewer for mobile 
+- Bug fixes on some stored proc.
+- Uploaded wireframes to github 
+
+2. What did the team plan to do next week
 
 ## Setup
 

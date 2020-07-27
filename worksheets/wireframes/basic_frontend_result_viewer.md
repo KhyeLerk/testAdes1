@@ -4,10 +4,8 @@ This document should help you explain how your user interfaces are designed. You
 
 ## Wireframe
 
-> This is just an example, please find your own wireframe.
-
 ## Wireframe part 1
-![Wireframe](assets/basic-wireframe-result-viewer-frontend-1.png)
+![Wireframe](assets/result-viewer-1.png)
 
 ## Wireframe part 2
 ![Wireframe](assets/basic-wireframe-result-viewer-frontend-2.png)
