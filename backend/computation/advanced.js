@@ -1,5 +1,7 @@
 function advancedCompute(performances){
 
+if(performances.length == 1) return performances
+
 var performances= performances
 var timeCumPop = []
 var tracker = []

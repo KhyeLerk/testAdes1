@@ -1458,3 +1458,44 @@ Delete /advance/delete
     "code":500
 }
 ```
+
+# API 15 : Delete all tables from database and create tables again
+
+### HTTP Method => 
+### Endpoint => /reset
+
+### Request Body
+
+### Response Body
+```json
+{
+    "success":"true"
+}
+```
+
+### Error
+```json
+{
+    "error":"error",
+}
+```
+
+### Sample Request
+```http
+Delete /reset
+
+```
+
+### Sample Response
+```json
+{
+    "success":"true"
+}
+```
+
+# Sample Error
+```json
+{
+    "error":"error",
+}
+```

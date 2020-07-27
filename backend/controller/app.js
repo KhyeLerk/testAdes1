@@ -209,16 +209,20 @@ app.get('/advance/count' ,function(req,res){
 
 app.get('/basic/result' ,function(req,res){
     var festivalId = req.query.festivalId
+    if(festivalId == null) res.status(400).send(JSON.parse(`{"error":"Null Input","code":400}`))
 
+    else{
     var cachedData = cache.get(`cache/basic/result/${festivalId}`)
     if(cachedData != null) return res.status(200).send(JSON.parse(cachedData))
 
     performance.getPerformancesByFestivalId(festivalId, function(err,result){
         if(!err){
+            console.log("result returned: " + result)
             var orderedPerformances =result.reduce((reduced, result)=> [...reduced, [result.performanceId, result.startTime, result.endTime]],[])
             // Checking for null returns
             if(orderedPerformances.length == 0){
-                res.status(400).send(JSON.parse(`{"error":"Null Input","code":400}`));
+                cache.put(`cache/basic/result/${festivalId}`, JSON.stringify({"result":[]}), 300000)
+                res.status(201).json({"result":[]});
             }
             // If not null run this
             else{
@@ -235,6 +239,8 @@ app.get('/basic/result' ,function(req,res){
             res.status(500).send(JSON.parse(`{"error":"Server Error","code":500}`));
         }
     })
+
+}
 })
 
 
@@ -242,6 +248,8 @@ app.get('/basic/result' ,function(req,res){
 
 app.get('/advance/result' , function(req,res){
     var festivalId = req.query.festivalId;
+    if(festivalId == null) res.status(400).send(JSON.parse(`{"error":"Null Input","code":400}`))
+    else{
 
     var cachedData = cache.get(`cache/advance/result/${festivalId}`)
     if(cachedData != null) return res.status(200).send(JSON.parse(cachedData))
@@ -251,7 +259,8 @@ app.get('/advance/result' , function(req,res){
             var orderedPerformances =result.reduce((reduced, result)=> [...reduced, [result.performanceId, result.startTime, result.endTime, result.popularity]],[])
             // Checking for null returns
             if(orderedPerformances.length == 0){
-                res.status(400).send(JSON.parse(`{"error":"Null Input","code":400}`))
+                cache.put(`cache/advance/result/${festivalId}`, JSON.stringify({"result":[]}), 300000)
+                res.status(201).json({"result":[]});
             }    
              // If not null run this
              else{
@@ -268,6 +277,7 @@ app.get('/advance/result' , function(req,res){
             res.status(500).send(JSON.parse(`{"error":"Server Error","code":500}`));
         }
     })
+}
 })
 
 /*================================================================================================================*/
@@ -347,6 +357,25 @@ app.delete('/advance/delete', function (req, res) {
     });
 
     
+});
+
+/*================================================================================================================*/
+
+// Backend tester use ( Delete all data )
+
+/*================================================================================================================*/
+
+// Delete everything in the database
+app.get('/reset', function(req, res) {
+
+    cache.clear()
+    performance.resetTable(function(error, result) {
+        if (error) { 
+            console.log(error);
+            return res.json({error: error});
+        }
+        return res.json({ success: true });
+    });
 });
 
 module.exports= app

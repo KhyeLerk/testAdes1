@@ -539,6 +539,30 @@ var performanceDB = {
                     }
                       });
                }, 
+
+                // Basic delete
+                resetTable: function ( callback) {
+                    var conn = db.getConnection();
+                    conn.connect(function (err) {
+                        if (err) {
+                            console.log(err);
+                            return callback(err,null);
+                        }
+                        else {
+                            console.log("Connected!");
+                            var sql = `CALL reset()`
+                            conn.query(sql, function (err, result) {
+                                conn.end();
+                                if (err) {
+                                    console.log(err);
+                                    return callback(err,null);
+                                } else {
+                                    return callback(null, result);
+                                }
+                            });
+                        }
+                          });
+                   }, 
 }
 
 module.exports = performanceDB

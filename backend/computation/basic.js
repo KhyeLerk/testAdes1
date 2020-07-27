@@ -1,5 +1,7 @@
  function basicCompute(orderedPerformances){
 
+if(orderedPerformances.length == 1) return orderedPerformances
+
 var selectedList = [orderedPerformances[0]]
 var i=1;
 
